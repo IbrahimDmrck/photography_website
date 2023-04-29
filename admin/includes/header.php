@@ -1,4 +1,5 @@
 <?php
+ob_start();
 require '../database/db_conn.php';
 ?>
 <!DOCTYPE html>
@@ -21,9 +22,10 @@ require '../database/db_conn.php';
     <link href="back/css/plugins/ladda/ladda-themeless.min.css" rel="stylesheet">
     <link href="back/css/plugins/dataTables/datatables.min.css" rel="stylesheet">
 
+    <link href="back/css/plugins/select2/select2.min.css" rel="stylesheet">
     <!-- Gritter -->
     <link href="back/js/plugins/gritter/jquery.gritter.css" rel="stylesheet">
-
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <link href="back/css/animate.css" rel="stylesheet">
     <link href="back/css/style.css" rel="stylesheet">
 
@@ -58,9 +60,6 @@ require '../database/db_conn.php';
                                 </ul>
                             </div>
                         <?php } ?>
-                        <div class="logo-element">
-
-                        </div>
                     </li>
                     <li class="active">
                         <a href="index.php"><i class="fa fa-th-large"></i> <span class="nav-label">Ana Sayfa</span> </a>

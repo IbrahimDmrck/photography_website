@@ -13,7 +13,7 @@ if (isset($_SESSION['username'])) {
                         <h5>Menüler</h5>
                         <div class="ibox-tools">
 
-                            <a href="menuAdd.php" class="ladda-button ladda-button-demo-add btn btn-primary text-white"  data-style="zoom-in" title="menü ekle" style="font-size: 1rem;">
+                            <a href="menuAdd.php" class="ladda-button ladda-button-demo-add btn btn-primary text-white btn-sm"  data-style="zoom-in" title="menü ekle" style="font-size: 1rem;">
                                 Menü Ekle
                             </a>
 
@@ -36,7 +36,7 @@ if (isset($_SESSION['username'])) {
                     <div class="ibox-content">
 
                         <div class="table-responsive">
-                            <table class="table table-striped table-bordered table-hover dataTables-example">
+                            <table  class="table table-striped table-bordered table-hover dataTables-example">
                                 <thead>
                                     <tr>
                                         <th>Menü Adı</th>
@@ -47,15 +47,46 @@ if (isset($_SESSION['username'])) {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>Trident</td>
-                                        <td>Internet
-                                            Explorer 4.0
-                                        </td>
-                                        <td>Win 95+</td>
-                                        <td><a name="delete" class="ladda-button ladda-button-demo-delete btn btn-danger text-white"  data-style="zoom-in" title="sil"><i class="fa fa-times"></i></a></td>
+                                    <?php
+                                    $menus=$db->query("SELECT * FROM menus",PDO::FETCH_ASSOC);
+                                    if (isset($_GET['id'])) {
+                                        $id=$_GET['id'];
+                                        $swal = 'swal';
+                                        $deleteMenu=$db->query("DELETE FROM menus WhERE Id=$id",PDO::FETCH_ASSOC);
+                                        $delete= $deleteMenu->execute();
+
+                                        if ($delete) {
+       
+                                            echo '<script>' . $swal . '("Menü Başarıyla Silindi", "", "success");</script>';
+                                            header('Refresh:2; menus.php');
+                                      
+                                          } else {
+                                            echo '<script>' . $swal . '("Beklenmedik Bir Hata Oldu", "Lütfen Tekrar Deneyin", "error");</script>';
+                                          }
+                                    }
+                                    ?>
+                                    <?php if (isset($menus)) {
+                                        
+                                        foreach ($menus as $menuValue) {
+                                            
+                                        ?>
+                                        
+                                        <tr>
+                                        <td><?= $menuValue['menuName'] ?></td>
+                                        <td><?= $menuValue['orderNumber'] ?></td>
+                                        <td><?= $menuValue['position'] ?></td>
+                                        <td><a href="?id=<?= $menuValue['Id'] ?>" name="delete" class="ladda-button ladda-button-demo-delete btn btn-danger text-white"  data-style="zoom-in" title="sil"><i class="fa fa-times"></i></a></td>
                                         <td><a name="update" class="ladda-button ladda-button-demo-update btn btn-warning text-white"  data-style="zoom-in" title="güncelle"><i class="fa fa-edit"></i></a></td>
                                     </tr>
+                                  <?php }} else {?>
+                                    <td>-----</td>
+                                    <td>-----</td>
+                                    <td>-----</td>
+                                    <td>-----</td>
+                                    <td>-----</td>
+                                </tr>
+                                  <?php } ?>
+                                    
 
 
                                 </tbody>

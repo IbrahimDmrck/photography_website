@@ -59,7 +59,7 @@ if (isset($_POST['register'])) {
     $save = $query->execute([$name,$surName,$email,md5($password)]);
 
     if ($save) {
-       //$_SESSION['username'] = $name;
+       
       echo '<script>' . $swal . '("Kayıt İşlemi Başarılı !", "Giriş Sayfasına Yönlediriliyorsunuz...", "success");</script>';
       header('Refresh:2; login.php');
 

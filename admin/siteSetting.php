@@ -4,7 +4,7 @@ require '../database/db_conn.php';
  if (isset($_SESSION['username'])) { 
 include('includes/header.php'); ?>
 </div>
-
+ 
 <div class="row">
     <div class="col-lg-12">
         <div class="wrapper wrapper-content">

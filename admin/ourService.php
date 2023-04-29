@@ -1,4 +1,8 @@
-<?php include('includes/header.php'); ?>
+<?php 
+session_start();
+require '../database/db_conn.php';
+ if (isset($_SESSION['username'])) { 
+include('includes/header.php'); ?>
 </div>
 <div class="row  border-bottom white-bg dashboard-header">
 
@@ -451,4 +455,8 @@
     </div>
 </div>
 
-<?php include('includes/footer.php'); ?>
+<?php include('includes/footer.php'); 
+}else {
+    header("location:login.php");
+  }
+?>

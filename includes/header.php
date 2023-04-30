@@ -2,6 +2,10 @@
 Author: W3layouts
 Author URL: http://w3layouts.com
 -->
+<?php
+ob_start();
+require 'database/db_conn.php';
+?>
 <!doctype html>
 <html lang="en">
 
@@ -43,18 +47,17 @@ Author URL: http://w3layouts.com
 
                 <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                     <ul class="navbar-nav mx-lg-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
+                        <?php
+                        $menus=$db->query("SELECT * FROM menus WHERE position='Header'",PDO::FETCH_ASSOC);
+                        ?>
+                        <?php foreach ($menus as $value) { ?>
+
+                       
+                        <li class="nav-item ">
+                            <a class="nav-link" href="<?= $value['slug'] ?>.php"><?= $value['menuName'] ?> <span class="sr-only">(current)</span></a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="about.php">About</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="services.php">Services</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="contact.php">Contact</a>
-                        </li>
+                       
+                        <?php } ?>
                     </ul>
                 </div>
                 <!-- search button -->

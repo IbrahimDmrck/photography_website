@@ -145,14 +145,15 @@
 
 <!-- Select2 -->
 <script src="back/js/plugins/select2/select2.full.min.js"></script>
-
+<!-- SUMMERNOTE -->
+<script src="back/js/plugins/summernote/summernote-bs4.js"></script>
 
 <script>
     <?php
     $admin_name = $_SESSION['username'];
     $admin = $db->query("SELECT * FROM admin WHERE email  LIKE '%$admin_name%' ", PDO::FETCH_ASSOC);
-  
-    
+
+
     foreach ($admin as $value) {
         echo "$(document).ready(function() {
             
@@ -169,8 +170,8 @@
            
         });";
     }
- 
-        ?>
+
+    ?>
     $(document).ready(function () {
         $('.dataTables-example').DataTable({
             pageLength: 25,
@@ -245,9 +246,15 @@
         });
 
         $(".select2_demo_3").select2({
-                placeholder: "Bir konum seçin",
-                allowClear: true
-            });
+            placeholder: "Bir konum seçin",
+            allowClear: true
+        });
+
+        $(document).ready(function () {
+
+            $('.summernote').summernote();
+
+        });
 
     });
 </script>

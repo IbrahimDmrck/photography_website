@@ -28,6 +28,7 @@ require '../database/db_conn.php';
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <link href="back/css/animate.css" rel="stylesheet">
     <link href="back/css/style.css" rel="stylesheet">
+    <link href="back/css/plugins/summernote/summernote-bs4.css" rel="stylesheet">
 
 </head>
 

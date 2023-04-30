@@ -39,6 +39,10 @@ if (isset($_SESSION['username'])) {
                             $id = $_GET['id'];
                             $swal = 'swal';
 
+                            $search  = array("ı", "ö", "ü", "ç", "ğ", "Ğ", "Ç", "İ", "Ö", "Ü", " ");
+                            $replace = array('i', 'o', 'u', 'c', 'g', 'g', 'c', 'i', 'o', 'u', '-');
+                            $menuSlug= str_replace($search, $replace, strtolower($menuName));
+
                             if (!$menuName) {
                                 echo '<script>' . $swal . '("Lütfen formu eksiksiz doldurun !", "", "warning");</script>';
                             } elseif (!$orderNumber) {
@@ -46,8 +50,8 @@ if (isset($_SESSION['username'])) {
                             } elseif (!$position) {
                                 echo '<script>' . $swal . '("Lütfen formu eksiksiz doldurun !", "", "warning");</script>';
                             } else {
-                                $query = $db->prepare('UPDATE menus SET menuName = ?, orderNumber = ?, position = ? WHERE id=' . $id);
-                                $save = $query->execute([$menuName, $orderNumber, $position]);
+                                $query = $db->prepare('UPDATE menus SET menuName = ?, orderNumber = ?, position = ?, slug = ? WHERE id=' . $id);
+                                $save = $query->execute([$menuName, $orderNumber, $position, $menuSlug]);
 
                                 if ($save) {
 

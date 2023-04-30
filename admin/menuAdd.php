@@ -16,15 +16,7 @@ if (isset($_SESSION['username'])) {
                             <a class="collapse-link">
                                 <i class="fa fa-chevron-up"></i>
                             </a>
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                <i class="fa fa-wrench"></i>
-                            </a>
-                            <ul class="dropdown-menu dropdown-user">
-                                <li><a href="#" class="dropdown-item">Config option 1</a>
-                                </li>
-                                <li><a href="#" class="dropdown-item">Config option 2</a>
-                                </li>
-                            </ul>
+                            
                             <a class="close-link">
                                 <i class="fa fa-times"></i>
                             </a>
@@ -38,6 +30,10 @@ if (isset($_SESSION['username'])) {
                             $position = $_POST['position'];
                             $swal = 'swal';
 
+                            $search  = array("ı", "ö", "ü", "ç", "ğ", "Ğ", "Ç", "İ", "Ö", "Ü", " ");
+                            $replace = array('i', 'o', 'u', 'c', 'g', 'g', 'c', 'i', 'o', 'u', '-');
+                            $menuSlug= str_replace($search, $replace, strtolower($menuName));
+
                             if (!$menuName) {
                                 echo '<script>' . $swal . '("Lütfen formu eksiksiz doldurun !", "", "warning");</script>';
                             }elseif (!$orderNumber) {
@@ -45,8 +41,8 @@ if (isset($_SESSION['username'])) {
                             }elseif (!$position) {
                                 echo '<script>' . $swal . '("Lütfen formu eksiksiz doldurun !", "", "warning");</script>';
                             } else {
-                                $query = $db->prepare('INSERT INTO menus SET menuName = ?, orderNumber = ?, position = ?');
-                                $save = $query->execute([$menuName, $orderNumber, $position]);
+                                $query = $db->prepare('INSERT INTO menus SET menuName = ?, orderNumber = ?, position = ?, slug = ?');
+                                $save = $query->execute([$menuName, $orderNumber, $position, $menuSlug]);
 
                                 if ($save) {
        

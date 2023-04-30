@@ -76,7 +76,7 @@ if (isset($_SESSION['username'])) {
                                         <td><?= $menuValue['orderNumber'] ?></td>
                                         <td><?= $menuValue['position'] ?></td>
                                         <td><a href="?id=<?= $menuValue['Id'] ?>" name="delete" class="ladda-button ladda-button-demo-delete btn btn-danger text-white"  data-style="zoom-in" title="sil"><i class="fa fa-times"></i></a></td>
-                                        <td><a name="update" class="ladda-button ladda-button-demo-update btn btn-warning text-white"  data-style="zoom-in" title="güncelle"><i class="fa fa-edit"></i></a></td>
+                                        <td><a href="menuUpdate.php?id=<?= $menuValue['Id'] ?>" name="update" class="ladda-button ladda-button-demo-update btn btn-warning text-white"  data-style="zoom-in" title="güncelle"><i class="fa fa-edit"></i></a></td>
                                     </tr>
                                   <?php }} else {?>
                                     <td>-----</td>

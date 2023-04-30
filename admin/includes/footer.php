@@ -139,7 +139,7 @@
 
 <!-- ChartJS-->
 <script src="back/js/plugins/chartJs/Chart.min.js"></script>
-
+ 
 <!-- Toastr -->
 <script src="back/js/plugins/toastr/toastr.min.js"></script>
 
@@ -148,7 +148,12 @@
 <!-- SUMMERNOTE -->
 <script src="back/js/plugins/summernote/summernote-bs4.js"></script>
 
+
 <script>
+ $('.custom-file-input').on('change', function() {
+   let fileName = $(this).val().split('\\').pop();
+   $(this).next('.custom-file-label').addClass("selected").html(fileName);
+}); 
     <?php
     $admin_name = $_SESSION['username'];
     $admin = $db->query("SELECT * FROM admin WHERE email  LIKE '%$admin_name%' ", PDO::FETCH_ASSOC);
@@ -156,7 +161,7 @@
 
     foreach ($admin as $value) {
         echo "$(document).ready(function() {
-            
+           
             setTimeout(function(){
                 toastr.options = {
                     closeButton: true,
@@ -250,11 +255,11 @@
             allowClear: true
         });
 
-        $(document).ready(function () {
+       
 
             $('.summernote').summernote();
 
-        });
+        
 
     });
 </script>

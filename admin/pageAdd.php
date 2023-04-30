@@ -47,7 +47,7 @@ if (isset($_SESSION['username'])) {
                             $replace = array('i', 'o', 'u', 'c', 'g', 'g', 'c', 'i', 'o', 'u', '-');
                             $pageSlug = str_replace($search, $replace, strtolower($pageName));
 
-                            
+
 
                             if (!$pageName) {
                                 echo '<script>' . $swal . '("Lütfen formu eksiksiz doldurun !", "", "warning");</script>';
@@ -102,7 +102,8 @@ if (isset($_SESSION['username'])) {
                             <div class="form-group row"><label class="col-lg-2 col-form-label">İçerik</label>
 
                                 <div class="col-lg-6">
-                                        <textarea class="summernote form-control" name="content" id="" cols="30" rows="10"></textarea>
+                                    <textarea class="summernote form-control" name="content" id="" cols="30"
+                                        rows="10"></textarea>
                                 </div>
                             </div>
                             <div class="form-group row"><label class="col-lg-2 col-form-label">Seo Title</label>
@@ -120,15 +121,18 @@ if (isset($_SESSION['username'])) {
                             <div class="form-group row"><label class="col-lg-2 col-form-label">Seo Keyword</label>
 
                                 <div class="col-lg-6">
-                                <input type="text" name="seoKeyword" placeholder="Seo Keyword"
-                                        class="form-control">
-                                        <p class="font-bold">Anahtar kelimeleri virgül(,) ile ayırarak yazınız</p>
+                                    <input type="text" name="seoKeyword" placeholder="Seo Keyword" class="form-control">
+                                    <p class="font-bold">Anahtar kelimeleri virgül(,) ile ayırarak yazınız</p>
                                 </div>
-                                
+
                             </div>
 
-
-
+                            <div class="form-group"><label class="col-lg-2 col-form-label">Banner Fotoğrafı</label>
+                                <div class="col-lg-6 custom-file">
+                                    <input id="logo" type="file" class="custom-file-input">
+                                    <label for="logo" class="custom-file-label">Choose file...</label>
+                                </div>
+                            </div>
                             <div class="form-group row">
                                 <div class="col-lg-offset-2 col-lg-10 d-flex justify-content-center">
                                     <button name="pageAdd" class="btn btn-primary w-25" type="submit">Ekle</button>

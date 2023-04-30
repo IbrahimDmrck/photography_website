@@ -69,7 +69,7 @@ if (isset($_SESSION['username'])) {
 
                                 if ($save) {
 
-                                    echo '<script>' . $swal . '("Sayfa başarıyla eklendi", "", "success");</script>';
+                                    echo '<script>' . $swal . '("Sayfa başarıyla güncellendi", "", "success");</script>';
                                     header('Refresh:3;url=pages.php');
 
                                 } else {
@@ -127,7 +127,12 @@ if (isset($_SESSION['username'])) {
 
                                 </div>
 
-
+                                <div class="form-group"><label class="col-lg-2 col-form-label">Banner Fotoğrafı</label>
+                                <div class="col-lg-6 custom-file">
+                                    <input id="logo" type="file" class="custom-file-input">
+                                    <label for="logo" class="custom-file-label">Choose file...</label>
+                                </div>
+                            </div>
 
                                 <div class="form-group row">
                                     <div class="col-lg-offset-2 col-lg-10 d-flex justify-content-center">

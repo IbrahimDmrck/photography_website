@@ -6,7 +6,7 @@ require '../database/db_conn.php';
 include('includes/header.php');  
 ?>
 </div>
-<div  class="row border-bottom white-bg dashboard-header">
+<div id="index"  class="row border-bottom white-bg dashboard-header">
 
     <div class="col-md-3">
         <h2>Welcome Amelia</h2>

@@ -58,7 +58,7 @@ if (isset($_SESSION['username'])) {
                                         if ($delete) {
 
                                             echo '<script>' . $swal . '("Menü Başarıyla Silindi", "", "success");</script>';
-                                            header('Refresh:2; menus.php');
+                                            header('Refresh:2; pages.php');
 
                                         } else {
                                             echo '<script>' . $swal . '("Beklenmedik Bir Hata Oldu", "Lütfen Tekrar Deneyin", "error");</script>';

@@ -70,7 +70,7 @@ if (isset($_SESSION['username'])) {
                                 if ($save) {
 
                                     echo '<script>' . $swal . '("Sayfa başarıyla eklendi", "", "success");</script>';
-                                    header('Refresh:3;url=menus.php');
+                                    header('Refresh:3;url=pages.php');
 
                                 } else {
                                     echo '<script>' . $swal . '("Beklenmedik Bir Hata Oldu!", "Lütfen Tekrar Deneyin", "error");</script>';

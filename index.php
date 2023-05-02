@@ -1,5 +1,5 @@
 
-    <?php include('includes/header.php'); ?>
+<?php include('includes/header.php'); ?>
     <!-- banner section -->
     <div class="slider-container">
         <div class="left-slide">
@@ -68,7 +68,6 @@
                 <div class="col-lg-4 mt-lg-0 mt-4">
                     <div class="row">
                         <div class="col-lg-12 col-sm-6 item">
-                        
                             <a href="front/assets/images/g5.jpg" data-lightbox="example-set" data-title="Project 4"
                                 class="zoom d-block">
                                 <img class="card-img-bottom d-block" src="front/assets/images/g5.jpg" alt="Card image cap">
@@ -80,16 +79,13 @@
                             </a>
                         </div>
                         <div class="col-lg-12 col-sm-6 item mt-lg-4 mt-sm-0 mt-4">
-                        
                             <a href="front/assets/images/g4.jpg" data-lightbox="example-set" data-title="Project 5"
                                 class="zoom d-block">
                                 <img class="card-img-bottom d-block" src="front/assets/images/g4.jpg" alt="Card image cap">
                                 <span class="overlay__hover"></span>
-                               
                                 <span class="hover-content">
                                     <span class="title">Photojournalism</span>
                                     <span class="content">Quisque ut lectus, eros et, sed commodo risus.</span>
-                                    
                                 </span>
                             </a>
                         </div>
@@ -258,7 +254,7 @@
                         <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
                             labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
                             laboris nisi ut aliquip ex ea commodo consequat. </h3>
-                        <img src="front/assets/images/quote.png" alt="" />
+                        <img src="assets/images/quote.png" alt="" />
                     </div>
                 </div>
 
@@ -322,7 +318,7 @@
                         <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
                             labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
                             laboris nisi ut aliquip ex ea commodo consequat. </h3>
-                        <img src="front/assets/images/quote.png" alt="" />
+                        <img src="assets/images/quote.png" alt="" />
                     </div>
                 </div>
 
@@ -352,23 +348,6 @@
                     </div>
                     <div class="client-comment">
                         <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                            laboris nisi ut aliquip ex ea commodo consequat. </h3>
-                        <img src="front/assets/images/quote.png" alt="" />
-                    </div>
-                </div>
-
-                <div class="client-single inactive position-8" data-position="position-8">
-                    <div class="client-img">
-                        <img src="front/assets/images/testi7.jpg" alt="" />
-                    </div>
-                    <div class="client-info">
-                        <h3>Jenna John</h3>
-                        <p>Subtitle goes here</p>
-                    </div>
-                    <div class="client-comment">
-                        
-                        <h3>merhaba merhaba sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
                             labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
                             laboris nisi ut aliquip ex ea commodo consequat. </h3>
                         <img src="front/assets/images/quote.png" alt="" />

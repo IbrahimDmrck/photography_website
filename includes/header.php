@@ -54,7 +54,7 @@ require 'database/db_conn.php';
 
                        
                         <li class="nav-item ">
-                            <a class="nav-link" href="<?= $value['slug'] ?>.php"><?= $value['menuName'] ?> <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="http://localhost/portfolio/<?= $value['slug'] ?>"><?= $value['menuName'] ?> <span class="sr-only">(current)</span></a>
                         </li>
                        
                         <?php } ?>

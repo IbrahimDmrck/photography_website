@@ -1,0 +1,4 @@
+RewriteEngine On
+RewriteRule ^([0-9a-zA-Z-_]+)$ main.php?page=$1
+
+ErrorDocument 404 http://localhost/portfolio/404.html

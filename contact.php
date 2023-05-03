@@ -17,14 +17,19 @@
     <section class="w3l-contact py-5" id="contact">
         <div class="container py-lg-5 py-md-4 py-2">
             <div class="title-heading-w3 text-center mx-auto mb-sm-5 mb-4" style="max-width:700px">
-                <h3 class="title-style">Contact Us</h3>
-                <p class="lead mt-2">Nostrud exercitation ullamco laboris nisi
-                    ut aliquip ex ea commodo consequat sunt in culpa qui official.</p>
+            <?php
+            $contact = $db->query("SELECT * FROM  pages WHERE pageName='iletisim'",PDO::FETCH_ASSOC);
+
+            foreach ($contact as $value) {?>
+                <h3 class="title-style"><?= $value['pageName'] ?></h3>
+                <p class="lead mt-2"><?= $value['shortDescription'] ?></p>
+           <?php } ?>
+                
             </div>
             <div class="mx-auto pt-lg-4 pt-md-5 pt-4" style="max-width:1000px">
                 <div class="row contact-block">
                     <div class="col-md-5 contact-left">
-                        <h3 class="font-weight-bold mb-md-5 mb-4">Contact Details</h3>
+                        <h3 class="font-weight-bold mb-md-5 mb-4">İletişim Bilgileri</h3>
                         <div class="cont-details">
                             <div class="d-flex contact-grid">
                                 <div class="cont-left text-center mr-3">
@@ -65,22 +70,71 @@
                         </div>
                     </div>
                     <div class="col-md-7 contact-right mt-md-0 mt-4">
-                        <form action="https://sendmail.w3layouts.com/submitForm" method="post" class="signin-form">
+                        <?php
+                        if(isset($_POST['sendMessage'])){
+                            $name=$_POST['name'];
+                            $sender=$_POST['sender'];
+                            $subject=$_POST['subject'];
+                            $message=$_POST['message'];
+
+                            if (!$name || strlen($name)>100) {
+                                echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                Lütfen adınızı ve soyadınızı giriniz !
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                              </div>';
+                            }elseif (!$sender || strlen($sender)>60) {
+                                echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                Lütfen e-postaadresinizi giriniz !
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                              </div>';
+                            }elseif (!$subject || strlen($subject)>50) {
+                                echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                Lütfen iletişime geçme konunuzu giriniz !
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                              </div>';
+                            }elseif (!$message || strlen($message)>300) {
+                                echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                Lütfen mesajınızı giriniz !
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                              </div>';
+                            }else {
+                                $query = $db->prepare('INSERT INTO messages SET name = ?, sender = ?, subject = ?, message = ?');
+                                $save = $query->execute([$name, $sender, $subject, $message]);
+
+                                if ($save) {
+       
+                                    echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                                        Mesajınız iletildi !
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    </div>';
+                                    header('Refresh:4');
+                              
+                                  } else {
+                                    echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                                            Mesajınız iletilemedi , lütfen tekrar deneyin !
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        </div>';
+                                  }
+                            }
+                            
+                            
+
+                        }
+                        ?>
+                        <form action="" method="post" class="signin-form">
                             <div class="input-grids">
-                                <input type="text" name="w3lName" id="w3lName" placeholder="Your Name*"
+                                <input type="text" name="name" id="w3lName" placeholder="Ad Soyad*"
                                     class="contact-input" required="" />
-                                <input type="email" name="w3lSender" id="w3lSender" placeholder="Your Email*"
+                                <input type="email" name="sender" id="w3lSender" placeholder="Email*"
                                     class="contact-input" required="" />
-                                <input type="text" name="w3lSubect" id="w3lSubect" placeholder="Subject*"
-                                    class="contact-input" required="" />
-                                <input type="text" name="w3lWebsite" id="w3lWebsite" placeholder="Website URL*"
+                                <input type="text" name="subject" id="w3lSubect" placeholder="Konu*"
                                     class="contact-input" required="" />
                             </div>
                             <div class="form-input">
-                                <textarea name="w3lMessage" id="w3lMessage" placeholder="Type your message here*"
+                                <textarea name="message" id="w3lMessage" placeholder="Mesaj*"
                                     required=""></textarea>
                             </div>
-                            <button class="btn btn-style btn-style-primary-2">Send Message</button>
+                            <button type="submit" name="sendMessage" class="btn btn-style btn-style-primary-2">Mesaj Gönder</button>
                         </form>
                     </div>
                 </div>

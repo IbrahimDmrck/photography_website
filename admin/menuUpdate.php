@@ -36,7 +36,7 @@ if (isset($_SESSION['username'])) {
                             $menuName = $_POST['menuName'];
                             $orderNumber = $_POST['orderNumber'];
                             $position = $_POST['position'];
-                            $id = $_GET['id'];
+                         
                             $swal = 'swal';
 
                             $search  = array("ı", "ö", "ü", "ç", "ğ", "Ğ", "Ç", "İ", "Ö", "Ü", " ");
@@ -50,8 +50,8 @@ if (isset($_SESSION['username'])) {
                             } elseif (!$position) {
                                 echo '<script>' . $swal . '("Lütfen formu eksiksiz doldurun !", "", "warning");</script>';
                             } else {
-                                $query = $db->prepare('UPDATE menus SET menuName = ?, orderNumber = ?, position = ?, slug = ? WHERE id=' . $id);
-                                $save = $query->execute([$menuName, $orderNumber, $position, $menuSlug]);
+                                $query = $db->prepare('UPDATE menus SET menuName = ?, orderNumber = ?, position = ?, slug = ? WHERE Id = ?');
+                                $save = $query->execute([$menuName, $orderNumber, $position, $menuSlug, $id]);
 
                                 if ($save) {
 

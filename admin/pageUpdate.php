@@ -41,7 +41,7 @@ if (isset($_SESSION['username'])) {
                             $seoTitle = $_POST['seoTitle'];
                             $seoDescription = $_POST['seoDescription'];
                             $seoKeyword = $_POST['seoKeyword'];
-                            $id = $_GET['id'];
+                            
                             $swal = 'swal';
 
                             $search = array("ı", "ö", "ü", "ç", "ğ", "Ğ", "Ç", "İ", "Ö", "Ü", " ");
@@ -64,8 +64,8 @@ if (isset($_SESSION['username'])) {
                             } elseif (!$seoKeyword) {
                                 echo '<script>' . $swal . '("Lütfen formu eksiksiz doldurun !", "", "warning");</script>';
                             } else {
-                                $query = $db->prepare('UPDATE pages SET pageName = ?, orderNumber = ?, shortDescription = ?, content = ?, seoTitle = ?, seoDescription = ?, seoKeyword = ?, slug = ?');
-                                $save = $query->execute([$pageName, $orderNumber, $shortDescription, $content, $seoTitle, $seoDescription, $seoKeyword, $pageSlug]);
+                                $query = $db->prepare('UPDATE pages SET pageName = ?, orderNumber = ?, shortDescription = ?, content = ?, seoTitle = ?, seoDescription = ?, seoKeyword = ?, slug = ? WHERE Id = ?');
+                                $save = $query->execute([$pageName, $orderNumber, $shortDescription, $content, $seoTitle, $seoDescription, $seoKeyword, $pageSlug, $id]);
 
                                 if ($save) {
 

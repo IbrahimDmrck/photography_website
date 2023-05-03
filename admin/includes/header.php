@@ -109,7 +109,7 @@ require '../database/db_conn.php';
 
                     </li>
                     <li>
-                        <a href="../index.php" target="_blank"><i class="fa fa-sign-out"></i> <span
+                        <a href="../ana-sayfa" target="_blank"><i class="fa fa-sign-out"></i> <span
                                 class="nav-label">Siteye Git</span></a>
 
                     </li>

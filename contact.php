@@ -1,4 +1,12 @@
-<?php include('includes/header.php'); ?>
+<?php include('includes/header.php'); 
+use PHPMailer\PHPMailer\PHPMailer;
+
+
+require 'PHPMailer/src/Exception.php';
+require 'PHPMailer/src/PHPMailer.php';
+require 'PHPMailer/src/SMTP.php';
+?>
+
 <!-- inner banner -->
 <section class="inner-banner py-5">
         <div class="w3l-breadcrumb py-lg-5">
@@ -76,6 +84,9 @@
                             $sender=$_POST['sender'];
                             $subject=$_POST['subject'];
                             $message=$_POST['message'];
+                            
+                          
+
 
                             if (!$name || strlen($name)>100) {
                                 echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -102,13 +113,49 @@
                                 $save = $query->execute([$name, $sender, $subject, $message]);
 
                                 if ($save) {
-       
-                                    echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+
+                                    $mail=new PHPMailer();
+                                    $mail->isSMTP();
+                                    $mail->SMTPAuth=true;
+                                    $mail->SMTPSecure="tls"; 
+                                    $mail->Port=587;
+                                    $mail->Host="smtp.gmail.com";
+                                    $mail->Username="ibrahimdmrck@gmail.com";
+                                    $mail->Password="vpqsrdpkyvyidtgi";
+                                    $mail->addAddress("ibrahimdmrck@gmail.com");//alıcı adres
+                                    $mail->isHTML(true);
+                                    $mail->Subject=$subject;
+                                    $mail->Body='<html lang="tr">
+                                    <head>
+                                      <meta charset="utf-8">
+                                      <meta name="viewport" content="width=device-width, initial-scale=1">
+                                      <title>Bootstrap demo</title>
+                                      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+                                    </head>
+                                    <body>
+                                    <div class="card text-bg-info mb-3" style="max-width: 18rem;">
+                                    <div class="card-header">'.$name.' - '.$sender.'</div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">'.$subject.'</h5>
+                                        <p class="card-text">'.$message.'</p>
+                                    </div>
+                                    </div>
+                                    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+                                    </body>
+                                  </html>
+                                    ';
+
+                                    if ($mail->send()) {
+                                        echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
                                         Mesajınız iletildi !
                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                     </div>';
-                                    header('Refresh:4');
-                              
+                                    }else {
+                                        echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                                        Mesajınız iletilemedi , lütfen tekrar deneyin !
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    </div>';
+                                    }                       
                                   } else {
                                     echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
                                             Mesajınız iletilemedi , lütfen tekrar deneyin !
@@ -134,6 +181,7 @@
                                 <textarea name="message" id="w3lMessage" placeholder="Mesaj*"
                                     required=""></textarea>
                             </div>
+                            
                             <button type="submit" name="sendMessage" class="btn btn-style btn-style-primary-2">Mesaj Gönder</button>
                         </form>
                     </div>

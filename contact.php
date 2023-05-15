@@ -109,7 +109,7 @@ require 'PHPMailer/src/SMTP.php';
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                               </div>';
                             }else {
-                                $query = $db->prepare('INSERT INTO messages SET name = ?, sender = ?, subject = ?, message = ?');
+                                $query = $db->prepare('INSERT INTO messages SET name = ?, sender = ?, subject = ?, message = ?, seen=0');
                                 $save = $query->execute([$name, $sender, $subject, $message]);
 
                                 if ($save) {

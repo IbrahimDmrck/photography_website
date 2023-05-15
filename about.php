@@ -37,7 +37,7 @@
                     <a class="btn btn-style btn-style-primary-2 mt-lg-5 mt-4" href="services.html">View Our Services</a>
                 </div>
                 <div class="col-lg-6 mt-lg-0 mt-5">
-                    <img src="assets/images/about.jpg" alt="" class="img-fluid" />
+                    <img src="front/assets/images/about.jpg" alt="" class="img-fluid" />
                 </div>
             </div>
             <div class="row mt-5 pt-lg-5 pt-sm-2">
@@ -125,7 +125,7 @@
                     </div>
                 </div>
                 <div class="content-right col-lg-6 mt-lg-0 mt-5">
-                    <img src="assets/images/about2.jpg" alt="" class="img-fluid" />
+                    <img src="front/assets/images/about2.jpg" alt="" class="img-fluid" />
                 </div>
             </div>
         </div>
@@ -144,7 +144,7 @@
                 <div class="col-lg-3 col-sm-6 col-xs-12">
                     <div class="single-team">
                         <div class="img-area">
-                            <img src="assets/images/team1.jpg" class="img-fluid radius-image" alt="">
+                            <img src="front/assets/images/team1.jpg" class="img-fluid radius-image" alt="">
                             <div class="social">
                                 <ul class="list-inline">
                                     <li><a href="#url"><i class="fab fa-facebook-f"></i></a></li>
@@ -162,7 +162,7 @@
                 <div class="col-lg-3 col-sm-6 col-xs-12 mt-sm-0 mt-5">
                     <div class="single-team">
                         <div class="img-area">
-                            <img src="assets/images/team2.jpg" class="img-fluid radius-image" alt="">
+                            <img src="front/assets/images/team2.jpg" class="img-fluid radius-image" alt="">
                             <div class="social">
                                 <ul class="list-inline">
                                     <li><a href="#url"><i class="fab fa-facebook-f"></i></a></li>
@@ -180,7 +180,7 @@
                 <div class="col-lg-3 col-sm-6 col-xs-12 mt-lg-0 mt-5">
                     <div class="single-team">
                         <div class="img-area">
-                            <img src="assets/images/team3.jpg" class="img-fluid radius-image" alt="">
+                            <img src="front/assets/images/team3.jpg" class="img-fluid radius-image" alt="">
                             <div class="social">
                                 <ul class="list-inline">
                                     <li><a href="#url"><i class="fab fa-facebook-f"></i></a></li>
@@ -198,7 +198,7 @@
                 <div class="col-lg-3 col-sm-6 col-xs-12 mt-lg-0 mt-5">
                     <div class="single-team">
                         <div class="img-area">
-                            <img src="assets/images/team4.jpg" class="img-fluid radius-image" alt="">
+                            <img src="front/assets/images/team4.jpg" class="img-fluid radius-image" alt="">
                             <div class="social">
                                 <ul class="list-inline">
                                     <li><a href="#url"><i class="fab fa-facebook-f"></i></a></li>
@@ -245,7 +245,7 @@
             <div class="testi-wrap">
                 <div class="client-single active position-1" data-position="position-1">
                     <div class="client-img">
-                        <img src="assets/images/testi4.jpg" alt="" />
+                        <img src="front/assets/images/testi4.jpg" alt="" />
                     </div>
                     <div class="client-info">
                         <h3>Theo Hall</h3>
@@ -255,13 +255,13 @@
                         <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
                             labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
                             laboris nisi ut aliquip ex ea commodo consequat. </h3>
-                        <img src="assets/images/quote.png" alt="" />
+                        <img src="front/assets/images/quote.png" alt="" />
                     </div>
                 </div>
 
                 <div class="client-single inactive position-2" data-position="position-2">
                     <div class="client-img">
-                        <img src="assets/images/testi2.jpg" alt="" />
+                        <img src="front/assets/images/testi2.jpg" alt="" />
                     </div>
                     <div class="client-info">
                         <h3>Olive Yew</h3>
@@ -271,13 +271,13 @@
                         <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
                             labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
                             laboris nisi ut aliquip ex ea commodo consequat. </h3>
-                        <img src="assets/images/quote.png" alt="" />
+                        <img src="front/assets/images/quote.png" alt="" />
                     </div>
                 </div>
 
                 <div class="client-single inactive position-3" data-position="position-3">
                     <div class="client-img">
-                        <img src="assets/images/testi1.jpg" alt="" />
+                        <img src="front/assets/images/testi1.jpg" alt="" />
                     </div>
                     <div class="client-info">
                         <h3>Maya Didas</h3>
@@ -287,13 +287,13 @@
                         <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
                             labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
                             laboris nisi ut aliquip ex ea commodo consequat. </h3>
-                        <img src="assets/images/quote.png" alt="" />
+                        <img src="front/assets/images/quote.png" alt="" />
                     </div>
                 </div>
 
                 <div class="client-single inactive position-4" data-position="position-4">
                     <div class="client-img">
-                        <img src="assets/images/testi3.jpg" alt="" />
+                        <img src="front/assets/images/testi3.jpg" alt="" />
                     </div>
                     <div class="client-info">
                         <h3>Brock Lee</h3>
@@ -303,13 +303,13 @@
                         <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
                             labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
                             laboris nisi ut aliquip ex ea commodo consequat. </h3>
-                        <img src="assets/images/quote.png" alt="" />
+                        <img src="front/assets/images/quote.png" alt="" />
                     </div>
                 </div>
 
                 <div class="client-single inactive position-5" data-position="position-5">
                     <div class="client-img">
-                        <img src="assets/images/testi5.jpg" alt="" />
+                        <img src="front/assets/images/testi5.jpg" alt="" />
                     </div>
                     <div class="client-info">
                         <h3>Shona Leer</h3>
@@ -319,13 +319,13 @@
                         <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
                             labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
                             laboris nisi ut aliquip ex ea commodo consequat. </h3>
-                        <img src="assets/images/quote.png" alt="" />
+                        <img src="front/assets/images/quote.png" alt="" />
                     </div>
                 </div>
 
                 <div class="client-single inactive position-6" data-position="position-6">
                     <div class="client-img">
-                        <img src="assets/images/testi6.jpg" alt="" />
+                        <img src="front/assets/images/testi6.jpg" alt="" />
                     </div>
                     <div class="client-info">
                         <h3>Dennis Lson</h3>
@@ -335,13 +335,13 @@
                         <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
                             labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
                             laboris nisi ut aliquip ex ea commodo consequat. </h3>
-                        <img src="assets/images/quote.png" alt="" />
+                        <img src="front/assets/images/quote.png" alt="" />
                     </div>
                 </div>
 
                 <div class="client-single inactive position-7" data-position="position-7">
                     <div class="client-img">
-                        <img src="assets/images/testi7.jpg" alt="" />
+                        <img src="front/assets/images/testi7.jpg" alt="" />
                     </div>
                     <div class="client-info">
                         <h3>Jenna John</h3>
@@ -351,7 +351,7 @@
                         <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
                             labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
                             laboris nisi ut aliquip ex ea commodo consequat. </h3>
-                        <img src="assets/images/quote.png" alt="" />
+                        <img src="front/assets/images/quote.png" alt="" />
                     </div>
                 </div>
 

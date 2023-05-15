@@ -12,7 +12,8 @@
             </div>
         </div>
         <div class="right-slide">
-            <div class="bg-image1"></div>
+        <div class="bg-image1"></div>
+      
         </div>
     </div>
     <!-- //banner section -->

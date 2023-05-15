@@ -149,6 +149,8 @@
 <script src="back/js/plugins/summernote/summernote-bs4.js"></script>
  <!-- Color picker -->
  <script src="back/js/plugins/colorpicker/bootstrap-colorpicker.min.js"></script>
+     <!-- FooTable -->
+     <script src="back/js/plugins/footable/footable.all.min.js"></script>
 
 <script>
  $('.custom-file-input').on('change', function() {
@@ -261,6 +263,8 @@
 
             $('.summernote').summernote();
             $('.demo1').colorpicker();
+            $('.footable').footable();
+           
 
         
 

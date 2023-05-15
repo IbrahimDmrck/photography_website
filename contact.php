@@ -1,4 +1,4 @@
-<?php include('includes/header.php'); 
+<?php 
 use PHPMailer\PHPMailer\PHPMailer;
 
 
@@ -119,10 +119,10 @@ require 'PHPMailer/src/SMTP.php';
                                     $mail->SMTPAuth=true;
                                     $mail->SMTPSecure="tls"; 
                                     $mail->Port=587;
-                                    $mail->Host="smtp.example.com";
-                                    $mail->Username="user@example.com'";
-                                    $mail->Password="*****";
-                                    $mail->addAddress("user@example.com'");
+                                    $mail->Host="smtp.gmail.com";
+                                    $mail->Username="ibrahimdmrck@gmail.com";
+                                    $mail->Password="vpqsrdpkyvyidtgi";
+                                    $mail->addAddress("ibrahimdmrck@gmail.com");//alıcı adres
                                     $mail->isHTML(true);
                                     $mail->Subject=$subject;
                                     $mail->Body='<html lang="tr">
@@ -196,4 +196,3 @@ require 'PHPMailer/src/SMTP.php';
             width="100%" height="400" frameborder="0" style="border: 0px;" allowfullscreen=""></iframe>
     </div>
     <!-- //contact -->
-    <?php include('includes/footer.php'); ?>

@@ -30,6 +30,8 @@ require '../database/db_conn.php';
     <link href="back/css/style.css" rel="stylesheet">
     <link href="back/css/plugins/summernote/summernote-bs4.css" rel="stylesheet">
 
+    <link href="back/css/plugins/colorpicker/bootstrap-colorpicker.min.css" rel="stylesheet">
+
     <style>
         .ui-helper-hidden-accessible {
             display: none;

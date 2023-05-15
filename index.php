@@ -1,5 +1,5 @@
 
-<?php include('includes/header.php'); ?>
+
     <!-- banner section -->
     <div class="slider-container">
         <div class="left-slide">
@@ -19,7 +19,7 @@
 
     <!-- gallery section -->
     <section class="w3l-gallery py-5" id="gallery">
-        <div class="container py-md-5 py-4">
+        <div class="container-fluid py-md-5 py-4">
             <div class="title-heading-w3 text-center mx-auto mb-sm-5 mb-4" style="max-width:700px">
                 <h3 class="title-style">Amazing Photo Gallery</h3>
                 <p class="lead mt-2">Nostrud exercitation ullamco laboris nisi
@@ -64,6 +64,7 @@
                         </a>
                     </div>
                 </div>
+
 
                 <div class="col-lg-4 mt-lg-0 mt-4">
                     <div class="row">
@@ -445,4 +446,4 @@
         </div>
     </section>
     <!-- //blog section -->
-    <?php include('includes/footer.php'); ?>
+ 

@@ -106,6 +106,8 @@ if (isset($_SESSION['username'])) {
                                             rows="10"><?= $value['content'] ?></textarea>
                                     </div>
                                 </div>
+                                
+
                                 <div class="form-group row"><label class="col-lg-2 col-form-label">Seo Title</label>
 
                                     <div class="col-lg-6"><input type="text" name="seoTitle" value="<?= $value['seoTitle'] ?>"  placeholder="Seo Title"

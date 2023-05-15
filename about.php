@@ -1,5 +1,5 @@
 
-<?php include('includes/header.php'); ?>
+
   <!-- inner banner -->
   <section class="inner-banner py-5">
         <div class="w3l-breadcrumb py-lg-5">
@@ -359,4 +359,4 @@
         </div>
     </section>
     <!-- //testimonial section -->
-    <?php include('includes/footer.php'); ?>
+

@@ -1,4 +1,4 @@
-<?php include('includes/header.php'); ?>
+
  <!-- inner banner -->
  <section class="inner-banner py-5">
         <div class="w3l-breadcrumb py-lg-5">
@@ -54,12 +54,12 @@
                     </div>
                 </div>
                 <div class="col-lg-6 left-wthree-img mt-lg-0 mt-5">
-                    <img src="assets/images/service1.jpg" alt="" class="img-fluid">
+                    <img src="front/assets/images/service1.jpg" alt="" class="img-fluid">
                 </div>
             </div>
             <div class="row mt-5 pt-lg-5">
                 <div class="col-lg-6 left-wthree-img mt-lg-0 mt-5 order-lg-first order-last">
-                    <img src="assets/images/service2.jpg" alt="" class="img-fluid">
+                    <img src="front/assets/images/service2.jpg" alt="" class="img-fluid">
                 </div>
                 <div class="col-lg-6 about-right-faq align-self pl-lg-5 order-lg-last order-first">
                     <h3 class="title-style mb-4">Making world a better place</h3>
@@ -159,4 +159,3 @@
         </div>
     </section>
     <!-- //content with buttons -->
-    <?php include('includes/footer.php'); ?>

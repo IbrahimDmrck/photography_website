@@ -147,7 +147,8 @@
 <script src="back/js/plugins/select2/select2.full.min.js"></script>
 <!-- SUMMERNOTE -->
 <script src="back/js/plugins/summernote/summernote-bs4.js"></script>
-
+ <!-- Color picker -->
+ <script src="back/js/plugins/colorpicker/bootstrap-colorpicker.min.js"></script>
 
 <script>
  $('.custom-file-input').on('change', function() {
@@ -205,6 +206,7 @@
 
 
 
+
         var lddelete = $('.ladda-button-demo-delete').ladda();
 
         lddelete.click(function () {
@@ -258,6 +260,7 @@
        
 
             $('.summernote').summernote();
+            $('.demo1').colorpicker();
 
         
 

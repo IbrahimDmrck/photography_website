@@ -104,6 +104,7 @@
 <!-- counter for stats -->
 <script src="front/assets/js/counter.js"></script>
 <!-- //counter for stats -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <!-- testimonial script -->
 <script>
@@ -132,7 +133,10 @@
                 $(this).attr('data-position', newPos);
 
             }
-        });
+        }
+       
+        
+        );
 
     }(jQuery));
 </script>
@@ -176,9 +180,75 @@
     });
 </script>
 <!-- //disable body scroll which navbar is in active -->
-
+<script>
+    $(document).ready(function(){
+  $(".owl-carousel").owlCarousel({
+    center: true,
+    items:3,
+    loop:true,
+    margin:0,
+    autoplay:true,
+    autoplayTimeout:1900,
+    autoplayHoverPause:true, responsive:{
+        2560:{
+            center: false,
+            margin:10,
+            items:3,
+            autoplay:true,
+            autoplayTimeout:1900,
+            autoplayHoverPause:true,
+            loop:true
+        },
+        1920:{
+            center: false,
+            items:3,
+            loop:true,
+            margin:0,
+            autoplay:true,
+            autoplayTimeout:1900,
+            autoplayHoverPause:true,
+        },
+        768:{
+            center: false,
+            margin:50,
+            loop:true,
+            autoplay:true,
+            autoplayTimeout:1900,
+            autoplayHoverPause:true,
+            items:2
+        },
+        390:{
+            loop:true,
+            autoplay:true,
+            autoplayTimeout:1900,
+            autoplayHoverPause:true,
+            items:1
+        },
+        375:{
+            margin:40,
+            loop:true,
+            autoplay:true,
+            autoplayTimeout:1900,
+            autoplayHoverPause:true,
+            items:1
+        }, 
+        320:{
+            margin:100,
+            loop:true,
+            autoplay:true,
+            autoplayTimeout:1900,
+            autoplayHoverPause:true,
+            items:1
+        }
+    }
+   
+  });
+});
+</script>
 <!--bootstrap-->
 <script src="front/assets/js/bootstrap.min.js"></script>
+
+
 <!-- //bootstrap-->
 <!-- //Js scripts -->
 </body>

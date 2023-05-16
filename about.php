@@ -40,7 +40,7 @@
                     <a class="btn btn-style btn-style-primary-2 mt-lg-5 mt-4" href="hizmetler">Hizmetlerimiz</a>
                 </div>
                 <div class="col-lg-6 mt-lg-0 mt-5">
-                    <img src="front/assets/images/about.jpg" alt="" class="img-fluid" />
+                    <img src="front/assets/images/inner-banner.jpg" alt="" class="img-fluid" />
                 </div>
             <?php }
             ?>
@@ -71,6 +71,12 @@
 <section class="w3l-content-4 py-5" id="features">
     <div class="container py-md-5 py-4">
         <div class="content-info-in row align-items-center">
+            <?php 
+             $aboutus = $db->query("SELECT * FROM aboutus", PDO::FETCH_ASSOC);
+            foreach ($aboutus as $value) { ?>
+        <div class="content-right col-lg-6 mt-lg-0 mt-5">
+                <img src="front/assets/images/about2.jpg" alt="" class="img-fluid" />
+            </div>
             <div class="content-left col-lg-6 pr-lg-5">
                 <div class="row content4-right-grids mb-sm-5 mb-4 pb-3">
                     <div class="col-2 content4-right-icon">
@@ -80,8 +86,7 @@
                     </div>
                     <div class="col-10 content4-right-info pl-lg-5">
                         <h6><a href="#url">A high quality photography</a></h6>
-                        <p>Lorem ipsum dolor sit amet, Ea consequuntur illum facere aperiam optio
-                            adipisicing.</p>
+                        <p><?=$value['aboutContent1']?></p>
                     </div>
                 </div>
                 <div class="row content4-right-grids mb-sm-5 mb-4 pb-3">
@@ -92,8 +97,7 @@
                     </div>
                     <div class="col-10 content4-right-info pl-lg-5">
                         <h6><a href="#url">With experience comes trust</a></h6>
-                        <p>Lorem ipsum dolor sit amet, Ea consequuntur illum facere aperiam optio
-                            adipisicing.</p>
+                        <p><?=$value['aboutContent1']?></p>
                     </div>
                 </div>
                 <div class="row content4-right-grids">
@@ -104,14 +108,11 @@
                     </div>
                     <div class="col-10 content4-right-info pl-lg-5">
                         <h6><a href="#url">Making world a better place</a></h6>
-                        <p>Lorem ipsum dolor sit amet, Ea consequuntur illum facere aperiam optio
-                            adipisicing.</p>
+                        <p><?=$value['aboutContent1']?></p>
                     </div>
                 </div>
             </div>
-            <div class="content-right col-lg-6 mt-lg-0 mt-5">
-                <img src="front/assets/images/about2.jpg" alt="" class="img-fluid" />
-            </div>
+           <?php } ?>
         </div>
     </div>
 </section>
@@ -125,61 +126,10 @@
             <p class="lead mt-2">Nostrud exercitation ullamco laboris nisi
                 ut aliquip ex ea commodo consequat sunt in culpa qui official.</p>
         </div>
-        <div class="row mt-lg-5 mt-4">
-            <div class="col-lg-3 col-sm-6 col-xs-12">
-                <div class="single-team">
-                    <div class="img-area">
-                        <img src="front/assets/images/team1.jpg" class="img-fluid radius-image" alt="">
-                        <div class="social">
-                            <ul class="list-inline">
-                                <li><a href="#url"><i class="fab fa-facebook-f"></i></a></li>
-                                <li><a href="#url"><i class="fab fa-twitter"></i></a></li>
-                                <li><a href="#url"><i class="fab fa-linkedin-in"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="img-text">
-                        <h4>Daniel Roberto</h4>
-                        <p>Subtitle goes here</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6 col-xs-12 mt-sm-0 mt-5">
-                <div class="single-team">
-                    <div class="img-area">
-                        <img src="front/assets/images/team2.jpg" class="img-fluid radius-image" alt="">
-                        <div class="social">
-                            <ul class="list-inline">
-                                <li><a href="#url"><i class="fab fa-facebook-f"></i></a></li>
-                                <li><a href="#url"><i class="fab fa-twitter"></i></a></li>
-                                <li><a href="#url"><i class="fab fa-linkedin-in"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="img-text">
-                        <h4>Richard Elison</h4>
-                        <p>Subtitle goes here</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6 col-xs-12 mt-lg-0 mt-5">
-                <div class="single-team">
-                    <div class="img-area">
-                        <img src="front/assets/images/team3.jpg" class="img-fluid radius-image" alt="">
-                        <div class="social">
-                            <ul class="list-inline">
-                                <li><a href="#url"><i class="fab fa-facebook-f"></i></a></li>
-                                <li><a href="#url"><i class="fab fa-twitter"></i></a></li>
-                                <li><a href="#url"><i class="fab fa-linkedin-in"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="img-text">
-                        <h4>Elizabeth</h4>
-                        <p>Subtitle goes here</p>
-                    </div>
-                </div>
-            </div>
+        <div class="row mt-lg-5 mt-4 justify-content-center">
+            
+            
+           
             <div class="col-lg-3 col-sm-6 col-xs-12 mt-lg-0 mt-5">
                 <div class="single-team">
                     <div class="img-area">
@@ -204,19 +154,23 @@
 <!-- //team section -->
 
 <!-- content with bg -->
+<?php 
+ $aboutus = $db->query("SELECT * FROM aboutus", PDO::FETCH_ASSOC);
+foreach ($aboutus as $value) { ?>
 <section class="w3l-content-bg">
     <div class="container py-md-5 py-4">
         <div class="row py-5">
             <div class="col-md-7">
                 <div class="left-content-bg">
                     <p class="text-tag">Brilliant Photography</p>
-                    <h4 class="text-head-content">Built For Creatives To Showcase Their Portfolio Beautiful !</h4>
+                    <h4 class="text-head-content"><?= $value['sectionTitle'] ?></h4>
                     <a class="btn btn-style mt-4" href="services.html">Learn More</a>
                 </div>
             </div>
         </div>
     </div>
 </section>
+<?php } ?>
 <!-- //content with bg -->
 
 <!-- testimonial section -->
@@ -339,6 +293,25 @@
                     <img src="front/assets/images/quote.png" alt="" />
                 </div>
             </div>
+            <div class="client-single inactive position-8" data-position="position-8">
+                <div class="client-img">
+                    <img src="front/assets/images/testi7.jpg" alt="" />
+                </div>
+                <div class="client-info">
+                    <h3>Jenna John</h3>
+                    <p>Subtitle goes here</p>
+                </div>
+                <div class="client-comment">
+                    <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                        laboris nisi ut aliquip ex ea commodo consequat. </h3>
+                    <img src="front/assets/images/quote.png" alt="" />
+                </div>
+            </div>
+         
+            
+           
+       
 
         </div>
     </div>

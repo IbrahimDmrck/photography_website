@@ -5,20 +5,42 @@ Author URL: http://w3layouts.com
 <?php
 ob_start();
 require 'database/db_conn.php';
+
 ?>
 <!doctype html>
-<html lang="en">
+<html lang="tr">
 
 <head>
     <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Photogenic - Photo Gallery Category Bootstrap Responsive Website Template - Home : W3Layouts</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <?php
+    if (isset($_GET['page'])) {
+        $page_slug = $_GET['page'];
+
+        $site_settings = $db->query("SELECT * FROM pages WHERE slug='$page_slug'", PDO::FETCH_ASSOC);
+    }
+    foreach ($site_settings as $value) { ?>
+    
+    
+        <title><?= $value['seoTitle']; ?></title>
+        <meta name="description" content="<?= $value['seoDescription'] ?>">
+        <meta name="keywords" content="<?= $value['seoKeyword'] ?>">
+    
+        <meta property="og:title" content="<?= $value['seoTitle']; ?>" />
+        <meta property="og:description" content="<?= $value['seoDescription'] ?>" />
+        <link rel="canonical" href="http://localhost/portfolio/<?= $value['slug'] ?>" />
+    <?php } ?>
+    <meta property="og:image" content="favicon.png" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="" />
+ 
+    
+    <meta name="robots" content="index,follow"/><meta name="googlebot" content="index,follow"/>
+    <meta name="author" content="Yasin Yilmaz">
     <!-- google-fonts -->
-    <link href="//fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;600;700;800;900&display=swap"
-        rel="stylesheet">
-    <link href="//fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&display=swap"
-        rel="stylesheet">
+    <link href="//fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <!-- //google-fonts -->
     <!-- Template CSS Style link -->
     <link rel="stylesheet" href="front/assets/css/style-starter.css">

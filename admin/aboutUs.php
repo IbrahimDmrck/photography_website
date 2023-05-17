@@ -37,7 +37,7 @@ if (isset($_SESSION['username'])) {
                     </div>
                     <div class="ibox-content">
 
-                        <div class="table-responsive">
+                        <div class="table-responsive col-8">
                             <table class="table table-striped table-bordered table-hover dataTables-example">
                                 <thead>
                                     <tr>

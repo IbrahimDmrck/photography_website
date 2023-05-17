@@ -24,7 +24,7 @@
 
                 <div class="col-lg-6 pr-lg-5">
                    
-                    <h3 class="title-style mb-sm-3 mb-2">Birkaç Kelimede Hakkımda</h3>
+                    <!-- <h3 class="title-style mb-sm-3 mb-2">Birkaç Kelimede Hakkımda</h3> -->
                     <p> <?=$value['content']?></p>
                     <!-- <ul class="list-about-2 mt-sm-4 mt-3">
                         <li class="py-1"><i class="far fa-check-square mr-2"></i>Ut enim ad minim
@@ -72,7 +72,7 @@
     <div class="container py-md-5 py-4">
         <div class="content-info-in row align-items-center">
             <?php 
-             $aboutus = $db->query("SELECT * FROM aboutus", PDO::FETCH_ASSOC);
+             $aboutus = $db->query("SELECT * FROM aboutus WHERE id ORDER BY id DESC LIMIT 1", PDO::FETCH_ASSOC);
             foreach ($aboutus as $value) { ?>
         <div class="content-right col-lg-6 mt-lg-0 mt-5">
                 <img src="front/assets/images/about2.jpg" alt="" class="img-fluid" />
@@ -97,7 +97,7 @@
                     </div>
                     <div class="col-10 content4-right-info pl-lg-5">
                         <h6><a href="#url">With experience comes trust</a></h6>
-                        <p><?=$value['aboutContent1']?></p>
+                        <p><?=$value['aboutContent2']?></p>
                     </div>
                 </div>
                 <div class="row content4-right-grids">
@@ -108,7 +108,7 @@
                     </div>
                     <div class="col-10 content4-right-info pl-lg-5">
                         <h6><a href="#url">Making world a better place</a></h6>
-                        <p><?=$value['aboutContent1']?></p>
+                        <p><?=$value['aboutContent3']?></p>
                     </div>
                 </div>
             </div>

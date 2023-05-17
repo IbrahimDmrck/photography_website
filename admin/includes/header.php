@@ -33,7 +33,7 @@ require '../database/db_conn.php';
     <link href="back/css/plugins/colorpicker/bootstrap-colorpicker.min.css" rel="stylesheet">
       <!-- FooTable -->
       <link href="back/css/plugins/footable/footable.core.css" rel="stylesheet">
-
+      <link href="back/css/plugins/jasny/jasny-bootstrap.min.css" rel="stylesheet">
     <style>
         .ui-helper-hidden-accessible {
             display: none;

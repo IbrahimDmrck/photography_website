@@ -39,13 +39,20 @@ require 'PHPMailer/src/SMTP.php';
                     <div class="col-md-5 contact-left">
                         <h3 class="font-weight-bold mb-md-5 mb-4">İletişim Bilgileri</h3>
                         <div class="cont-details">
+
+                        <?php 
+                        $site_contact=$db->query("SELECT * FROM settings WHERE id=1",PDO::FETCH_ASSOC);
+                        foreach ($site_contact as  $value) { ?>
+                        
+                     
+
                             <div class="d-flex contact-grid">
                                 <div class="cont-left text-center mr-3">
                                     <span class="fa fa-globe icon-color"></span>
                                 </div>
                                 <div class="cont-right">
-                                    <h6>Company Address</h6>
-                                    <p>10001, 5th Avenue, 12202 street, USA.</p>
+                                    <h6>Adres</h6>
+                                    <p><?=$value['Adres']?></p>
                                 </div>
                             </div>
                             <div class="d-flex contact-grid mt-4 pt-lg-2">
@@ -53,8 +60,8 @@ require 'PHPMailer/src/SMTP.php';
                                     <span class="fa fa-phone icon-color"></span>
                                 </div>
                                 <div class="cont-right">
-                                    <h6>Call Us</h6>
-                                    <p><a href="tel:+1(21) 234 4567">+1(21) 112 7368</a></p>
+                                    <h6>Telefon</h6>
+                                    <p><a href="tel:<?=$value['Telefon']?>"><?=$value['Telefon']?></a></p>
                                 </div>
                             </div>
                             <div class="d-flex contact-grid mt-4 pt-lg-2">
@@ -62,11 +69,11 @@ require 'PHPMailer/src/SMTP.php';
                                     <span class="fa fa-envelope-open icon-color"></span>
                                 </div>
                                 <div class="cont-right">
-                                    <h6>Email Us</h6>
-                                    <p><a href="mailto:example@mail.com" class="mail">example@mail.com</a></p>
+                                    <h6>Email</h6>
+                                    <p><a href="mailto:<?=$value['Email']?>" class="mail"><?=$value['Email']?></a></p>
                                 </div>
                             </div>
-                            <div class="d-flex contact-grid mt-4 pt-lg-2">
+                            <!-- <div class="d-flex contact-grid mt-4 pt-lg-2">
                                 <div class="cont-left text-center mr-3">
                                     <span class="fa fa-headphones icon-color"></span>
                                 </div>
@@ -74,7 +81,8 @@ require 'PHPMailer/src/SMTP.php';
                                     <h6>Customer Support</h6>
                                     <p><a href="mailto:info@support.com" class="mail">info@support.com</a></p>
                                 </div>
-                            </div>
+                            </div> -->
+                            <?php  } ?>
                         </div>
                     </div>
                     <div class="col-md-7 contact-right mt-md-0 mt-4">

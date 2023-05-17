@@ -188,7 +188,7 @@
     loop:true,
     margin:0,
     autoplay:true,
-    autoplayTimeout:1900,
+    autoplayTimeout:2500,
     autoplayHoverPause:true, responsive:{
         2560:{
             center: false,

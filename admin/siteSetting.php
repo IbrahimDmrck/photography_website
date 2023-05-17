@@ -9,72 +9,11 @@ include('includes/header.php'); ?>
     <div class="col-lg-12">
         <div class="wrapper wrapper-content">
             <div class="row">
-                <div class="col-lg-4">
-                  
-                    <div class="ibox ">
-                        <div class="ibox-title">
-                            <h5>Read below comments</h5>
-                            <div class="ibox-tools">
-                                <a class="collapse-link" href="">
-                                    <i class="fa fa-chevron-up"></i>
-                                </a>
-                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                    <i class="fa fa-wrench"></i>
-                                </a>
-                                <ul class="dropdown-menu dropdown-user">
-                                    <li><a href="#" class="dropdown-item">Config option 1</a>
-                                    </li>
-                                    <li><a href="#" class="dropdown-item">Config option 2</a>
-                                    </li>
-                                </ul>
-                                <a class="close-link" href="">
-                                    <i class="fa fa-times"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="ibox-content no-padding">
-                            <ul class="list-group">
-                                <li class="list-group-item">
-                                    <p><a class="text-info" href="#">@Alan Marry</a> I belive that. Lorem Ipsum is
-                                        simply dummy text of the printing and typesetting industry.</p>
-                                    <small class="block text-muted"><i class="fa fa-clock-o"></i> 1 minuts ago</small>
-                                </li>
-                                <li class="list-group-item">
-                                    <p><a class="text-info" href="#">@Stock Man</a> Check this stock chart. This price
-                                        is crazy! </p>
-                                    <div class="text-center m">
-                                        <span id="sparkline8"></span>
-                                    </div>
-                                    <small class="block text-muted"><i class="fa fa-clock-o"></i> 2 hours ago</small>
-                                </li>
-                                <li class="list-group-item">
-                                    <p><a class="text-info" href="#">@Kevin Smith</a> Lorem ipsum unknown printer took a
-                                        galley </p>
-                                    <small class="block text-muted"><i class="fa fa-clock-o"></i> 2 minuts ago</small>
-                                </li>
-                                <li class="list-group-item ">
-                                    <p><a class="text-info" href="#">@Jonathan Febrick</a> The standard chunk of Lorem
-                                        Ipsum</p>
-                                    <small class="block text-muted"><i class="fa fa-clock-o"></i> 1 hour ago</small>
-                                </li>
-                                <li class="list-group-item">
-                                    <p><a class="text-info" href="#">@Alan Marry</a> I belive that. Lorem Ipsum is
-                                        simply dummy text of the printing and typesetting industry.</p>
-                                    <small class="block text-muted"><i class="fa fa-clock-o"></i> 1 minuts ago</small>
-                                </li>
-                                <li class="list-group-item">
-                                    <p><a class="text-info" href="#">@Kevin Smith</a> Lorem ipsum unknown printer took a
-                                        galley </p>
-                                    <small class="block text-muted"><i class="fa fa-clock-o"></i> 2 minuts ago</small>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4">
+             
+                <div class="col-lg-6">
                     <div class="ibox ">
                     <div class="ibox-title">
-                            <h5>Read below comments</h5>
+                            <h5>Sosyal Medya Hesapları</h5>
                             <div class="ibox-tools">
                                 <a class="collapse-link" href="">
                                     <i class="fa fa-chevron-up"></i>
@@ -94,119 +33,115 @@ include('includes/header.php'); ?>
                             </div>
                         </div>
                         <div class="ibox-content">
+<?php
+if (isset($_POST['sosyalMedya'])) {
+    $swal = 'swal';
+    $Facebook=$_POST['Facebook'];
+    $Instagram=$_POST['Instagram'];
+    $Linkedin=$_POST['Linkedin'];
+    $Youtube=$_POST['Youtube'];
+    $Pinterest=$_POST['Pinterest'];
+    $Tiktok=$_POST['Tiktok'];
+    $Twitter=$_POST['Twitter'];
 
-                            <div>
-                                <div class="feed-activity-list">
 
-                                    <div class="feed-element">
-                                        <a class="float-left" href="profile.html">
-                                            <img alt="image" class="rounded-circle" src="img/profile.jpg">
-                                        </a>
-                                        <div class="media-body ">
-                                            <small class="float-right">5m ago</small>
-                                            <strong>Monica Smith</strong> posted a new blog. <br>
-                                            <small class="text-muted">Today 5:60 pm - 12.06.2014</small>
 
-                                        </div>
-                                    </div>
+        $query = $db->prepare('INSERT INTO settings SET Facebook = ?, Instagram = ?, Linkedin = ?, Youtube = ?, Pinterest = ?, Tiktok = ?, Twitter = ?');
+        $save = $query->execute([$Facebook, $Instagram, $Linkedin, $Youtube, $Pinterest, $Tiktok, $Twitter]);
 
-                                    <div class="feed-element">
-                                        <a class="float-left" href="profile.html">
-                                            <img alt="image" class="rounded-circle" src="img/a2.jpg">
-                                        </a>
-                                        <div class="media-body ">
-                                            <small class="float-right">2h ago</small>
-                                            <strong>Mark Johnson</strong> posted message on <strong>Monica
-                                                Smith</strong> site. <br>
-                                            <small class="text-muted">Today 2:10 pm - 12.06.2014</small>
-                                        </div>
-                                    </div>
-                                    <div class="feed-element">
-                                        <a class="float-left" href="profile.html">
-                                            <img alt="image" class="rounded-circle" src="img/a3.jpg">
-                                        </a>
-                                        <div class="media-body ">
-                                            <small class="float-right">2h ago</small>
-                                            <strong>Janet Rosowski</strong> add 1 photo on <strong>Monica
-                                                Smith</strong>. <br>
-                                            <small class="text-muted">2 days ago at 8:30am</small>
-                                        </div>
-                                    </div>
-                                    <div class="feed-element">
-                                        <a class="float-left" href="profile.html">
-                                            <img alt="image" class="rounded-circle" src="img/a4.jpg">
-                                        </a>
-                                        <div class="media-body ">
-                                            <small class="float-right text-navy">5h ago</small>
-                                            <strong>Chris Johnatan Overtunk</strong> started following <strong>Monica
-                                                Smith</strong>. <br>
-                                            <small class="text-muted">Yesterday 1:21 pm - 11.06.2014</small>
-                                            <div class="actions">
-                                                <a href="" class="btn btn-xs btn-white"><i class="fa fa-thumbs-up"></i>
-                                                    Like </a>
-                                                <a href="" class="btn btn-xs btn-white"><i class="fa fa-heart"></i>
-                                                    Love</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="feed-element">
-                                        <a class="float-left" href="profile.html">
-                                            <img alt="image" class="rounded-circle" src="img/a5.jpg">
-                                        </a>
-                                        <div class="media-body ">
-                                            <small class="float-right">2h ago</small>
-                                            <strong>Kim Smith</strong> posted message on <strong>Monica Smith</strong>
-                                            site. <br>
-                                            <small class="text-muted">Yesterday 5:20 pm - 12.06.2014</small>
-                                            <div class="well">
-                                                Lorem Ipsum is simply dummy text of the printing and typesetting
-                                                industry. Lorem Ipsum has been the industry's standard dummy text ever
-                                                since the 1500s.
-                                                Over the years, sometimes by accident, sometimes on purpose (injected
-                                                humour and the like).
-                                            </div>
-                                            <div class="float-right">
-                                                <a href="" class="btn btn-xs btn-white"><i class="fa fa-thumbs-up"></i>
-                                                    Like </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="feed-element">
-                                        <a class="float-left" href="profile.html">
-                                            <img alt="image" class="rounded-circle" src="img/profile.jpg">
-                                        </a>
-                                        <div class="media-body ">
-                                            <small class="float-right">23h ago</small>
-                                            <strong>Monica Smith</strong> love <strong>Kim Smith</strong>. <br>
-                                            <small class="text-muted">2 days ago at 2:30 am - 11.06.2014</small>
-                                        </div>
-                                    </div>
-                                    <div class="feed-element">
-                                        <a class="float-left" href="profile.html">
-                                            <img alt="image" class="rounded-circle" src="img/a7.jpg">
-                                        </a>
-                                        <div class="media-body ">
-                                            <small class="float-right">46h ago</small>
-                                            <strong>Mike Loreipsum</strong> started following <strong>Monica
-                                                Smith</strong>. <br>
-                                            <small class="text-muted">3 days ago at 7:58 pm - 10.06.2014</small>
-                                        </div>
-                                    </div>
-                                </div>
+        if ($save) {
 
-                                <button class="btn btn-primary btn-block m-t"><i class="fa fa-arrow-down"></i> Show
-                                    More</button>
+            echo '<script>' . $swal . '("Bilgiler başarıyla kaydedildi", "", "success");</script>';
+            header('Refresh:3;url=siteSetting.php');
 
+        } else {
+            echo '<script>' . $swal . '("Beklenmedik Bir Hata Oldu!", "Lütfen Tekrar Deneyin", "error");</script>';
+        }
+    
+}
+
+if (isset($_POST['iletisim'])) {
+    $swal = 'swal';
+    $Adres=$_POST['Adres'];
+    $Telefon=$_POST['Telefon'];
+    $Email=$_POST['Email'];
+
+
+
+
+        $query = $db->prepare('UPDATE settings SET Adres = ?, Telefon = ?, Email = ? WHERE id=?');
+        $save = $query->execute([$Adres, $Telefon, $Email,1]);
+
+        if ($save) {
+
+            echo '<script>' . $swal . '("Bilgiler başarıyla kaydedildi", "", "success");</script>';
+            header('Refresh:3;url=siteSetting.php');
+
+        } else {
+            echo '<script>' . $swal . '("Beklenmedik Bir Hata Oldu!", "Lütfen Tekrar Deneyin", "error");</script>';
+        }
+    
+}
+?>
+                     <form action="" method="post">
+                       <div class="row form-group"> <label class="col-2 col-form-label" for="facebook">Facebook:</label>
+                            <div class="col-8">
+                                <input type="text" name="Facebook" id="facebook" class="form-control">
                             </div>
+                       </div>
 
+                       <div class="row form-group"> <label class="col-2 col-form-label" for="twitter">Twitter:</label>
+                            <div class="col-8">
+                                <input type="text" name="Twitter" id="twitter" class="form-control">
+                            </div>
+                       </div>
+
+                       <div class="row form-group"> <label class="col-2 col-form-label" for="instagram">Instagram:</label>
+                            <div class="col-8">
+                                <input type="text" name="Instagram" id="instagram" class="form-control">
+                            </div>
+                       </div>
+
+                       <div class="row form-group"> <label class="col-2 col-form-label" for="linkedin">Linkedin:</label>
+                            <div class="col-8">
+                                <input type="text" name="Linkedin" id="linkedin" class="form-control">
+                            </div>
+                       </div>
+
+                       <div class="row form-group"> <label class="col-2 col-form-label" for="youtube">Youtube:</label>
+                            <div class="col-8">
+                                <input type="text" name="Youtube" id="youtube" class="form-control">
+                            </div>
+                       </div>
+
+                       <div class="row form-group"> <label class="col-2 col-form-label" for="pinterest">pinterest:</label>
+                            <div class="col-8">
+                                <input type="text" name="Pinterest" id="pinterest" class="form-control">
+                            </div>
+                       </div>
+
+                       <div class="row form-group"> <label class="col-2 col-form-label" for="pinterest">tiktok:</label>
+                            <div class="col-8">
+                                <input type="text" name="Tiktok" id="tiktok" class="form-control">
+                            </div>
+                       </div>
+
+                       <div class="row form-group justify-content-center"> 
+                            
+                               <button type="submit" name="sosyalMedya" class="btn btn-lg btn-secondary w-25">Ekle</button>
+                           
+                       </div>
+                       
+                     </form>
+                    
                         </div>
                     </div>
 
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-6">
                     <div class="ibox ">
                         <div class="ibox-title">
-                            <h5>Alpha project</h5>
+                            <h5>İletişim Bilgileri</h5>
                             <div class="ibox-tools">
                                 <a class="collapse-link" href="">
                                     <i class="fa fa-chevron-up"></i>
@@ -225,118 +160,35 @@ include('includes/header.php'); ?>
                                 </a>
                             </div>
                         </div>
-                        <div class="ibox-content ibox-heading">
-                            <h3>You have meeting today!</h3>
-                            <small><i class="fa fa-map-marker"></i> Meeting is on 6:00am. Check your schedule to see
-                                detail.</small>
-                        </div>
-                        <div class="ibox-content inspinia-timeline">
+                        
+                        <div class="ibox-content ">             
+                        <form action="" method="post">
+                       <div class="row form-group"> <label class="col-2 col-form-label" for="adres">Adres:</label>
+                            <div class="col-8">
+                                <input type="text" name="Adres" id="adres" class="form-control">
+                            </div>
+                       </div>
 
-                            <div class="timeline-item">
-                                <div class="row">
-                                    <div class="col-4 date">
-                                        <i class="fa fa-briefcase"></i>
-                                        6:00 am
-                                        <br />
-                                        <small class="text-navy">2 hour ago</small>
-                                    </div>
-                                    <div class="col content no-top-border">
-                                        <p class="m-b-xs"><strong>Meeting</strong></p>
+                       <div class="row form-group"> <label class="col-2 col-form-label" for="telefon">Telefon:</label>
+                            <div class="col-8">
+                                <input type="text" name="Telefon" id="telefon" data-mask="0(999) 999-9999" class="form-control">
+                            </div>
+                       </div>
 
-                                        <p>Conference on the sales results for the previous year. Monica please examine
-                                            sales trends in marketing and products. Below please find the current status
-                                            of the
-                                            sale.</p>
+                       <div class="row form-group"> <label class="col-2 col-form-label" for="email">E-mail:</label>
+                            <div class="col-8">
+                                <input type="text" name="Email" id="email" class="form-control">
+                            </div>
+                       </div>
 
-                                        <p><span data-diameter="40"
-                                                class="updating-chart">5,3,9,6,5,9,7,3,5,2,5,3,9,6,5,9,4,7,3,2,9,8,7,4,5,1,2,9,5,4,7,2,7,7,3,5,2</span>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="timeline-item">
-                                <div class="row">
-                                    <div class="col-4 date">
-                                        <i class="fa fa-file"></i>
-                                        7:00 am
-                                        <br />
-                                        <small class="text-navy">3 hour ago</small>
-                                    </div>
-                                    <div class="col content">
-                                        <p class="m-b-xs"><strong>Send documents to Mike</strong></p>
-                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                            Lorem Ipsum has been the industry's standard dummy text ever since.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="timeline-item">
-                                <div class="row">
-                                    <div class="col-4 date">
-                                        <i class="fa fa-coffee"></i>
-                                        8:00 am
-                                        <br />
-                                    </div>
-                                    <div class="col content">
-                                        <p class="m-b-xs"><strong>Coffee Break</strong></p>
-                                        <p>
-                                            Go to shop and find some products.
-                                            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                            Lorem Ipsum has been the industry's.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="timeline-item">
-                                <div class="row">
-                                    <div class="col-4 date">
-                                        <i class="fa fa-phone"></i>
-                                        11:00 am
-                                        <br />
-                                        <small class="text-navy">21 hour ago</small>
-                                    </div>
-                                    <div class="col content">
-                                        <p class="m-b-xs"><strong>Phone with Jeronimo</strong></p>
-                                        <p>
-                                            Lorem Ipsum has been the industry's standard dummy text ever since.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="timeline-item">
-                                <div class="row">
-                                    <div class="col-4 date">
-                                        <i class="fa fa-user-md"></i>
-                                        09:00 pm
-                                        <br />
-                                        <small>21 hour ago</small>
-                                    </div>
-                                    <div class="col content">
-                                        <p class="m-b-xs"><strong>Go to the doctor dr Smith</strong></p>
-                                        <p>
-                                            Find some issue and go to doctor.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="timeline-item">
-                                <div class="row">
-                                    <div class="col-4 date">
-                                        <i class="fa fa-comments"></i>
-                                        12:50 pm
-                                        <br />
-                                        <small class="text-navy">48 hour ago</small>
-                                    </div>
-                                    <div class="col content">
-                                        <p class="m-b-xs"><strong>Chat with Monica and Sandra</strong></p>
-                                        <p>
-                                            Web sites still in their infancy. Various versions have evolved over the
-                                            years, sometimes by accident, sometimes on purpose (injected humour and the
-                                            like).
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
 
+                       <div class="row form-group justify-content-center"> 
+                            
+                               <button type="submit" name="iletisim" class="btn btn-lg btn-secondary w-25">Ekle</button>
+                           
+                       </div>
+                       
+                     </form>
                         </div>
                     </div>
                 </div>

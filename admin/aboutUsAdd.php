@@ -69,29 +69,32 @@ if (isset($_POST['aboutInfo'])) {
     }
 }
 ?>
-<div class="form-group row"><label class="col-lg-2 col-form-label">Section Başlık</label>
+<div class="form-group row"><label class="col-1 col-form-label">Section Başlık</label>
 
     <div class="col-lg-6"><input type="text" name="sectionTitle" placeholder="Section Başlığı"
             class="form-control">
     </div>
 </div>
-<div class="form-group row"><label class="col-lg-2 col-form-label">içerik-1</label>
+<div class="form-group row"><label class="col-1 col-form-label">içerik-1</label>
 
-    <div class="col-lg-6"><input type="text" name="aboutContent1" placeholder="İçerik-1"
-            class="form-control">
+    <div class="col-lg-9">
+        <textarea name="aboutContent1" class="summernote form-control" id="" cols="10" rows="10"></textarea>
+        
     </div>
 </div>
-<div class="form-group row"><label class="col-lg-2 col-form-label">İçerik -2</label>
+<div class="form-group row"><label class="col-1 col-form-label">İçerik -2</label>
 
-    <div class="col-lg-6"><input type="text" name="aboutContent2" placeholder="İçerik-2"
-            class="form-control">
+    <div class="col-lg-9">
+
+            <textarea name="aboutContent2" class="summernote form-control" id="" cols="10" rows="10"></textarea>
     </div>
 </div>
-<div class="form-group row"><label class="col-lg-2 col-form-label">İçerik-3</label>
+<div class="form-group row"><label class="col-lg-1 col-form-label">İçerik-3</label>
 
-    <div class="col-lg-6">
-    <input type="text" name="aboutContent3" placeholder="İçerik-3"
-            class="form-control">
+    <div class="col-lg-9">
+    
+            <textarea name="aboutContent3" class="summernote form-control" id="" cols="10" rows="10"></textarea>
+            
     </div>
 </div>
 <div class="form-group"><label class="col-lg-2 col-form-label">İçerik1-Fotoğrafı</label>

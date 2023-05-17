@@ -151,7 +151,8 @@
  <script src="back/js/plugins/colorpicker/bootstrap-colorpicker.min.js"></script>
      <!-- FooTable -->
      <script src="back/js/plugins/footable/footable.all.min.js"></script>
-
+   <!-- Input Mask-->
+   <script src="back/js/plugins/jasny/jasny-bootstrap.min.js"></script>
 <script>
  $('.custom-file-input').on('change', function() {
    let fileName = $(this).val().split('\\').pop();

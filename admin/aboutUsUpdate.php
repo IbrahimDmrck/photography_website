@@ -87,21 +87,21 @@ if (isset($_POST['aboutInfoUpdate'])) {
 </div>
 <div class="form-group row"><label class="col-lg-2 col-form-label">içerik-1</label>
 
-    <div class="col-lg-6"><input type="text" name="aboutContent1" value="<?=$value['aboutContent1']?>"
-            class="form-control">
+    <div class="col-lg-6">
+            <textarea name="aboutContent1" class="summernote form-control" id="" cols="10" rows="10"><?=$value['aboutContent1']?></textarea>
     </div>
 </div>
 <div class="form-group row"><label class="col-lg-2 col-form-label">İçerik -2</label>
 
-    <div class="col-lg-6"><input type="text" name="aboutContent2" value="<?=$value['aboutContent2']?>"
-            class="form-control">
+    <div class="col-lg-6">
+            <textarea name="aboutContent2" class="summernote form-control" id="" cols="10" rows="10"><?=$value['aboutContent2']?></textarea>
     </div>
 </div>
 <div class="form-group row"><label class="col-lg-2 col-form-label">İçerik-3</label>
 
     <div class="col-lg-6">
-    <input type="text" name="aboutContent3" value="<?=$value['aboutContent3']?>"
-            class="form-control">
+
+            <textarea name="aboutContent3" class="summernote form-control" id="" cols="10" rows="10"><?=$value['aboutContent3']?></textarea>
     </div>
 </div>
 <div class="form-group"><label class="col-lg-2 col-form-label">İçerik1-Fotoğrafı</label>

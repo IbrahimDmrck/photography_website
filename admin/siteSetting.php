@@ -46,8 +46,8 @@ if (isset($_POST['sosyalMedya'])) {
 
 
 
-        $query = $db->prepare('INSERT INTO settings SET Facebook = ?, Instagram = ?, Linkedin = ?, Youtube = ?, Pinterest = ?, Tiktok = ?, Twitter = ?');
-        $save = $query->execute([$Facebook, $Instagram, $Linkedin, $Youtube, $Pinterest, $Tiktok, $Twitter]);
+        $query = $db->prepare('UPDATE settings SET Facebook = ?, Instagram = ?, Linkedin = ?, Youtube = ?, Pinterest = ?, Tiktok = ?, Twitter = ? WHERE id=?');
+        $save = $query->execute([$Facebook, $Instagram, $Linkedin, $Youtube, $Pinterest, $Tiktok, $Twitter,1]);
 
         if ($save) {
 
@@ -82,47 +82,51 @@ if (isset($_POST['iletisim'])) {
         }
     
 }
-?>
+
+$settings=$db->query("SELECT * FROM settings WHERE id=1",PDO::FETCH_ASSOC);
+foreach ($settings as $value) {?>
+    
+
                      <form action="" method="post">
                        <div class="row form-group"> <label class="col-2 col-form-label" for="facebook">Facebook:</label>
                             <div class="col-8">
-                                <input type="text" name="Facebook" id="facebook" class="form-control">
+                                <input type="text" name="Facebook" id="facebook" value="<?=$value['Facebook']?>" class="form-control">
                             </div>
                        </div>
 
                        <div class="row form-group"> <label class="col-2 col-form-label" for="twitter">Twitter:</label>
                             <div class="col-8">
-                                <input type="text" name="Twitter" id="twitter" class="form-control">
+                                <input type="text" name="Twitter" id="twitter" value="<?=$value['Twitter']?>"  class="form-control">
                             </div>
                        </div>
 
                        <div class="row form-group"> <label class="col-2 col-form-label" for="instagram">Instagram:</label>
                             <div class="col-8">
-                                <input type="text" name="Instagram" id="instagram" class="form-control">
+                                <input type="text" name="Instagram" id="instagram" value="<?=$value['Instagram']?>"  class="form-control">
                             </div>
                        </div>
 
                        <div class="row form-group"> <label class="col-2 col-form-label" for="linkedin">Linkedin:</label>
                             <div class="col-8">
-                                <input type="text" name="Linkedin" id="linkedin" class="form-control">
+                                <input type="text" name="Linkedin" id="linkedin" value="<?=$value['Linkedin']?>" class="form-control">
                             </div>
                        </div>
 
                        <div class="row form-group"> <label class="col-2 col-form-label" for="youtube">Youtube:</label>
                             <div class="col-8">
-                                <input type="text" name="Youtube" id="youtube" class="form-control">
+                                <input type="text" name="Youtube" id="youtube" value="<?=$value['Youtube']?>" class="form-control">
                             </div>
                        </div>
 
                        <div class="row form-group"> <label class="col-2 col-form-label" for="pinterest">pinterest:</label>
                             <div class="col-8">
-                                <input type="text" name="Pinterest" id="pinterest" class="form-control">
+                                <input type="text" name="Pinterest" id="pinterest" value="<?=$value['Pinterest']?>"  class="form-control">
                             </div>
                        </div>
 
-                       <div class="row form-group"> <label class="col-2 col-form-label" for="pinterest">tiktok:</label>
+                       <div class="row form-group"> <label class="col-2 col-form-label"  for="pinterest">tiktok:</label>
                             <div class="col-8">
-                                <input type="text" name="Tiktok" id="tiktok" class="form-control">
+                                <input type="text" name="Tiktok" id="tiktok"  value="<?=$value['Tiktok']?>" class="form-control">
                             </div>
                        </div>
 
@@ -133,7 +137,7 @@ if (isset($_POST['iletisim'])) {
                        </div>
                        
                      </form>
-                    
+                     <?php } ?>
                         </div>
                     </div>
 
@@ -161,23 +165,26 @@ if (isset($_POST['iletisim'])) {
                             </div>
                         </div>
                         
-                        <div class="ibox-content ">             
+                        <div class="ibox-content ">   
+                            <?php 
+                            $settings=$db->query("SELECT * FROM settings WHERE id=1",PDO::FETCH_ASSOC);
+                            foreach ($settings as $value) {?>          
                         <form action="" method="post">
                        <div class="row form-group"> <label class="col-2 col-form-label" for="adres">Adres:</label>
                             <div class="col-8">
-                                <input type="text" name="Adres" id="adres" class="form-control">
+                                <input type="text" name="Adres" id="adres"  value="<?=$value['Adres']?>" class="form-control">
                             </div>
                        </div>
 
                        <div class="row form-group"> <label class="col-2 col-form-label" for="telefon">Telefon:</label>
                             <div class="col-8">
-                                <input type="text" name="Telefon" id="telefon" data-mask="0(999) 999-9999" class="form-control">
+                                <input type="text" name="Telefon" id="telefon" value="<?=$value['Telefon']?>" data-mask="0(999) 999-9999" class="form-control">
                             </div>
                        </div>
 
                        <div class="row form-group"> <label class="col-2 col-form-label" for="email">E-mail:</label>
                             <div class="col-8">
-                                <input type="text" name="Email" id="email" class="form-control">
+                                <input type="text" name="Email" id="email" value="<?=$value['Email']?>" class="form-control">
                             </div>
                        </div>
 
@@ -189,6 +196,7 @@ if (isset($_POST['iletisim'])) {
                        </div>
                        
                      </form>
+                     <?php } ?>
                         </div>
                     </div>
                 </div>

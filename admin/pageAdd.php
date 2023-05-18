@@ -37,15 +37,44 @@ if (isset($_SESSION['username'])) {
                             $orderNumber = $_POST['orderNumber'];
                             $shortDescription = $_POST['shortDescription'];
                             $content = $_POST['content'];
-                            //$banner = $_POST['banner'];
+                          //  $banner = $_POST['banner'];
                             $seoTitle = $_POST['seoTitle'];
                             $seoDescription = $_POST['seoDescription'];
                             $seoKeyword = $_POST['seoKeyword'];
                             $swal = 'swal';
 
-                            $search = array("ı", "ö", "ü", "ç", "ğ", "Ğ", "Ç", "İ", "Ö", "Ü", " ");
-                            $replace = array('i', 'o', 'u', 'c', 'g', 'g', 'c', 'i', 'o', 'u', '-');
+                            $search = array("ı", "ö", "ü", "ş" ,"ç", "ğ", "Ğ", "Ç", "İ", "Ö", "Ü", 'Ş' ," ");
+                            $replace = array('i', 'o', 'u', "s" ,'c', 'g', 'g', 'c', 'i', 'o', 'u', 's' ,'-');
                             $pageSlug = str_replace($search, $replace, strtolower($pageName));
+
+                            $tmp_name = $_FILES["banner"]['tmp_name'];
+                            $fileName = $_FILES["banner"]['name'];
+                            $size = $_FILES["banner"]['size'];
+                            $type = $_FILES["banner"]['type'];
+                            
+                            $extension = substr($fileName, -4, 4);
+                            
+                            $randomNo = rand(10000, 50000);
+                            $randomNoSec = rand(10000, 50000);
+                            
+                            $photo_name = $randomNo . $randomNoSec . $extension;
+                            $destinationFolder = "public/uploads/".basename($photo_name);
+                  
+                            
+                            if (!$fileName) {
+                                echo '<script>' . $swal . '("Lütfen bir fotoğraf seçiniz !", "", "warning");</script>';
+                              }
+                          
+                              if ($size > (1024 * 1024 * 3)) {
+                                echo '<script>' . $swal . '("Fotoğraf boyutu çok fazla !", "", "warning");</script>';
+                              }
+                          
+                              if ($type != 'image/jpeg' && $type != 'image/png' && $type != '.jpg') {
+                                echo '<script>' . $swal . '("Dosya uzantısı jpeg,jpg veya png olabilir !", "", "warning");</script>';
+                              }
+                 
+                              move_uploaded_file($tmp_name,$destinationFolder);
+                          
 
 
 
@@ -63,12 +92,12 @@ if (isset($_SESSION['username'])) {
                                 echo '<script>' . $swal . '("Lütfen formu eksiksiz doldurun !", "", "warning");</script>';
                             } elseif (!$seoKeyword) {
                                 echo '<script>' . $swal . '("Lütfen formu eksiksiz doldurun !", "", "warning");</script>';
-                            } else {
-                                $query = $db->prepare('INSERT INTO pages SET pageName = ?, orderNumber = ?, shortDescription = ?, content = ?, seoTitle = ?, seoDescription = ?, seoKeyword = ?, slug = ?');
-                                $save = $query->execute([$pageName, $orderNumber, $shortDescription, $content, $seoTitle, $seoDescription, $seoKeyword, $pageSlug]);
+                            }else {
+                               
+                                $query = $db->prepare('INSERT INTO pages SET pageName = ?, orderNumber = ?, shortDescription = ?, content = ?, banner = ?,seoTitle = ?, seoDescription = ?, seoKeyword = ?, slug = ?');
+                                $save = $query->execute([$pageName, $orderNumber, $shortDescription, $content, $photo_name,$seoTitle, $seoDescription,  $seoKeyword, $pageSlug]);
 
                                 if ($save) {
-
                                     echo '<script>' . $swal . '("Sayfa başarıyla eklendi", "", "success");</script>';
                                     header('Refresh:3;url=pages.php');
 
@@ -79,8 +108,8 @@ if (isset($_SESSION['username'])) {
                         }
                         //echo "<div class='alert alert-danger'>".$menuName ." ".$orderNumber." ".$position."</div>";
                         ?>
-                        <form class="mx-5" method="post">
-
+                        <form class="mx-5" method="post" enctype="multipart/form-data">
+                           
                             <div class="form-group row"><label class="col-lg-2 col-form-label">Sayfa Adı</label>
 
                                 <div class="col-lg-6"><input type="text" name="pageName" placeholder="Sayfa Adı"
@@ -129,8 +158,8 @@ if (isset($_SESSION['username'])) {
 
                             <div class="form-group"><label class="col-lg-2 col-form-label">Banner Fotoğrafı</label>
                                 <div class="col-lg-6 custom-file">
-                                    <input id="logo" type="file" class="custom-file-input">
-                                    <label for="logo" class="custom-file-label">Choose file...</label>
+                                    <input id="banner" type="file" name="banner" class="custom-file-input">
+                                    <label for="banner" class="custom-file-label">Choose file...</label>
                                 </div>
                             </div>
                             <div class="form-group row">

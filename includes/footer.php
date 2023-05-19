@@ -245,6 +245,7 @@
   });
 });
 </script>
+
 <!--bootstrap-->
 <script src="front/assets/js/bootstrap.min.js"></script>
 

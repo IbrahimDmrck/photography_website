@@ -58,24 +58,18 @@ if (isset($_SESSION['username'])) {
                             $randomNoSec = rand(10000, 50000);
                             
                             $photo_name = $randomNo . $randomNoSec . $extension;
-                            $destinationFolder = "public/uploads/".basename($photo_name);
-                  
+                            $destinationFolder = "../../public/uploads/";
                             
-                            if (!$fileName) {
-                                echo '<script>' . $swal . '("Lütfen bir fotoğraf seçiniz !", "", "warning");</script>';
-                              }
+                            
                           
-                              if ($size > (1024 * 1024 * 3)) {
-                                echo '<script>' . $swal . '("Fotoğraf boyutu çok fazla !", "", "warning");</script>';
-                              }
-                          
-                              if ($type != 'image/jpeg' && $type != 'image/png' && $type != '.jpg') {
-                                echo '<script>' . $swal . '("Dosya uzantısı jpeg,jpg veya png olabilir !", "", "warning");</script>';
-                              }
-                 
-                              move_uploaded_file($tmp_name,$destinationFolder);
-                          
-
+                            
+                            
+                            
+                            
+                         
+                            
+                            
+                            
 
 
                             if (!$pageName) {
@@ -92,8 +86,15 @@ if (isset($_SESSION['username'])) {
                                 echo '<script>' . $swal . '("Lütfen formu eksiksiz doldurun !", "", "warning");</script>';
                             } elseif (!$seoKeyword) {
                                 echo '<script>' . $swal . '("Lütfen formu eksiksiz doldurun !", "", "warning");</script>';
-                            }else {
-                               
+                            }elseif (!$fileName) {
+                                echo '<script>' . $swal . '("Lütfen bir fotoğraf seçiniz !", "", "warning");</script>';
+                            }elseif ($size > (1024 * 1024 * 3)) {
+                                echo '<script>' . $swal . '("Fotoğraf boyutu çok fazla !", "", "warning");</script>';
+                            }elseif ($type != 'image/jpeg' && $type != 'image/png' && $type != '.jpg') {
+                                echo '<script>' . $swal . '("Dosya uzantısı jpeg,jpg veya png olabilir !", "", "warning");</script>';
+                            }
+                            else {
+                                move_uploaded_file($tmp_name, "$destinationFolder"."$photo_name");
                                 $query = $db->prepare('INSERT INTO pages SET pageName = ?, orderNumber = ?, shortDescription = ?, content = ?, banner = ?,seoTitle = ?, seoDescription = ?, seoKeyword = ?, slug = ?');
                                 $save = $query->execute([$pageName, $orderNumber, $shortDescription, $content, $photo_name,$seoTitle, $seoDescription,  $seoKeyword, $pageSlug]);
 
@@ -108,7 +109,7 @@ if (isset($_SESSION['username'])) {
                         }
                         //echo "<div class='alert alert-danger'>".$menuName ." ".$orderNumber." ".$position."</div>";
                         ?>
-                        <form class="mx-5" method="post" enctype="multipart/form-data">
+                        <form class="mx-5"  method="post"  enctype="multipart/form-data">
                            
                             <div class="form-group row"><label class="col-lg-2 col-form-label">Sayfa Adı</label>
 

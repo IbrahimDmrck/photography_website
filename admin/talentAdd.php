@@ -33,9 +33,36 @@ if (isset($_SESSION['username'])) {
                             $talentColor = $_POST['talentColor'];
                             $talentTitle = $_POST['talentTitle'];
                             $talentContent = $_POST['talentContent'];
-                            // $talentColor = $_POST['talentColor'];
-                            // $talentColor = $_POST['talentColor'];
+                           
+                            $tmp_name = $_FILES["imageR"]['tmp_name'];
+                            $fileName = $_FILES["imageR"]['name'];
+                            $size = $_FILES["imageR"]['size'];
+                            $type = $_FILES["imageR"]['type'];
+                            
+                            $extension = substr($fileName, -4, 4);
+                            
+                            $randomNo = rand(10000, 50000);
+                            $randomNoSec = rand(10000, 50000);
+                            
+                            $photo_name = $randomNo . $randomNoSec . $extension;
+                            $destinationFolder = "../../public/uploads/";
                        
+                            /*-------------*/ 
+
+                            $tmp_name1 = $_FILES["imageL"]['tmp_name'];
+                            $fileName1 = $_FILES["imageL"]['name'];
+                            $size1 = $_FILES["imageL"]['size'];
+                            $type1 = $_FILES["imageL"]['type'];
+                            
+                            $extension1 = substr($fileName, -4, 4);
+                            
+                            $randomNo1 = rand(10000, 50000);
+                            $randomNoSec1 = rand(10000, 50000);
+                            
+                            $photo_name1 = $randomNo1 . $randomNoSec1 . $extension1;
+                            $destinationFolder1 = "../../public/uploads/";
+
+
                             $swal = 'swal';
 
                             if (!$talentName) {
@@ -44,9 +71,17 @@ if (isset($_SESSION['username'])) {
                                 echo '<script>' . $swal . '("Lütfen formu eksiksiz doldurun !", "", "warning");</script>';
                             } elseif (!$talentColor) {
                                 echo '<script>' . $swal . '("Lütfen formu eksiksiz doldurun !", "", "warning");</script>';
+                            }elseif (!$fileName || !$fileName1) {
+                                echo '<script>' . $swal . '("Lütfen bir fotoğraf seçiniz !", "", "warning");</script>';
+                            }elseif ($size > (1024 * 1024 * 3) || $size1 > (1024 * 1024 * 3)) {
+                                echo '<script>' . $swal . '("Fotoğraf boyutu çok fazla !", "", "warning");</script>';
+                            }elseif (($type != 'image/jpeg' && $type != 'image/png' && $type != '.jpg') || ($type1 != 'image/jpeg' && $type1 != 'image/png' && $type1 != '.jpg')) {
+                                echo '<script>' . $swal . '("Dosya uzantısı jpeg,jpg veya png olabilir !", "", "warning");</script>';
                             }else {
-                                $query = $db->prepare('INSERT INTO talent SET talentName = ?, talentScore = ?, talentColor =?,talentTitle=?,talentContent=?');
-                                $save = $query->execute([$talentName, $talentScore, $talentColor, $talentTitle, $talentContent]);
+                                move_uploaded_file($tmp_name, "$destinationFolder"."$photo_name");
+                                move_uploaded_file($tmp_name1, "$destinationFolder1"."$photo_name1");
+                                $query = $db->prepare('INSERT INTO talent SET talentName = ?, talentScore = ?, talentColor =?,imageR=?,imageL=?,talentTitle=?,talentContent=?');
+                                $save = $query->execute([$talentName, $talentScore, $talentColor, $photo_name,$photo_name1, $talentTitle, $talentContent]);
 
                                 if ($save) {
 
@@ -60,7 +95,7 @@ if (isset($_SESSION['username'])) {
                         }
                         //echo "<div class='alert alert-danger'>".$menuName ." ".$orderNumber." ".$position."</div>";
                         ?>
-                        <form class="mx-5" method="post">
+                        <form class="mx-5" method="post" enctype="multipart/form-data">
 
                         <div class="form-group row"><label class="col-lg-2 col-form-label">Yetenek Adı</label>
 
@@ -95,14 +130,14 @@ if (isset($_SESSION['username'])) {
                             </div>
                             <div class="form-group"><label class="col-lg-2 col-form-label">Yetenek Sağ Fotoğrafı</label>
                                 <div class="col-lg-6 custom-file">
-                                    <input id="logo" type="file" name="imageR" class="custom-file-input">
-                                    <label for="logo" class="custom-file-label">Choose file...</label>
+                                    <input id="imageR" type="file" name="imageR" class="custom-file-input">
+                                    <label for="imageR" class="custom-file-label">Choose file...</label>
                                 </div>
                             </div>
                             <div class="form-group"><label class="col-lg-2 col-form-label">Yetenek Sol Fotoğrafı</label>
                                 <div class="col-lg-6 custom-file">
-                                    <input id="logo" type="file" name="imageL" class="custom-file-input">
-                                    <label for="logo" class="custom-file-label">Choose file...</label>
+                                    <input id="imageL" type="file" name="imageL" class="custom-file-input">
+                                    <label for="imageL" class="custom-file-label">Choose file...</label>
                                 </div>
                             </div>
                             

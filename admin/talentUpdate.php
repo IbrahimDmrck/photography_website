@@ -32,7 +32,7 @@ if (isset($_SESSION['username'])) {
 
                             $talent = $db->query("SELECT * FROM talent WHERE id=$id", PDO::FETCH_ASSOC);
 
-                        }
+                       
 
                         if (isset($_POST['talentUpdate'])) {
                             $talentName = $_POST['talentName'];
@@ -65,10 +65,90 @@ if (isset($_SESSION['username'])) {
                                 }
                             }
                         }
+
+                        if (isset($_POST["updateServicePhoto"])) {
+                            $id = $_GET['id'];
+                            $swal = 'swal';
+                            $foto = $_FILES['imageR']['name'];
+                            if ($foto != null) {
+
+
+                                $tmp_name = $_FILES["imageR"]['tmp_name'];
+                                $fileName = $_FILES["imageR"]['name'];
+                                $size = $_FILES["imageR"]['size'];
+                                $type = $_FILES["imageR"]['type'];
+
+                                $extension = substr($fileName, -4, 4);
+
+                                $randomNo = rand(10000, 50000);
+                                $randomNoSec = rand(10000, 50000);
+
+                                $photo_name = $randomNo . $randomNoSec . $extension;
+                                $destinationFolder = "../../public/uploads/";
+                                /* ---------------------------------- */
+                                $tmp_name1 = $_FILES["imageL"]['tmp_name'];
+                                $fileName1 = $_FILES["imageL"]['name'];
+                                $size1 = $_FILES["imageL"]['size'];
+                                $type1 = $_FILES["imageL"]['type'];
+
+                                $extension1 = substr($fileName, -4, 4);
+
+                                $randomNo1 = rand(10000, 50000);
+                                $randomNoSec1 = rand(10000, 50000);
+
+                                $photo_name1 = $randomNo1 . $randomNoSec1 . $extension1;
+                                $destinationFolder1 = "../../public/uploads/";
+
+                                move_uploaded_file($tmp_name, "$destinationFolder" . "$photo_name");
+                                move_uploaded_file($tmp_name1, "$destinationFolder1" . "$photo_name1");
+                            } else {
+                                $photo_name1 = "";
+                            }
+
+
+
+                            if (!$fileName || !$fileName1) {
+                                echo '<script>' . $swal . '("Lütfen bir fotoğraf seçiniz !", "", "warning");</script>';
+                            } elseif ($size > (1024 * 1024 * 3) || $size1 > (1024 * 1024 * 3)) {
+                                echo '<script>' . $swal . '("Fotoğraf boyutu çok fazla !", "", "warning");</script>';
+                            } elseif (($type != 'image/jpeg' && $type != 'image/png' && $type != '.jpg') || ($type1 != 'image/jpeg' && $type1 != 'image/png' && $type1 != '.jpg')) {
+                                echo '<script>' . $swal . '("Dosya uzantısı jpeg,jpg veya png olabilir !", "", "warning");</script>';
+                            } else {
+                                $check = $db->prepare('SELECT * FROM talent WHERE id = :id');
+                                $check->execute([":id" => $id]);
+                                $get_service = $check->fetch(PDO::FETCH_ASSOC);
+                                $check_exist = $check->rowCount();
+
+                                $old_photo = $get_service["imageL"];
+                                $old_photo1 = $get_service["imageR"];
+                                if ($old_photo != "" || $old_photo != null) {
+                                    unlink("../../public/uploads/" . $old_photo);
+                                   
+                                }
+
+                                if ($old_photo1 != "" || $old_photo1 != null) {
+                                    unlink("../../public/uploads/" . $old_photo1);
+                                }
+                                $query = $db->prepare('UPDATE talent SET imageR =?,imageL =? WHERE id=' . $id . '');
+                                $save = $query->execute([$photo_name,$photo_name1]);
+
+                                if ($save) {
+
+                                    echo '<script>' . $swal . '("Yetenek fotoğrafı başarıyla güncellendi", "", "success");</script>';
+                                    header('Refresh:3;');
+
+                                } else {
+                                    echo '<script>' . $swal . '("Yetenek Bir Hata Oldu!", "Lütfen Tekrar Deneyin", "error");</script>';
+                                }
+                            }
+
+                        }
+                    }
+
                         //echo "<div class='alert alert-danger'>".$menuName ." ".$orderNumber." ".$position."</div>";
                         ?>
-                        <form class="mx-5" method="post" enctype="multipart/form-data">
                             <?php foreach ($talent as $value) {?>
+                        <form class="mx-5" method="post" enctype="multipart/form-data">
                               
                           
                             <div class="form-group row"><label class="col-lg-2 col-form-label">Yetenek Adı</label>
@@ -99,26 +179,43 @@ if (isset($_SESSION['username'])) {
                                         rows="10"><?=$value['talentContent']?></textarea>
                                 </div>
                             </div>
-                            <div class="form-group"><label class="col-lg-2 col-form-label">Yetenek Sağ Fotoğrafı</label>
-                                <div class="col-lg-6 custom-file">
-                                    <input id="logo" type="file" name="imageR" value="<?=$value['imageR']?>" class="custom-file-input">
-                                    <label for="logo" class="custom-file-label"><?=$value['imageR']?></label>
-                                </div>
-                            </div>
-                            <div class="form-group"><label class="col-lg-2 col-form-label">Yetenek Sol Fotoğrafı</label>
-                                <div class="col-lg-6 custom-file">
-                                    <input id="logo" type="file" name="imageL" value="<?=$value['imageL']?>" class="custom-file-input">
-                                    <label for="logo" class="custom-file-label"><?=$value['imageL']?></label>
-                                </div>
-                            </div>
-
+                           
                             <div class="form-group row">
                                 <div class="col-lg-offset-2 col-lg-10 d-flex justify-content-center">
-                                    <button name="talentUpdate" class="btn btn-primary w-25" type="submit">Ekle</button>
+                                    <button name="talentUpdate" class="btn btn-primary w-25" type="submit">Güncelle</button>
                                 </div>
                             </div>
-                            <?php } ?>
                         </form>
+
+                        <form method="post" enctype="multipart/form-data" style="margin-bottom: 30px;">
+                        <div class="form-group row"><label class="col-lg-2 col-form-label">Yetenek Sağ Fotoğrafı</label>
+                                <div class="col-lg-6">
+                                    <img src="../../public/uploads/<?= $value['imageR'] ?>" alt="Bir Fotoğraf Eklemediniz"
+                                        class="img-fluid">
+                                </div>
+                                <div class=" col-lg-3  custom-file ">
+                                        <input id="imageR" type="file" name="imageR" class="custom-file-input">
+                                        <label for="imageR" class="custom-file-label">Fotoğraf Seçin</label>                     
+                                </div>
+
+                            </div>
+                            <div class="form-group row"><label class="col-lg-2 col-form-label">Yetenek Sol Fotoğrafı</label>
+                                <div class="col-lg-6">
+                                    <img src="../../public/uploads/<?= $value['imageL'] ?>" alt="Bir Fotoğraf Eklemediniz"
+                                        class="img-fluid">
+                                </div>
+                                <div class=" col-lg-3  custom-file ">
+                                        <input id="imageL" type="file" name="imageL" class="custom-file-input">
+                                        <label for="imageL" class="custom-file-label">Fotoğraf Seçin</label>
+
+                                        <button name="updateServicePhoto" class="float-right btn btn-secondary mt-2">Fotoğrafı
+                                            Güncelle</button>
+                                    
+                                </div>
+
+                            </div>
+                            </form>
+                        <?php } ?>
                     </div>
                 </div>
             </div>

@@ -37,7 +37,7 @@ if (isset($_SESSION['username'])) {
                     </div>
                     <div class="ibox-content">
 
-                    <form class="mx-5" method="post">
+                    <form class="mx-5" method="post" enctype="multipart/form-data">
 <?php
     if (isset($_GET['id'])) {
         $id = $_GET['id'];

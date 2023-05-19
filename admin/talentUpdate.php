@@ -67,7 +67,7 @@ if (isset($_SESSION['username'])) {
                         }
                         //echo "<div class='alert alert-danger'>".$menuName ." ".$orderNumber." ".$position."</div>";
                         ?>
-                        <form class="mx-5" method="post">
+                        <form class="mx-5" method="post" enctype="multipart/form-data">
                             <?php foreach ($talent as $value) {?>
                               
                           

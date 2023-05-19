@@ -33,37 +33,75 @@ if (isset($_SESSION['username'])) {
                             $talentColor = $_POST['talentColor'];
                             $talentTitle = $_POST['talentTitle'];
                             $talentContent = $_POST['talentContent'];
+                            $swal = 'swal';
+                            $foto = $_FILES['imageR']['name'];
+                            $foto1 = $_FILES['imageL']['name'];
+
+                            if ($foto != null) {
+
+
+                                $tmp_name = $_FILES["imageR"]['tmp_name'];
+                                $fileName = $_FILES["imageR"]['name'];
+                                $size = $_FILES["imageR"]['size'];
+                                $type = $_FILES["imageR"]['type'];
+                                
+                                $extension = substr($fileName, -4, 4);
+                                
+                                $randomNo = rand(10000, 50000);
+                                $randomNoSec = rand(10000, 50000);
+                                
+                                $photo_name = $randomNo . $randomNoSec . $extension;
+                                $destinationFolder = "../../public/uploads/";
+                                move_uploaded_file($tmp_name, "$destinationFolder" . "$photo_name");
+
+                                if (!$fileName) {
+                                    echo '<script>' . $swal . '("Herhangi bir değişiklik yapmadınız !", "", "warning");</script>';
+                                } elseif ($size > (1024 * 1024 * 3)) {
+                                    echo '<script>' . $swal . '("Fotoğraf boyutu çok fazla !", "", "warning");</script>';
+                                } elseif (($type != 'image/jpeg' && $type != 'image/png' && $type != '.jpg')) {
+                                    echo '<script>' . $swal . '("Dosya uzantısı jpeg,jpg veya png olabilir !", "", "warning");</script>';
+                                }
+
+                            } else {                 
+                                $photo_name = "";
+                            }
                            
-                            $tmp_name = $_FILES["imageR"]['tmp_name'];
-                            $fileName = $_FILES["imageR"]['name'];
-                            $size = $_FILES["imageR"]['size'];
-                            $type = $_FILES["imageR"]['type'];
-                            
-                            $extension = substr($fileName, -4, 4);
-                            
-                            $randomNo = rand(10000, 50000);
-                            $randomNoSec = rand(10000, 50000);
-                            
-                            $photo_name = $randomNo . $randomNoSec . $extension;
-                            $destinationFolder = "../../public/uploads/";
+                    
                        
                             /*-------------*/ 
 
-                            $tmp_name1 = $_FILES["imageL"]['tmp_name'];
-                            $fileName1 = $_FILES["imageL"]['name'];
-                            $size1 = $_FILES["imageL"]['size'];
-                            $type1 = $_FILES["imageL"]['type'];
-                            
-                            $extension1 = substr($fileName, -4, 4);
-                            
-                            $randomNo1 = rand(10000, 50000);
-                            $randomNoSec1 = rand(10000, 50000);
-                            
-                            $photo_name1 = $randomNo1 . $randomNoSec1 . $extension1;
-                            $destinationFolder1 = "../../public/uploads/";
+                            if ($foto1 != null) {
 
 
-                            $swal = 'swal';
+                                $tmp_name1 = $_FILES["imageL"]['tmp_name'];
+                                $fileName1 = $_FILES["imageL"]['name'];
+                                $size1 = $_FILES["imageL"]['size'];
+                                $type1 = $_FILES["imageL"]['type'];
+                                
+                                $extension1 = substr($fileName, -4, 4);
+                                
+                                $randomNo1 = rand(10000, 50000);
+                                $randomNoSec1 = rand(10000, 50000);
+                                
+                                $photo_name1 = $randomNo1 . $randomNoSec1 . $extension1;
+                                $destinationFolder1 = "../../public/uploads/";
+                                move_uploaded_file($tmp_name1, "$destinationFolder1"."$photo_name1");
+
+                                if (!$fileName1) {
+                                    echo '<script>' . $swal . '("Herhangi bir değişiklik yapmadınız !", "", "warning");</script>';
+                                } elseif ($size1 > (1024 * 1024 * 3)) {
+                                    echo '<script>' . $swal . '("Fotoğraf boyutu çok fazla !", "", "warning");</script>';
+                                } elseif (($type1 != 'image/jpeg' && $type1 != 'image/png' && $type1 != '.jpg')) {
+                                    echo '<script>' . $swal . '("Dosya uzantısı jpeg,jpg veya png olabilir !", "", "warning");</script>';
+                                }
+
+                            } else {                 
+                                $photo_name1 = "";
+                            }
+                           
+
+
+                          
 
                             if (!$talentName) {
                                 echo '<script>' . $swal . '("Lütfen formu eksiksiz doldurun !", "", "warning");</script>';
@@ -71,15 +109,9 @@ if (isset($_SESSION['username'])) {
                                 echo '<script>' . $swal . '("Lütfen formu eksiksiz doldurun !", "", "warning");</script>';
                             } elseif (!$talentColor) {
                                 echo '<script>' . $swal . '("Lütfen formu eksiksiz doldurun !", "", "warning");</script>';
-                            }elseif (!$fileName || !$fileName1) {
-                                echo '<script>' . $swal . '("Lütfen bir fotoğraf seçiniz !", "", "warning");</script>';
-                            }elseif ($size > (1024 * 1024 * 3) || $size1 > (1024 * 1024 * 3)) {
-                                echo '<script>' . $swal . '("Fotoğraf boyutu çok fazla !", "", "warning");</script>';
-                            }elseif (($type != 'image/jpeg' && $type != 'image/png' && $type != '.jpg') || ($type1 != 'image/jpeg' && $type1 != 'image/png' && $type1 != '.jpg')) {
-                                echo '<script>' . $swal . '("Dosya uzantısı jpeg,jpg veya png olabilir !", "", "warning");</script>';
                             }else {
-                                move_uploaded_file($tmp_name, "$destinationFolder"."$photo_name");
-                                move_uploaded_file($tmp_name1, "$destinationFolder1"."$photo_name1");
+        
+                              
                                 $query = $db->prepare('INSERT INTO talent SET talentName = ?, talentScore = ?, talentColor =?,imageR=?,imageL=?,talentTitle=?,talentContent=?');
                                 $save = $query->execute([$talentName, $talentScore, $talentColor, $photo_name,$photo_name1, $talentTitle, $talentContent]);
 

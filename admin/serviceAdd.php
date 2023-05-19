@@ -35,40 +35,52 @@ if (isset($_SESSION['username'])) {
                         if (isset($_POST['serviceAdd'])) {
                             $serviceName = $_POST['serviceName'];
                             $serviceDescription = $_POST['serviceDescription'];
-                           
-
-                            $tmp_name = $_FILES["serviceImage"]['tmp_name'];
-                            $fileName = $_FILES["serviceImage"]['name'];
-                            $size = $_FILES["serviceImage"]['size'];
-                            $type = $_FILES["serviceImage"]['type'];
-                            
-                            $extension = substr($fileName, -4, 4);
-                            
-                            $randomNo = rand(10000, 50000);
-                            $randomNoSec = rand(10000, 50000);
-                            
-                            $photo_name = $randomNo . $randomNoSec . $extension;
-                            $destinationFolder = "../../public/uploads/";
-                       
                             $swal = 'swal';
+                            $foto = $_FILES['serviceImage']['name'];
+
+                            if ($foto != null) {
+
+                                $tmp_name = $_FILES["serviceImage"]['tmp_name'];
+                                $fileName = $_FILES["serviceImage"]['name'];
+                                $size = $_FILES["serviceImage"]['size'];
+                                $type = $_FILES["serviceImage"]['type'];
+                                
+                                $extension = substr($fileName, -4, 4);
+                                
+                                $randomNo = rand(10000, 50000);
+                                $randomNoSec = rand(10000, 50000);
+                                
+                                $photo_name = $randomNo . $randomNoSec . $extension;
+                                $destinationFolder = "../../public/uploads/";
+                                move_uploaded_file($tmp_name, "$destinationFolder"."$photo_name");
+
+                                if (!$fileName) {
+                                    echo '<script>' . $swal . '("Herhangi bir değişiklik yapmadınız !", "", "warning");</script>';
+                                } elseif ($size > (1024 * 1024 * 3)) {
+                                    echo '<script>' . $swal . '("Fotoğraf boyutu çok fazla !", "", "warning");</script>';
+                                } elseif (($type != 'image/jpeg' && $type != 'image/png' && $type != '.jpg')) {
+                                    echo '<script>' . $swal . '("Dosya uzantısı jpeg,jpg veya png olabilir !", "", "warning");</script>';
+                                }
+
+                            } else {                 
+                                $photo_name = "";
+                            }
+
+             
+                       
+                            
 
                             if (!$serviceName) {
                                 echo '<script>' . $swal . '("Lütfen formu eksiksiz doldurun !", "", "warning");</script>';
                             } elseif (!$serviceDescription) {
                                 echo '<script>' . $swal . '("Lütfen formu eksiksiz doldurun !", "", "warning");</script>';
-                            }elseif (!$fileName) {
-                                echo '<script>' . $swal . '("Lütfen bir fotoğraf seçiniz !", "", "warning");</script>';
-                            }elseif ($size > (1024 * 1024 * 3)) {
-                                echo '<script>' . $swal . '("Fotoğraf boyutu çok fazla !", "", "warning");</script>';
-                            }elseif ($type != 'image/jpeg' && $type != 'image/png' && $type != '.jpg') {
-                                echo '<script>' . $swal . '("Dosya uzantısı jpeg,jpg veya png olabilir !", "", "warning");</script>';
                             }else {
-                                move_uploaded_file($tmp_name, "$destinationFolder"."$photo_name");
+                               
                                 $query = $db->prepare('INSERT INTO services SET serviceName = ?, serviceDescription = ?, serviceImg =?');
                                 $save = $query->execute([$serviceName, $serviceDescription,$photo_name]);
 
                                 if ($save) {
-
+ 
                                     echo '<script>' . $swal . '("Hizmet başarıyla eklendi", "", "success");</script>';
                                     header('Refresh:3;url=ourService.php');
 

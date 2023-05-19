@@ -37,7 +37,6 @@ if (isset($_SESSION['username'])) {
                             $orderNumber = $_POST['orderNumber'];
                             $shortDescription = $_POST['shortDescription'];
                             $content = $_POST['content'];
-                          //  $banner = $_POST['banner'];
                             $seoTitle = $_POST['seoTitle'];
                             $seoDescription = $_POST['seoDescription'];
                             $seoKeyword = $_POST['seoKeyword'];
@@ -47,18 +46,38 @@ if (isset($_SESSION['username'])) {
                             $replace = array('i', 'o', 'u', "s" ,'c', 'g', 'g', 'c', 'i', 'o', 'u', 's' ,'-');
                             $pageSlug = str_replace($search, $replace, strtolower($pageName));
 
-                            $tmp_name = $_FILES["banner"]['tmp_name'];
-                            $fileName = $_FILES["banner"]['name'];
-                            $size = $_FILES["banner"]['size'];
-                            $type = $_FILES["banner"]['type'];
-                            
-                            $extension = substr($fileName, -4, 4);
-                            
-                            $randomNo = rand(10000, 50000);
-                            $randomNoSec = rand(10000, 50000);
-                            
-                            $photo_name = $randomNo . $randomNoSec . $extension;
-                            $destinationFolder = "../../public/uploads/";
+                            $foto = $_FILES['banner']['name'];
+
+                            if ($foto != null) {
+ 
+                                $tmp_name = $_FILES["banner"]['tmp_name'];
+                                $fileName = $_FILES["banner"]['name'];
+                                $size = $_FILES["banner"]['size'];
+                                $type = $_FILES["banner"]['type'];
+                                
+                                $extension = substr($fileName, -4, 4);
+                                
+                                $randomNo = rand(10000, 50000);
+                                $randomNoSec = rand(10000, 50000);
+                                
+                                $photo_name = $randomNo . $randomNoSec . $extension;
+                                $destinationFolder = "../../public/uploads/";
+                                move_uploaded_file($tmp_name, "$destinationFolder"."$photo_name");
+
+                                if (!$fileName) {
+                                    echo '<script>' . $swal . '("Herhangi bir değişiklik yapmadınız !", "", "warning");</script>';
+                                } elseif ($size > (1024 * 1024 * 3)) {
+                                    echo '<script>' . $swal . '("Fotoğraf boyutu çok fazla !", "", "warning");</script>';
+                                } elseif (($type != 'image/jpeg' && $type != 'image/png' && $type != '.jpg')) {
+                                    echo '<script>' . $swal . '("Dosya uzantısı jpeg,jpg veya png olabilir !", "", "warning");</script>';
+                                }
+
+                            } else {                 
+                                $photo_name = "";
+                            }
+
+
+          
                             
                             
                           
@@ -86,15 +105,9 @@ if (isset($_SESSION['username'])) {
                                 echo '<script>' . $swal . '("Lütfen formu eksiksiz doldurun !", "", "warning");</script>';
                             } elseif (!$seoKeyword) {
                                 echo '<script>' . $swal . '("Lütfen formu eksiksiz doldurun !", "", "warning");</script>';
-                            }elseif (!$fileName) {
-                                echo '<script>' . $swal . '("Lütfen bir fotoğraf seçiniz !", "", "warning");</script>';
-                            }elseif ($size > (1024 * 1024 * 3)) {
-                                echo '<script>' . $swal . '("Fotoğraf boyutu çok fazla !", "", "warning");</script>';
-                            }elseif ($type != 'image/jpeg' && $type != 'image/png' && $type != '.jpg') {
-                                echo '<script>' . $swal . '("Dosya uzantısı jpeg,jpg veya png olabilir !", "", "warning");</script>';
                             }
                             else {
-                                move_uploaded_file($tmp_name, "$destinationFolder"."$photo_name");
+                                
                                 $query = $db->prepare('INSERT INTO pages SET pageName = ?, orderNumber = ?, shortDescription = ?, content = ?, banner = ?,seoTitle = ?, seoDescription = ?, seoKeyword = ?, slug = ?');
                                 $save = $query->execute([$pageName, $orderNumber, $shortDescription, $content, $photo_name,$seoTitle, $seoDescription,  $seoKeyword, $pageSlug]);
 
@@ -171,7 +184,7 @@ if (isset($_SESSION['username'])) {
                         </form>
                     </div>
                 </div>
-            </div>
+            </div> 
         </div>
     </div>
 

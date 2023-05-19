@@ -52,6 +52,43 @@ if (isset($_SESSION['username'])) {
                                     if (isset($_GET['id'])) {
                                         $id = $_GET['id'];
                                         $swal = 'swal';
+
+                                        $check = $db->prepare('SELECT * FROM aboutus WHERE id = :id');
+                                        $check->execute([":id" => $id]);
+                                        $get_service = $check->fetch(PDO::FETCH_ASSOC);
+                                        $check_exist = $check->rowCount();
+
+                                        $old_photo = $get_service["content1Img"];
+                                        $old_photo1 = $get_service["content2Img"];
+                                        $old_photo2 = $get_service["content3Img"];
+                                        $old_photo3 = $get_service["sectionImg"];
+                                        $old_photo4 = $get_service["rightImg"];
+                                        $old_photo5 = $get_service["leftImg"];
+
+                                        if ($old_photo != "" || $old_photo != null) {
+                                            unlink("../../public/uploads/" . $old_photo);
+                                        }
+
+                                        if ($old_photo1 != "" || $old_photo1 != null) {
+                                            unlink("../../public/uploads/" . $old_photo1);
+                                        }
+
+                                        if ($old_photo2 != "" || $old_photo2 != null) {
+                                            unlink("../../public/uploads/" . $old_photo2);
+                                        }
+
+                                        if ($old_photo3 != "" || $old_photo3 != null) {
+                                            unlink("../../public/uploads/" . $old_photo3);
+                                        }
+
+                                        if ($old_photo4 != "" || $old_photo4 != null) {
+                                            unlink("../../public/uploads/" . $old_photo4);
+                                        }
+
+                                        if ($old_photo5 != "" || $old_photo5 != null) {
+                                            unlink("../../public/uploads/" . $old_photo5);
+                                        }
+
                                         $deleteAboutus = $db->query("DELETE FROM aboutus WhERE id=$id", PDO::FETCH_ASSOC);
                                         $delete = $deleteAboutus->execute();
 

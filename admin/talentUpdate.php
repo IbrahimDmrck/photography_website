@@ -40,8 +40,6 @@ if (isset($_SESSION['username'])) {
                             $talentColor = $_POST['talentColor'];
                             $talentTitle = $_POST['talentTitle'];
                             $talentContent = $_POST['talentContent'];
-                            // $talentColor = $_POST['talentColor'];
-                            // $talentColor = $_POST['talentColor'];
                     
                             $swal = 'swal';
 
@@ -66,10 +64,12 @@ if (isset($_SESSION['username'])) {
                             }
                         }
 
-                        if (isset($_POST["updateServicePhoto"])) {
+                        if (isset($_POST["updateTalentPhoto"])) {
                             $id = $_GET['id'];
                             $swal = 'swal';
                             $foto = $_FILES['imageR']['name'];
+                            $foto1 = $_FILES['imageL']['name'];
+
                             if ($foto != null) {
 
 
@@ -77,58 +77,94 @@ if (isset($_SESSION['username'])) {
                                 $fileName = $_FILES["imageR"]['name'];
                                 $size = $_FILES["imageR"]['size'];
                                 $type = $_FILES["imageR"]['type'];
-
+                                
                                 $extension = substr($fileName, -4, 4);
-
+                                
                                 $randomNo = rand(10000, 50000);
                                 $randomNoSec = rand(10000, 50000);
-
+                                
                                 $photo_name = $randomNo . $randomNoSec . $extension;
                                 $destinationFolder = "../../public/uploads/";
-                                /* ---------------------------------- */
+                                move_uploaded_file($tmp_name, "$destinationFolder" . "$photo_name");
+
+                                if (!$fileName) {
+                                    echo '<script>' . $swal . '("Herhangi bir değişiklik yapmadınız !", "", "warning");</script>';
+                                } elseif ($size > (1024 * 1024 * 3)) {
+                                    echo '<script>' . $swal . '("Fotoğraf boyutu çok fazla !", "", "warning");</script>';
+                                } elseif (($type != 'image/jpeg' && $type != 'image/png' && $type != '.jpg')) {
+                                    echo '<script>' . $swal . '("Dosya uzantısı jpeg,jpg veya png olabilir !", "", "warning");</script>';
+                                }else{
+                                    $check = $db->prepare('SELECT * FROM talent WHERE id = :id');
+                                    $check->execute([":id" => $id]);
+                                    $get_service = $check->fetch(PDO::FETCH_ASSOC);
+                                    $check_exist = $check->rowCount();
+                        
+                                    $old_photo = $get_service["imageR"];
+                                    if ($old_photo != "" || $old_photo != null) {
+                                        unlink("../../public/uploads/" . $old_photo);
+                                       
+                                    }
+
+                                }
+
+                            } else {  
+                                $check = $db->prepare('SELECT * FROM talent WHERE id = :id');
+                                $check->execute([":id" => $id]);
+                                $get_service = $check->fetch(PDO::FETCH_ASSOC);
+                                $check_exist = $check->rowCount();
+                           
+                                $old_photo = $get_service["imageR"];           
+                                $photo_name = $old_photo;
+                            }
+                                                
+                            /*-------------*/ 
+
+                            if ($foto1 != null) {
+
+
                                 $tmp_name1 = $_FILES["imageL"]['tmp_name'];
                                 $fileName1 = $_FILES["imageL"]['name'];
                                 $size1 = $_FILES["imageL"]['size'];
                                 $type1 = $_FILES["imageL"]['type'];
-
-                                $extension1 = substr($fileName, -4, 4);
-
+                                
+                                $extension1 = substr($fileName1, -4, 4);
+                                
                                 $randomNo1 = rand(10000, 50000);
                                 $randomNoSec1 = rand(10000, 50000);
-
+                                
                                 $photo_name1 = $randomNo1 . $randomNoSec1 . $extension1;
                                 $destinationFolder1 = "../../public/uploads/";
+                                move_uploaded_file($tmp_name1, "$destinationFolder1"."$photo_name1");
 
-                                move_uploaded_file($tmp_name, "$destinationFolder" . "$photo_name");
-                                move_uploaded_file($tmp_name1, "$destinationFolder1" . "$photo_name1");
-                            } else {
-                                $photo_name1 = "";
-                            }
+                                if (!$fileName1) {
+                                    echo '<script>' . $swal . '("Herhangi bir değişiklik yapmadınız !", "", "warning");</script>';
+                                } elseif ($size1 > (1024 * 1024 * 3)) {
+                                    echo '<script>' . $swal . '("Fotoğraf boyutu çok fazla !", "", "warning");</script>';
+                                } elseif (($type1 != 'image/jpeg' && $type1 != 'image/png' && $type1 != '.jpg')) {
+                                    echo '<script>' . $swal . '("Dosya uzantısı jpeg,jpg veya png olabilir !", "", "warning");</script>';
+                                }else{
+                                    $check = $db->prepare('SELECT * FROM talent WHERE id = :id');
+                                    $check->execute([":id" => $id]);
+                                    $get_service = $check->fetch(PDO::FETCH_ASSOC);
+                                    $check_exist = $check->rowCount();  
 
+                                    $old_photo1 = $get_service["imageL"];  
+                                    if ($old_photo1 != "" || $old_photo1 != null) {
+                                        unlink("../../public/uploads/" . $old_photo1);
+                                    }
+                                }
 
-
-                            if (!$fileName || !$fileName1) {
-                                echo '<script>' . $swal . '("Lütfen bir fotoğraf seçiniz !", "", "warning");</script>';
-                            } elseif ($size > (1024 * 1024 * 3) || $size1 > (1024 * 1024 * 3)) {
-                                echo '<script>' . $swal . '("Fotoğraf boyutu çok fazla !", "", "warning");</script>';
-                            } elseif (($type != 'image/jpeg' && $type != 'image/png' && $type != '.jpg') || ($type1 != 'image/jpeg' && $type1 != 'image/png' && $type1 != '.jpg')) {
-                                echo '<script>' . $swal . '("Dosya uzantısı jpeg,jpg veya png olabilir !", "", "warning");</script>';
-                            } else {
+                            } else {   
                                 $check = $db->prepare('SELECT * FROM talent WHERE id = :id');
                                 $check->execute([":id" => $id]);
                                 $get_service = $check->fetch(PDO::FETCH_ASSOC);
                                 $check_exist = $check->rowCount();
 
-                                $old_photo = $get_service["imageL"];
-                                $old_photo1 = $get_service["imageR"];
-                                if ($old_photo != "" || $old_photo != null) {
-                                    unlink("../../public/uploads/" . $old_photo);
-                                   
-                                }
-
-                                if ($old_photo1 != "" || $old_photo1 != null) {
-                                    unlink("../../public/uploads/" . $old_photo1);
-                                }
+                                $old_photo1 = $get_service["imageL"];                             
+                                $photo_name1 = $old_photo1;
+                            }
+                           
+                              
                                 $query = $db->prepare('UPDATE talent SET imageR =?,imageL =? WHERE id=' . $id . '');
                                 $save = $query->execute([$photo_name,$photo_name1]);
 
@@ -140,8 +176,7 @@ if (isset($_SESSION['username'])) {
                                 } else {
                                     echo '<script>' . $swal . '("Yetenek Bir Hata Oldu!", "Lütfen Tekrar Deneyin", "error");</script>';
                                 }
-                            }
-
+                            
                         }
                     }
 
@@ -182,7 +217,7 @@ if (isset($_SESSION['username'])) {
                            
                             <div class="form-group row">
                                 <div class="col-lg-offset-2 col-lg-10 d-flex justify-content-center">
-                                    <button name="talentUpdate" class="btn btn-primary w-25" type="submit">Güncelle</button>
+                                    <button name="talentUpdate" class="btn btn-primary " type="submit">Güncelle</button>
                                 </div>
                             </div>
                         </form>
@@ -208,7 +243,7 @@ if (isset($_SESSION['username'])) {
                                         <input id="imageL" type="file" name="imageL" class="custom-file-input">
                                         <label for="imageL" class="custom-file-label">Fotoğraf Seçin</label>
 
-                                        <button name="updateServicePhoto" class="float-right btn btn-secondary mt-2">Fotoğrafı
+                                        <button name="updateTalentPhoto" class="float-right btn btn-secondary mt-2">Fotoğrafı
                                             Güncelle</button>
                                     
                                 </div>

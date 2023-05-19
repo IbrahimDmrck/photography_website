@@ -30,7 +30,7 @@ if (isset($_SESSION['username'])) {
 
                             $page = $db->query("SELECT * FROM pages WHERE id=$id", PDO::FETCH_ASSOC);
 
-                        }
+                       
 
                         if (isset($_POST['pageUpdate'])) {
                             $pageName = $_POST['pageName'];
@@ -77,9 +77,74 @@ if (isset($_SESSION['username'])) {
                                 }
                             }
                         }
+
+                        if (isset($_POST["updatePageBanner"])) {
+                            $id = $_GET['id'];
+                            $swal = 'swal';
+                            $foto = $_FILES['banner']['name'];
+
+                            if ($foto != null) {
+
+                                $tmp_name = $_FILES["banner"]['tmp_name'];
+                                $fileName = $_FILES["banner"]['name'];
+                                $size = $_FILES["banner"]['size'];
+                                $type = $_FILES["banner"]['type'];
+                                
+                                $extension = substr($fileName, -4, 4);
+                                
+                                $randomNo = rand(10000, 50000);
+                                $randomNoSec = rand(10000, 50000);
+                                
+                                $photo_name = $randomNo . $randomNoSec . $extension;
+                                $destinationFolder = "../../public/uploads/";
+                                move_uploaded_file($tmp_name, "$destinationFolder"."$photo_name");
+
+                                if (!$fileName) {
+                                    echo '<script>' . $swal . '("Herhangi bir değişiklik yapmadınız !", "", "warning");</script>';
+                                } elseif ($size > (1024 * 1024 * 3)) {
+                                    echo '<script>' . $swal . '("Fotoğraf boyutu çok fazla !", "", "warning");</script>';
+                                } elseif (($type != 'image/jpeg' && $type != 'image/png' && $type != '.jpg')) {
+                                    echo '<script>' . $swal . '("Dosya uzantısı jpeg,jpg veya png olabilir !", "", "warning");</script>';
+                                }else{
+                                    $check = $db->prepare('SELECT * FROM pages WHERE id = :id');
+                                    $check->execute([":id" => $id]);
+                                    $get_page = $check->fetch(PDO::FETCH_ASSOC);
+                                    $check_exist = $check->rowCount();
+
+                                    $old_photo = $get_page["banner"];
+                                    if ($old_photo != "" || $old_photo != null) {
+                                        unlink("../../public/uploads/" . $old_photo);
+                                    }
+                                }
+
+                            } else {   
+                                $check = $db->prepare('SELECT * FROM pages WHERE id = :id');
+                                $check->execute([":id" => $id]);
+                                $get_page = $check->fetch(PDO::FETCH_ASSOC);
+                                $check_exist = $check->rowCount();
+
+                                $old_photo = $get_page["banner"];
+                                           
+                                $photo_name =  $old_photo;
+                            }
+
+                                $query = $db->prepare('UPDATE pages SET banner =? WHERE id=' . $id . '');
+                                $save = $query->execute([$photo_name]);
+
+                                if ($save) {
+
+                                    echo '<script>' . $swal . '("Sayfa banner fotoğrafı başarıyla güncellendi", "", "success");</script>';
+                                    header('Refresh:3;');
+
+                                } else {
+                                    echo '<script>' . $swal . '("Beklenmedik Bir Hata Oldu!", "Lütfen Tekrar Deneyin", "error");</script>';
+                                }
+                            
+                        }
+                    }
                         ?>
-                        <form class="mx-5" method="post">
                             <?php foreach ($page as $value) { ?>
+                        <form class="mx-5" method="post">
 
                                 <div class="form-group row"><label class="col-lg-2 col-form-label">Sayfa Adı</label>
 
@@ -129,20 +194,34 @@ if (isset($_SESSION['username'])) {
 
                                 </div>
 
-                                <div class="form-group"><label class="col-lg-2 col-form-label">Banner Fotoğrafı</label>
-                                <div class="col-lg-6 custom-file">
-                                    <input id="logo" type="file" class="custom-file-input">
-                                    <label for="logo" class="custom-file-label">Choose file...</label>
-                                </div>
-                            </div>
+                                
 
                                 <div class="form-group row">
                                     <div class="col-lg-offset-2 col-lg-10 d-flex justify-content-center">
                                         <button name="pageUpdate" class="btn btn-primary w-25" type="submit">Güncelle</button>
                                     </div>
                                 </div>
+                            </form>
+                            
+                            <div class="form-group row"><label class="col-lg-2 col-form-label">Banner Fotoğrafı</label>
+                                <div class="col-lg-6">
+                                    <img src="../../public/uploads/<?= $value['banner'] ?>" alt="Bir Fotoğraf Eklemediniz"
+                                        class="img-fluid">
+                                </div>
+                                <div class=" col-lg-3  custom-file ">
+
+                                    <form method="post" enctype="multipart/form-data">
+                                        <input id="banner" type="file" name="banner" class="custom-file-input">
+                                        <label for="banner" class="custom-file-label">Fotoğraf Seçin</label>
+
+
+                                        <button name="updatePageBanner" class="float-right btn btn-secondary mt-2 ">Fotoğrafı
+                                            Güncelle</button>
+                                    </form>
+                                </div>
+
+                            </div>
                             <?php } ?>
-                        </form>
                     </div>
                 </div>
             </div>

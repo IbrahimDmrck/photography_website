@@ -52,6 +52,18 @@ if (isset($_SESSION['username'])) {
                                     if (isset($_GET['id'])) {
                                         $id = $_GET['id'];
                                         $swal = 'swal';
+
+                                        $check = $db->prepare('SELECT * FROM pages WHERE id = :id');
+                                        $check->execute([":id" => $id]);
+                                        $get_page = $check->fetch(PDO::FETCH_ASSOC);
+                                        $check_exist = $check->rowCount();
+
+                                        $old_photo = $get_page["banner"];
+                                        
+                                        if ($old_photo != "" || $old_photo != null) {
+                                            unlink("../../public/uploads/" . $old_photo);
+                                        }
+                                        
                                         $deleteMenu = $db->query("DELETE FROM pages WhERE Id=$id", PDO::FETCH_ASSOC);
                                         $delete = $deleteMenu->execute();
 

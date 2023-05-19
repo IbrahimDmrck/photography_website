@@ -64,50 +64,54 @@ if (isset($_SESSION['username'])) {
                                 $id = $_GET['id'];
                                 $swal = 'swal';
                                 $foto = $_FILES['serviceImg']['name'];
+
                                 if ($foto != null) {
-
-
+    
                                     $tmp_name = $_FILES["serviceImg"]['tmp_name'];
                                     $fileName = $_FILES["serviceImg"]['name'];
                                     $size = $_FILES["serviceImg"]['size'];
                                     $type = $_FILES["serviceImg"]['type'];
-
+                                    
                                     $extension = substr($fileName, -4, 4);
-
+                                    
                                     $randomNo = rand(10000, 50000);
                                     $randomNoSec = rand(10000, 50000);
-
+                                    
                                     $photo_name = $randomNo . $randomNoSec . $extension;
                                     $destinationFolder = "../../public/uploads/";
-
-                                    move_uploaded_file($tmp_name, "$destinationFolder" . "$photo_name");
-                                } else {
-                                    $photo_name = "";
-                                }
-
-
-
-                                if (!$fileName) {
-                                    echo '<script>' . $swal . '("Lütfen bir fotoğraf seçiniz !", "", "warning");</script>';
-                                } elseif ($size > (1024 * 1024 * 3)) {
-                                    echo '<script>' . $swal . '("Fotoğraf boyutu çok fazla !", "", "warning");</script>';
-                                } elseif (($type != 'image/jpeg' && $type != 'image/png' && $type != '.jpg')) {
-                                    echo '<script>' . $swal . '("Dosya uzantısı jpeg,jpg veya png olabilir !", "", "warning");</script>';
-                                } else {
+                                    move_uploaded_file($tmp_name, "$destinationFolder"."$photo_name");
+    
+                                    if (!$fileName) {
+                                        echo '<script>' . $swal . '("Herhangi bir değişiklik yapmadınız !", "", "warning");</script>';
+                                    } elseif ($size > (1024 * 1024 * 3)) {
+                                        echo '<script>' . $swal . '("Fotoğraf boyutu çok fazla !", "", "warning");</script>';
+                                    } elseif (($type != 'image/jpeg' && $type != 'image/png' && $type != '.jpg')) {
+                                        echo '<script>' . $swal . '("Dosya uzantısı jpeg,jpg veya png olabilir !", "", "warning");</script>';
+                                    }else{
+                                        $check = $db->prepare('SELECT * FROM services WHERE id = :id');
+                                        $check->execute([":id" => $id]);
+                                        $get_service = $check->fetch(PDO::FETCH_ASSOC);
+                                        $check_exist = $check->rowCount();
+    
+                                        $old_photo = $get_service["serviceImg"];
+                                        if ($old_photo != "" || $old_photo != null) {
+                                            unlink("../../public/uploads/" . $old_photo);
+                                        }
+                                    }
+    
+                                } else {   
                                     $check = $db->prepare('SELECT * FROM services WHERE id = :id');
                                     $check->execute([":id" => $id]);
                                     $get_service = $check->fetch(PDO::FETCH_ASSOC);
                                     $check_exist = $check->rowCount();
 
                                     $old_photo = $get_service["serviceImg"];
-                                    if ($old_photo != "" || $old_photo != null) {
-                                        unlink("../../public/uploads/" . $old_photo);
-                                    }
+                                               
+                                    $photo_name =  $old_photo;
+                                }
+  
                                     $query = $db->prepare('UPDATE services SET serviceImg =? WHERE id=' . $id . '');
                                     $save = $query->execute([$photo_name]);
-
-
-
 
                                     if ($save) {
 
@@ -117,8 +121,7 @@ if (isset($_SESSION['username'])) {
                                     } else {
                                         echo '<script>' . $swal . '("Beklenmedik Bir Hata Oldu!", "Lütfen Tekrar Deneyin", "error");</script>';
                                     }
-                                }
-
+                                
                             }
                         }
 
@@ -158,8 +161,8 @@ if (isset($_SESSION['username'])) {
                                 <div class=" col-lg-3  custom-file ">
 
                                     <form method="post" enctype="multipart/form-data">
-                                        <input id="logo" type="file" name="serviceImg" class="custom-file-input">
-                                        <label for="logo" class="custom-file-label">Fotoğraf Seçin</label>
+                                        <input id="serviceImg" type="file" name="serviceImg" class="custom-file-input">
+                                        <label for="serviceImg" class="custom-file-label">Fotoğraf Seçin</label>
 
 
                                         <button name="updateServicePhoto" class="float-right btn btn-secondary mt-2 ">Fotoğrafı

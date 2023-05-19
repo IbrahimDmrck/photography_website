@@ -52,6 +52,19 @@ if (isset($_SESSION['username'])) {
                                     if (isset($_GET['service'])) {
                                         $id = $_GET['service'];
                                         $swal = 'swal';
+
+
+                                        $check = $db->prepare('SELECT * FROM services WHERE id = :id');
+                                        $check->execute([":id" => $id]);
+                                        $get_service = $check->fetch(PDO::FETCH_ASSOC);
+                                        $check_exist = $check->rowCount();
+
+                                        $old_photo = $get_service["serviceImg"];
+                                        
+                                        if ($old_photo != "" || $old_photo != null) {
+                                            unlink("../../public/uploads/" . $old_photo);
+                                        }
+
                                         $deleteServices = $db->query("DELETE FROM services WhERE id=$id", PDO::FETCH_ASSOC);
                                         $delete = $deleteServices->execute();
 
@@ -155,6 +168,24 @@ if (isset($_SESSION['username'])) {
                                     if (isset($_GET['talent'])) {
                                         $id = $_GET['talent'];
                                         $swal = 'swal';
+
+                                        $check = $db->prepare('SELECT * FROM talent WHERE id = :id');
+                                        $check->execute([":id" => $id]);
+                                        $get_talent = $check->fetch(PDO::FETCH_ASSOC);
+                                        $check_exist = $check->rowCount();
+
+                                        $old_photo = $get_talent["imageR"];
+                                        $old_photo1 = $get_talent["imageL"];
+                               
+
+                                        if ($old_photo != "" || $old_photo != null) {
+                                            unlink("../../public/uploads/" . $old_photo);
+                                        }
+
+                                        if ($old_photo1 != "" || $old_photo1 != null) {
+                                            unlink("../../public/uploads/" . $old_photo1);
+                                        }
+
                                         $deleteTalent = $db->query("DELETE FROM talent WhERE id=$id", PDO::FETCH_ASSOC);
                                         $delete = $deleteTalent->execute();
 

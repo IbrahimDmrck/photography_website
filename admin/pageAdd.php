@@ -91,6 +91,10 @@ if (isset($_SESSION['username'])) {
                                 echo '<script>' . $swal . '("Lütfen formu eksiksiz doldurun !", "", "warning");</script>';
                             } elseif (!$seoKeyword) {
                                 echo '<script>' . $swal . '("Lütfen formu eksiksiz doldurun !", "", "warning");</script>';
+                            }elseif (isset($type)) {
+                                if (($type != 'image/jpeg' && $type != 'image/png' && $type != '.jpg')) {
+                                    echo '<script>' . $swal . '("Dosya uzantısı jpeg,jpg veya png olabilir !", "", "warning");</script>';
+                                }
                             }
                             else {
                                 

@@ -351,9 +351,6 @@ if (isset($_SESSION['username'])) {
                                 }
 
 
-
-
-
                                 $query = $db->prepare('UPDATE aboutus SET content1Img =?,content2Img =?,content3Img=?, sectionImg=?,rightImg=?,leftImg=?   WHERE id=' . $id . '');
                                 $save = $query->execute([$photo_name, $photo_name1, $photo_name2, $photo_name3, $photo_name4, $photo_name5]);
 

@@ -302,6 +302,35 @@
                         }
                     });
                 });
+
+                $(".edit_photo_btn").click(function (e) {
+
+                    e.preventDefault();
+                    var photo_id = $(this).closest("tr").find(".photo_id").text();
+                  
+                        $.ajax({
+                            type: "POST",
+                            url: "ajax_post.php",
+                            data: {
+                                'checking_edit_photo_btn': true,
+                                'photo_id': photo_id,
+                            },
+                        
+                            success: function (response) {
+                            
+                                $.each(response, function (key, value) {
+                                    $('#name').val(value['name']);
+                                    $('#categories').val(value['categories[]']);
+                                    $('#id').val(value['id']);
+                                    $('#photoName').val(value['photoName']);
+                                    
+                                });
+                            
+                                $('#photoUpdateModalCenter').modal('show');
+                            }
+                        });
+                    });
+
             });
 
 </script>

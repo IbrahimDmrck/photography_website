@@ -74,6 +74,12 @@ if (isset($_SESSION['username'])) {
                                 echo '<script>' . $swal . '("Lütfen formu eksiksiz doldurun !", "", "warning");</script>';
                             } elseif (!$serviceDescription) {
                                 echo '<script>' . $swal . '("Lütfen formu eksiksiz doldurun !", "", "warning");</script>';
+                            }elseif (isset($type)) {
+                                if (($type != 'image/jpeg' && $type != 'image/png' && $type != '.jpg')) {
+                                    
+                               
+                                echo '<script>' . $swal . '("Dosya uzantısı jpeg,jpg veya png olabilir !", "", "warning");</script>';
+                            }
                             }else {
                                
                                 $query = $db->prepare('INSERT INTO services SET serviceName = ?, serviceDescription = ?, serviceImg =?');

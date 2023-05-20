@@ -45,6 +45,7 @@ if (isset($_SESSION['username'])) {
                                     <table class="table table-striped table-bordered table-hover dataTables-example">
                                         <thead>
                                             <tr>
+                                            <th hidden>id</th>
                                                 <th>#</th>
                                                 <th>Fotoğraf Adı</th>
                                                 <th>Kategori</th>
@@ -77,6 +78,9 @@ if (isset($_SESSION['username'])) {
                                                 foreach ($photos as $photo) {
                                                     ?>
                                                     <tr class="gradeX">
+                                                         <td hidden class="photo_id">
+                                                            <?= $photo['id'] ?>
+                                                        </td>
                                                         <td><a href="../../public/uploads/<?= $photo['photoName'] ?>"
                                                                 target="_blank"><img
                                                                     src="../../public/uploads/<?= $photo['photoName'] ?>"
@@ -94,10 +98,11 @@ if (isset($_SESSION['username'])) {
                                                                 class="ladda-button ladda-button-demo-delete btn btn-danger text-white"
                                                                 data-style="zoom-in" title="sil"><i class="fa fa-times"></i></a>
                                                         </td>
-                                                        <td class="center"><a href="pageUpdate.php?id=<?= $photo['id'] ?>"
+                                                        <td class="center"><button
                                                                 name="update"
-                                                                class="ladda-button ladda-button-demo-update btn btn-warning text-white"
-                                                                data-style="zoom-in" title="güncelle"><i class="fa fa-edit"></i></a>
+                                                                class="edit_photo_btn btn btn-warning text-white"
+                                                                data-style="zoom-in" title="güncelle" data-toggle="modal" data-target="#photoUpdateModalCenter" type="button"
+                                                            ><i class="fa fa-edit"></i></button>
                                                         </td>
                                                     </tr>
                                                 <?php }
@@ -252,6 +257,8 @@ if (isset($_SESSION['username'])) {
                                                     echo '<script>' . $swal . '("Herhangi bir fotoğraf yüklemediniz!", "", "warning");</script>';
                                                 } elseif (!$categories) {
                                                     echo '<script>' . $swal . '("Lütfen en az bir kategori seçiniz!", "", "warning");</script>';
+                                                }elseif ($type != 'image/jpeg' && $type != 'image/png' && $type != '.jpg') {
+                                                    echo '<script>' . $swal . '("Dosya uzantısı jpeg,jpg veya png olabilir !", "", "warning");</script>';
                                                 } else {
 
                                                     foreach ($categories as $value) {
@@ -311,6 +318,151 @@ if (isset($_SESSION['username'])) {
                                                     <button type="button" class="btn btn-secondary"
                                                         data-dismiss="modal">İptal</button>
                                                     <button type="submit" name="photoAdd"
+                                                        class="btn btn-primary">Kaydet</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!--Photo Update Modal -->
+                                <div class="modal fade" id="photoUpdateModalCenter" tabindex="-1" role="dialog"
+                                    aria-labelledby="photoUpdateModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h3 class="modal-title" id="photoUpdateModalCenterTitle">Fotoğraf Güncelle</h3>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <?php
+                                            if (isset($_POST['photoUpdate'])) {
+                                                $id = $_POST['id'];
+                                                $name = $_POST['name'];
+                                                $categories = $_POST['categories'];
+                                                $swal = 'swal';
+
+                                                $foto = $_FILES['photoName']['name'];
+
+                                                if ($foto != null) {
+
+                                                    $tmp_name = $_FILES["photoName"]['tmp_name'];
+                                                    $fileName = $_FILES["photoName"]['name'];
+                                                    $size = $_FILES["photoName"]['size'];
+                                                    $type = $_FILES["photoName"]['type'];
+
+                                                    $extension = substr($fileName, -4, 4);
+
+                                                    $randomNo = rand(10000, 50000);
+                                                    $randomNoSec = rand(10000, 50000);
+
+                                                    $photo_name = $randomNo . $randomNoSec . $extension;
+                                                    $destinationFolder = "../../public/uploads/";
+                                                    move_uploaded_file($tmp_name, "$destinationFolder" . "$photo_name");
+                                                    
+                                                    if (!$fileName) {
+                                                        echo '<script>' . $swal . '("Herhangi bir değişiklik yapmadınız !", "", "warning");</script>';
+                                                    } elseif ($size > (1024 * 1024 * 3)) {
+                                                        echo '<script>' . $swal . '("Fotoğraf boyutu çok fazla !", "", "warning");</script>';
+                                                    } elseif (isset($type)) {
+                                                        if ($type != 'image/jpeg' && $type != 'image/png' && $type != '.jpg') {
+                                                            echo '<script>' . $swal . '("Dosya uzantısı jpeg,jpg veya png olabilir !", "", "warning");</script>';
+                                                        }
+                                                    }else{
+                                                        $check = $db->prepare('SELECT * FROM photos WHERE id = :id');
+                                                        $check->execute([":id" => $id]);
+                                                        $get_photo = $check->fetch(PDO::FETCH_ASSOC);
+                                                        $check_exist = $check->rowCount();
+                        
+                                                        $old_photo = $get_photo["photoName"];
+
+                                                        if ($old_photo != "" || $old_photo != null) {
+                                                            unlink("../../public/uploads/" . $old_photo);
+                                                        }
+                                                    }
+
+                                                } else {
+
+                                                    $check = $db->prepare('SELECT * FROM photos WHERE id = :id');
+                                                    $check->execute([":id" => $id]);
+                                                    $get_photo = $check->fetch(PDO::FETCH_ASSOC);
+                                                    $check_exist = $check->rowCount();
+                    
+                                                    $old_photo = $get_photo["photoName"];
+                                                               
+                                                    $photo_name =  $old_photo;
+                                                   
+                                                }
+
+                                                if (!$name) {
+                                                    echo '<script>' . $swal . '("Herhangi bir fotoğraf yüklemediniz!", "", "warning");</script>';
+                                                } elseif (!$categories) {
+                                                    echo '<script>' . $swal . '("Lütfen en az bir kategori seçiniz!", "", "warning");</script>';
+                                                }elseif (isset($type)) {
+                                                    if ($type != 'image/jpeg' && $type != 'image/png' && $type != '.jpg') {
+                                                        echo '<script>' . $swal . '("Dosya uzantısı jpeg,jpg veya png olabilir !", "", "warning");</script>';
+                                                    }
+                                                } else {
+
+                                                    foreach ($categories as $value) {
+                                                        $ctg .= $value . ',';
+                                                    }
+
+                                                    $query = $db->prepare('UPDATE photos SET name = ?, photoName = ?, categories = ? WHERE id = ?');
+                                                    $save = $query->execute([$name, $photo_name, $ctg, $id]);
+
+                                                    if ($save) {
+                                                        echo '<script>' . $swal . '("Fotoğraf başarıyla güncellendi", "", "success");</script>';
+                                                        header('Refresh:3;url=gallery.php');
+
+                                                    } else {
+                                                        echo '<script>' . $swal . '("Beklenmedik Bir Hata Oldu!", "Lütfen Tekrar Deneyin", "error");</script>';
+                                                    }
+                                                }
+                                            }
+                                            $categories = $db->query("SELECT * FROM categories", PDO::FETCH_ASSOC);
+                                            ?>
+                                            <form action="" method="post" enctype="multipart/form-data">
+                                                <div class="modal-body">
+
+                                                    <label for="category"><b>Fotoğraf adı :</b></label>
+                                                    <input type="hidden" name="id" id="id" class="form-control mb-3">
+                                                    <input type="text" name="name" id="name" class="form-control mb-3">
+
+                                                    <label class="font-normal" class="mt-3"><b>Kategori Seçin</b></label>
+
+                                                    <select data-placeholder="Birden fazla kategori seçebilirsiniz..."
+                                                        name="categories[]" id="categories" class="chosen-select" multiple tabindex="4" required="true">
+                                                        <?php if (isset($categories)) {
+                                                            foreach ($categories as $categoryValue) { ?>
+
+
+                                                                <option value="<?= $categoryValue['name'] ?>">
+                                                                    <?= $categoryValue['name'] ?>
+                                                                </option>
+
+                                                            <?php }
+                                                        } ?>
+                                                    </select>
+
+                                                    <label class="mt-3"><b>Yüklenecek Fotoğraf :</b></label>
+                                                    <div class=" custom-file ">
+                                                        <input id="photoName" type="file" name="photoName"
+                                                            class="custom-file-input" value="">
+                                                        <label for="photoName" class="custom-file-label">Fotoğraf
+                                                            Seçin</label>
+
+                                                    </div>
+
+
+
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <span >Fotoğrafı güncelleyebilmek için en az 1 tane kategori seçmelisiniz</span>
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-dismiss="modal">İptal</button>
+                                                    <button type="submit" name="photoUpdate"
                                                         class="btn btn-primary">Kaydet</button>
                                                 </div>
                                             </form>

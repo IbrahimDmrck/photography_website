@@ -128,6 +128,9 @@ if (isset($_SESSION['username'])) {
                                 $photo_name =  $old_photo;
                             }
 
+                            if (($type != 'image/jpeg' && $type != 'image/png' && $type != '.jpg')) {
+                                echo '<script>' . $swal . '("Dosya uzantısı jpeg,jpg veya png olabilir !", "", "warning");</script>';
+                            }else{
                                 $query = $db->prepare('UPDATE pages SET banner =? WHERE id=' . $id . '');
                                 $save = $query->execute([$photo_name]);
 
@@ -139,7 +142,7 @@ if (isset($_SESSION['username'])) {
                                 } else {
                                     echo '<script>' . $swal . '("Beklenmedik Bir Hata Oldu!", "Lütfen Tekrar Deneyin", "error");</script>';
                                 }
-                            
+                            }
                         }
                     }
                         ?>

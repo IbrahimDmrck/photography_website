@@ -109,6 +109,11 @@ if (isset($_SESSION['username'])) {
                                 echo '<script>' . $swal . '("Lütfen formu eksiksiz doldurun !", "", "warning");</script>';
                             } elseif (!$talentColor) {
                                 echo '<script>' . $swal . '("Lütfen formu eksiksiz doldurun !", "", "warning");</script>';
+                            }elseif (isset($type) || isset($type1)) {
+                                if (($type != 'image/jpeg' && $type != 'image/png' && $type != '.jpg')||($type1 != 'image/jpeg' && $type1 != 'image/png' && $type1 != '.jpg')) {
+                                    
+                                    echo '<script>' . $swal . '("Dosya uzantısı jpeg,jpg veya png olabilir !", "", "warning");</script>';
+                                }
                             }else {
         
                               

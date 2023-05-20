@@ -153,6 +153,10 @@
      <script src="back/js/plugins/footable/footable.all.min.js"></script>
    <!-- Input Mask-->
    <script src="back/js/plugins/jasny/jasny-bootstrap.min.js"></script>
+
+   <!-- Chosen -->
+   <script src="back/js/plugins/chosen/chosen.jquery.js"></script>
+
 <script>
  $('.custom-file-input').on('change', function() {
    let fileName = $(this).val().split('\\').pop();
@@ -265,13 +269,42 @@
             $('.summernote').summernote();
             $('.demo1').colorpicker();
             $('.footable').footable();
-           
+            $('.chosen-select').chosen({width: "100%"});
 
         
 
     });
 </script>
+<script>
+        $(document).ready(function () {
+            $(".edit_btn").click(function (e) {
 
+                e.preventDefault();
+                var category_id = $(this).closest("tr").find(".category_id").text();
+                   
+                    $.ajax({
+                        type: "POST",
+                        url: "ajax_post.php",
+                        data: {
+                            'checking_edit_btn': true,
+                            'category_id': category_id,
+                        },
+                    
+                        success: function (response) {
+                        
+                            $.each(response, function (key, value) {
+                                $('#name').val(value['name']);
+                                $('#iddegeri').val(value['id']);
+                            
+                            });
+                        
+                            $('#categoryUpdateModal').modal('show');
+                        }
+                    });
+                });
+            });
+
+</script>
 </body>
 
 </html>

@@ -77,20 +77,6 @@ if (isset($_SESSION['username'])) {
                             }
 
 
-          
-                            
-                            
-                          
-                            
-                            
-                            
-                            
-                         
-                            
-                            
-                            
-
-
                             if (!$pageName) {
                                 echo '<script>' . $swal . '("Lütfen formu eksiksiz doldurun !", "", "warning");</script>';
                             } elseif (!$orderNumber) {

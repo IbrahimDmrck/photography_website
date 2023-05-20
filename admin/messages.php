@@ -63,7 +63,7 @@ include('includes/header.php'); ?>
             
                                             if ($save) {
             
-                                          
+                                                header('Refresh:2;messages.php');
             
                                             } else {
                                                 echo '<script>"Beklenmedik Bir Hata Oldu!</script>';

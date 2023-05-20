@@ -34,6 +34,8 @@ require '../database/db_conn.php';
       <!-- FooTable -->
       <link href="back/css/plugins/footable/footable.core.css" rel="stylesheet">
       <link href="back/css/plugins/jasny/jasny-bootstrap.min.css" rel="stylesheet">
+<!-- chosen-select -->
+      <link href="back/css/plugins/chosen/bootstrap-chosen.css" rel="stylesheet">
     <style>
         .ui-helper-hidden-accessible {
             display: none;

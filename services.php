@@ -2,6 +2,7 @@
   $pageService = $db->query("SELECT * FROM pages WHERE slug='hizmetler'", PDO::FETCH_ASSOC);
   $pageServiceContent = $db->query("SELECT * FROM pages WHERE slug='hizmetler'", PDO::FETCH_ASSOC);
   $pageServiceBanner = $db->query("SELECT * FROM pages WHERE slug='hizmetler'", PDO::FETCH_ASSOC);
+
   $services = $db->query("SELECT * FROM services ", PDO::FETCH_ASSOC);
   $talents = $db->query("SELECT * FROM talent ")->fetchAll();
 ?>
@@ -41,14 +42,19 @@
                     
                     <?php  } ?>
                 </div>
+                <?php $servicesphoto= $db->query("SELECT * FROM servicesPhoto", PDO::FETCH_ASSOC); 
+                foreach($servicesphoto as $simg){?>
+
+             
                 <div class="col-lg-6 left-wthree-img mt-lg-0 mt-5">
-                    <img src="front/assets/images/service1.jpg" alt="" class="img-fluid">
+                    <img src="../../public/uploads/<?=$simg['imageR']?>" alt="fotoğraf yok" class="img-fluid">
                 </div>
             </div>
             <div class="row mt-5 pt-lg-5">
                 <div class="col-lg-6 left-wthree-img mt-lg-0 mt-5 order-lg-first order-last">
-                    <img src="front/assets/images/service2.jpg" alt="" class="img-fluid">
+                    <img src="../../public/uploads/<?=$simg['imageL']?>" alt="fotoğraf yok" class="img-fluid">
                 </div>
+                <?php  } ?>
                 <div class="col-lg-6 about-right-faq align-self pl-lg-5 order-lg-last order-first">
                     <!-- <h3 class="title-style mb-4">Making world a better place</h3>
                     <p>Lorem ipsum viverra feugiat. Tesque libero ut justo,

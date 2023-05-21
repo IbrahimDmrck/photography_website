@@ -346,6 +346,33 @@
                         });
                     });
 
+                    $(".edit_sphoto").click(function (e) {
+
+                    e.preventDefault();
+                    var sphoto_id = $(this).closest("tr").find(".sphoto_id").text();
+                        console.log(sphoto_id);
+                        $.ajax({
+                            type: "POST",
+                            url: "ajax_post.php",
+                            data: {
+                                'checking_edit_sphoto_btn': true,
+                                'sphoto_id': sphoto_id,
+                            },
+                        
+                            success: function (response) {
+                            
+                                $.each(response, function (key, value) {                                   
+                                    $('#idServiceP').val(value['id']);
+                                    $('#imageR').val(value['imageR']);
+                                    $('#imageL').val(value['imageL']);
+                                    
+                                });
+                            
+                                $('#servicePhotoUpdateModal').modal('show');
+                            }
+                        });
+                    });
+
             });
 
 </script>

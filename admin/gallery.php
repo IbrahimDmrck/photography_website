@@ -194,7 +194,7 @@ if (isset($_SESSION['username'])) {
                                                                 data-style="zoom-in" title="sil"><i class="fa fa-times"></i></a>
                                                         </td>
                                                         <td class="center"><button href="" name="update"
-                                                                class="edit_btn btn btn-warning text-white" data-style="zoom-in"
+                                                                class="edit_btn btn btn-warning text-white" 
                                                                 title="güncelle" data-toggle="modal"
                                                                 data-target="#categoryUpdateModal" type="button"><i
                                                                     class="fa fa-edit"></i></button></td>

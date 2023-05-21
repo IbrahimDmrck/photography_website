@@ -22,8 +22,8 @@
     <section class="w3l-gallery py-2" id="gallery">
         <div class="container-fluid py-md-2 py-2">
             <div class="header title-heading-w3 text-center mx-auto mb-sm-2 mb-2" style="max-width:700px">
-                <!-- <h3 class="title-style">Amazing Photo Gallery</h3>
-                <p class="lead mt-2">Nostrud exercitation ullamco laboris nisi
+                 <h4 class="title-style mb-5">Fotoğraf Ara</h4>
+                <!--<p class="lead mt-2">Nostrud exercitation ullamco laboris nisi
                     ut aliquip ex ea commodo consequat sunt in culpa qui official.</p> -->
                    <?php  $categories = $db->query("SELECT * FROM categories", PDO::FETCH_ASSOC); 
                    
@@ -66,14 +66,15 @@
                 $randomPhotos4=array_slice($photos,15,5);
                 foreach ($randomPhotos1 as  $value) {?>
                     <div class=" item">
-                        <a href="../../public/uploads/<?=$value['photoName']?>" data-lightbox="example-set" data-title="<?=$value['name']?>"
+                        
+                        <a href="../../public/uploads/<?=$value['photoName']?>" data-lightbox="example-set" data-title="<a href='comment.php?photo=<?=$value['id']?>'  class='text-white  w-100  btn btn-success'>Yorum Yap</a>"
                             class="zoom d-block">
                             <img class="" src="../../public/uploads/<?=$value['photoName']?>" alt="Fotoğraf yok" style="width:100%">
                             <span class="overlay__hover"></span>
                             <span class="hover-content">
                                 <span class="title"><?=$value['name']?></span>
                                 <span class="content"><?=$value['categories']?></span>
-                              
+                               
                             </span>
                         </a>
                     </div>
@@ -96,7 +97,7 @@
                  <?php     
                 foreach ($randomPhotos2 as  $value) {?>
                     <div class=" item">
-                        <a href="../../public/uploads/<?=$value['photoName']?>" data-lightbox="example-set" data-title="<?=$value['name']?>"
+                        <a href="../../public/uploads/<?=$value['photoName']?>" data-lightbox="example-set" data-title="<a href='http://localhost/portfolio/yorum-yap'  class='text-white  w-100  btn btn-success'>Yorum Yap</a>"
                             class="zoom d-block">
                             <img class="" src="../../public/uploads/<?=$value['photoName']?>" alt="Fotoğraf yok" style="width:100%">
                             <span class="overlay__hover"></span>
@@ -127,7 +128,7 @@
                
                 foreach ($randomPhotos3 as  $value) {?>
                     <div class=" item">
-                        <a href="../../public/uploads/<?=$value['photoName']?>" data-lightbox="example-set" data-title="<?=$value['name']?>"
+                        <a href="../../public/uploads/<?=$value['photoName']?>" data-lightbox="example-set" data-title="<a href='http://localhost/portfolio/yorum-yap'  class='text-white  w-100  btn btn-success'>Yorum Yap</a>"
                             class="zoom d-block">
                             <img class="" src="../../public/uploads/<?=$value['photoName']?>" alt="Fotoğraf yok" style="width:100%">
                             <span class="overlay__hover"></span>
@@ -158,7 +159,7 @@
                 <?php  
                     foreach ($randomPhotos4 as  $value) {?>
                     <div class=" item">
-                        <a href="../../public/uploads/<?=$value['photoName']?>" data-lightbox="example-set" data-title="<?=$value['name']?>"
+                        <a href="../../public/uploads/<?=$value['photoName']?>" data-lightbox="example-set" data-title="<a href='http://localhost/portfolio/yorum-yap'  class='text-white  w-100  btn btn-success'>Yorum Yap</a>"
                             class="zoom d-block">
                             <img class="" src="../../public/uploads/<?=$value['photoName']?>" alt="Fotoğraf yok" style="width:100%">
                             <span class="overlay__hover"></span>
@@ -252,7 +253,7 @@
               
                 <div class="column">
                     <div class=" item">
-                        <a href="../../public/uploads/<?=$value['photoName']?>" data-lightbox="example-set" data-title="<?=$value['name']?>"
+                        <a href="../../public/uploads/<?=$value['photoName']?>" data-lightbox="example-set" data-title="<a href='http://localhost/portfolio/yorum-yap' class='text-white fw-bol btn btn-outline-primary'>Yorum Yap</a>"
                             class="zoom d-block">
                             <img class="" src="../../public/uploads/<?=$value['photoName']?>" alt="Fotoğraf yok" style="width:100%">
                             <span class="overlay__hover"></span>
@@ -366,96 +367,52 @@
     <section class="w3l-progress py-5" id="progress">
         <div class="container py-md-5 py-4">
             <div class="title-heading-w3 text-center mx-auto mb-sm-5 mb-4" style="max-width:700px">
-                <h3 class="title-style">Frequently Asked Questions</h3>
+            <?php  $pageService = $db->query("SELECT * FROM pages WHERE slug='hizmetler'", PDO::FETCH_ASSOC);
+            foreach ($pageService as $serviceContent) {?>
+                <?=$serviceContent['content']?>
+            <?php } ?>
+                <!-- <h3 class="title-style">Frequently Asked Questions</h3>
                 <p class="lead mt-2">Nostrud exercitation ullamco laboris nisi
-                    ut aliquip ex ea commodo consequat sunt in culpa qui official.</p>
+                    ut aliquip ex ea commodo consequat sunt in culpa qui official.</p> -->
             </div>
             <div class="row pt-2">
                 <div class="col-lg-6 w3l-faq">
                     <div class="faq-page">
                         <ul>
+                        <?php
+                      $services = $db->query("SELECT * FROM services")->fetchAll();
+                 shuffle($services);
+                 $randomServices=array_slice($services,0,4);
+                    foreach ($randomServices as  $service) { ?> 
                             <li>
                                 <input type="checkbox" checked>
                                 <i></i>
-                                <h2>How would you describe your photography?</h2>
-                                <p>It's really, really good. <br>Amet earum velit nobis aliquam
-                                    laboriosam nihil debitis facere voluptatibus consectetur quae quasi fuga, ad
-                                    corrupti libero omnis sapiente
-                                    non assumenda, incidunt officiis eaque iste minima autem.</p>
+                                <h2><?=$service['serviceName']?></h2>
+                                <p><?=$service['serviceDescription']?></p>
                             </li>
-                            <li>
-                                <input type="checkbox" checked>
-                                <i></i>
-                                <h2>What kind of photography equipment do you use?</h2>
-                                <p>I use the best equipment in the world.<br>
-                                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptates amet earum
-                                    velit nobis aliquam
-                                    laboriosam nihil quasi fuga, ad corrupti libero omnis sapiente
-                                    non assumenda excepturi. Tempore
-                                    reiciendis ipsam culpa, qui
-                                    voluptates eveniet, incidunt officiis eaque iste minima autem.</p>
-                            </li>
-                            <li>
-                                <input type="checkbox" checked>
-                                <i></i>
-                                <h2>Are you a successful photographer?</h2>
-                                <p>I'm sure that by almost any measure most folks would consider me a successful
-                                    photographer. <br> Sit amet consectetur adipisicing elit. Voluptates amet earum
-                                    velit
-                                    nobis aliquam
-                                    laboriosam nihil debitis animi. Tempore reiciendis
-                                    ipsam culpa, qui
-                                    voluptates eveniet, incidunt officiis eaque iste minima autem.</p>
-                            </li>
-
-                            <li>
-                                <input type="checkbox" checked>
-                                <i></i>
-                                <h2>How much do you charge?</h2>
-                                <p>All my pricing is available online. <br>Sit amet consectetur adipisicing elit.
-                                    Voluptates amet earum
-                                    velit nobis aliquam
-                                    laboriosam nihil debitis facere voluptatibus consectetur quae quasi fuga, ad
-                                    corrupti libero omnis sapiente
-                                    non assumenda excepturi aperiam iste minima autem.</p>
-                            </li>
+                         
+                            <?php } ?>
                         </ul>
                     </div>
                 </div>
                 <div class="col-lg-6 mt-lg-0 mt-5 pl-lg-5">
-                    <div class="progress-info info1">
-                        <h6 class="progress-tittle">Photography <span class="">80%</span></h6>
+
+                      <?php
+                      $talents = $db->query("SELECT * FROM talent ")->fetchAll();
+                 shuffle($talents);
+                 $randomTalents=array_slice($talents,0,4);
+                    foreach ($randomTalents as  $talentScore) { ?>                 
+                    <div class="progress-info info<?=$talentScore['id']?>">
+                        <h6 class="progress-tittle"><?=$talentScore['talentName']?> <span class="float-right"><?=$talentScore['talentScore']?>%</span></h6>
                         <div class="progress">
-                            <div class="progress-bar progress-bar-striped gradient-1" role="progressbar"
-                                style="width: 80%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">
+                            <div class="progress-bar progress-bar-striped gradient-<?=$talentScore['id']?>" role="progressbar"
+                                style="width: <?=$talentScore['talentScore']?>%;color:yellow;background-color: blue;background-image: linear-gradient(-224deg, red,<?=$talentScore['talentColor']?>);" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">
                             </div>
                         </div>
                     </div>
-                    <div class="progress-info info2">
-                        <h6 class="progress-tittle">Creativity <span class="">95%</span>
-                        </h6>
-                        <div class="progress">
-                            <div class="progress-bar progress-bar-striped gradient-2" role="progressbar"
-                                style="width: 95%" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="progress-info info3">
-                        <h6 class="progress-tittle">Retouching <span class="">60%</span></h6>
-                        <div class="progress">
-                            <div class="progress-bar progress-bar-striped gradient-3" role="progressbar"
-                                style="width: 60%" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="progress-info info4 mb-0">
-                        <h6 class="progress-tittle">New Stills <span class="">85%</span></h6>
-                        <div class="progress">
-                            <div class="progress-bar progress-bar-striped gradient-4" role="progressbar"
-                                style="width: 85%" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100">
-                            </div>
-                        </div>
-                    </div>
+                    
+                    <?php  } ?>
+                   
                 </div>
             </div>
         </div>
@@ -600,7 +557,7 @@
     <!-- //call section -->
 
     <!-- blog section -->
-    <section class="w3l-grids-block-5 py-5">
+    <!-- <section class="w3l-grids-block-5 py-5">
         <div class="container py-md-5 py-4">
             <div class="title-heading-w3 text-center mx-auto mb-sm-5 mb-4" style="max-width:700px">
                 <h3 class="title-style">Latest Blog Posts</h3>
@@ -672,6 +629,6 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
     <!-- //blog section -->
  

@@ -4,58 +4,76 @@
         <div class="container pt-md-5 pt-4">
             <div class="w3l-footer-text-style">
                 <div class="footer-list-cont d-flex align-items-center justify-content-between mb-5">
-                    <h6 class="foot-sub-title">Contact Us</h6>
+                    <h6 class="foot-sub-title">İletişim</h6>
+                    <?php $social_settings=$db->query("SELECT * FROM settings ")->fetchAll(); ?>
                     <div class="main-social-footer-29">
-                        <a href="#facebook" class="facebook"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#twitter" class="twitter"><i class="fab fa-twitter"></i></a>
-                        <a href="#instagram" class="instagram"><i class="fab fa-instagram"></i></a>
-                        <a href="#linkedin" class="linkedin"><i class="fab fa-linkedin-in"></i></a>
+                        <?php foreach ($social_settings as $value) {?>
+                           
+                        
+                        <a href="<?=$value['Facebook'] ?? '#'?>" target="_blank" class="facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="<?=$value['Twitter'] ?? '#'?>" target="_blank" class="twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="<?=$value['Instagram'] ?? '#'?>" target="_blank" class="instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="<?=$value['Linkedin'] ?? '#'?>" target="_blank" class="linkedin"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="<?=$value['Youtube'] ?? '#'?>" target="_blank" class="youtube"><i class="fab fa-youtube"></i></a>
+                        <a href="<?=$value['Pinterest'] ?? '#'?>" target="_blank" class="pinterest"><i class="fab fa-pinterest"></i></a>
+                        <a href="<?=$value['Tiktok'] ?? '#'?>" target="_blank" class="tiktok"><i class="fab fa-tiktok"></i></a>
+                       
                     </div>
                 </div>
             </div>
-            <div class="row footer-top-29 pt-lg-5 pt-sm-4">
-                <div class="col-lg-3 col-sm-6">
+            <div class="row footer-top-29 pt-lg-2 pt-sm-1">
+                <div class="col-lg-4 col-sm-6">
                     <div class="address-grid">
-                        <h5>10001 Alleghany st, 5th Avenue, 235 Terry, <br> London.</h5>
-                        <h5 class="mt-sm-5 mt-4">Everyday: <span> 7 AM - 8 PM</span></h5>
+                    <span>Adres :</span>
+                        <h5><?=$value['Adres'] ?? '#'?><br></h5>
+                        <h5 class="mt-sm-5 mt-4"><span> </span></h5>
                     </div>
                 </div>
-                <div class="col-lg-3 col-sm-6 mt-sm-0 mt-4">
+                <div class="col-lg-4 col-sm-6 mt-sm-0 mt-4 text-center">
                     <div class="address-grid">
-                        <h5>Phone</h5>
-                        <h5 class="phone-number-text mt-2"><a href="tel:+1(21) 112 7368">+1(21) 112 7368</a></h5>
+                        <h5>Telefon</h5>
+                        <h5 class="phone-number-text mt-2"><a href="tel:+1(21) 112 7368"><?=$value['Telefon'] ?? '#'?></a></h5>
                     </div>
                     <div class="address-grid mt-sm-5 mt-4">
                         <h5>E-mail</h5>
-                        <h5 class="email-cont-text mt-1"> <a href="mailto:photogenic@mail.com"
-                                class="mail">photogenic@mail.com</a></h5>
+                        <h5 class="email-cont-text mt-1"> <a href="mailto:<?=$value['Email'] ?? '#'?>"
+                                class="mail"><?=$value['Email'] ?? '#'?></a></h5>
+                                <?php } ?>
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-6 col-sm-5 footer-list-menu pl-lg-0 mt-lg-0 mt-sm-5 mt-4">
+                <div class="col-lg-4 col-md-6 col-sm-5 footer-list-menu pl-lg-0 mt-lg-0 mt-sm-2 mt-2">
                     <div class="address-grid">
-                        <h5 class="mb-4 pb-lg-2">Support Links</h5>
-                        <ul>
-                            <li><a href="#privacy">Privacy Policy</a></li>
-                            <li><a href="#terms"> Terms of Service</a></li>
-                            <li><a href="contact.html">Contact us</a></li>
-                            <li><a href="#support"> Support</a></li>
+                        <h5 class="mb-1 pb-lg-2 text-center">Bağlantılar</h5>
+                        <ul class="text-center">
+                        <?php
+                        $menus=$db->query("SELECT * FROM menus WHERE position='Header'",PDO::FETCH_ASSOC);
+                        ?>
+                        <?php foreach ($menus as $value) { ?>
+
+                       
+                       
+                        <li><a href="http://localhost/portfolio/<?= $value['slug'] ?>"><?= $value['menuName'] ?> </a></li>
+                       
+                        <?php } ?>
+
+                            
                         </ul>
                     </div>
                 </div>
-                <div class="address-grid col-lg-4 col-md-6 col-sm-7 mt-lg-0 mt-sm-5 mt-4 w3l-footer-16-main">
+                <!-- <div class="address-grid col-lg-4 col-md-6 col-sm-7 mt-lg-0 mt-sm-5 mt-4 w3l-footer-16-main">
                     <h5>Subscribe Here</h5>
                     <form action="#" class="subscribe d-flex mt-4 pt-lg-2 mb-4" method="post">
                         <input type="email" name="email" placeholder="Email Address" required="">
                         <button><span class="fa fa-paper-plane" aria-hidden="true"></span></button>
                     </form>
                     <p>Subscribe to our mailing list and get updates to your email inbox.</p>
-                </div>
+                </div> -->
             </div>
             <!-- copyright -->
             <div class="w3l-copyright text-center mt-lg-5 mt-sm-4 pt-md-4 pt-3">
-                <p class="copy-footer-29">© 2021 Photogenic. All rights reserved. Design by <a
-                        href="https://w3layouts.com/" target="_blank">
-                        W3layouts</a></p>
+                <p class="copy-footer-29">© <?php echo date('Y') ?> Portfolio. Tüm Hakları Saklıdır. Tasarlayan <a
+                        href="https://www.linkedin.com/in/ibrahim-demircik-01b87b22b/" target="_blank">
+                        İbrahim Demircik</a></p>
             </div>
         </div>
     </div>

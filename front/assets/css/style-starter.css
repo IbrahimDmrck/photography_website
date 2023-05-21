@@ -19152,7 +19152,7 @@ section.w3l-progress {
 .w3l-progress .progress-bar.gradient-1:before {
   content: "";
   position: absolute;
-  /* right: 20%; */
+  right: 20%;
   top: 90%;
   border-radius: 50%;
   transform: translate(50%, -50%);
@@ -19168,7 +19168,7 @@ section.w3l-progress {
 .w3l-progress .progress-bar.gradient-2:before {
   content: "";
   position: absolute;
-  /* right: 5%; */
+  right: 5%;
   top: 90%;
   border-radius: 50%;
   transform: translate(50%, -50%);
@@ -19184,7 +19184,7 @@ section.w3l-progress {
 .w3l-progress .progress-bar.gradient-3:before {
   content: "";
   position: absolute;
-  /* right: 40%; */
+  right: 40%;
   top: 90%;
   border-radius: 50%;
   transform: translate(50%, -50%);
@@ -19200,7 +19200,7 @@ section.w3l-progress {
 .w3l-progress .progress-bar.gradient-4:before {
   content: "";
   position: absolute;
-  /* right: 15%; */
+  right: 15%;
   top: 90%;
   border-radius: 50%;
   transform: translate(50%, -50%);
@@ -19221,25 +19221,25 @@ section.w3l-progress {
 .w3l-progress .info1 h6.progress-tittle {
   display: grid;
   grid-template-columns: 1fr auto;
-  /* width: 80%; */
+  width: 80%;
 }
 
 .w3l-progress .info2 h6.progress-tittle {
   display: grid;
   grid-template-columns: 1fr auto;
-  /* width: 95%; */
+  width: 95%;
 }
 
 .w3l-progress .info3 h6.progress-tittle {
   display: grid;
   grid-template-columns: 1fr auto;
-  /* width: 60%; */
+  width: 60%;
 }
 
 .w3l-progress .info4 h6.progress-tittle {
   display: grid;
   grid-template-columns: 1fr auto;
-  /* width: 85%; */
+  width: 85%;
 }
 
 /* faq style */

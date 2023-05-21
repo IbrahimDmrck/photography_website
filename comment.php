@@ -14,23 +14,17 @@ require 'database/db_conn.php';
     <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <?php
-    if (isset($_GET['page'])) {
-        $page_slug = $_GET['page'];
-
-        $site_settings = $db->query("SELECT * FROM pages WHERE slug='$page_slug'", PDO::FETCH_ASSOC);
-    }
-    foreach ($site_settings as $value) { ?>
     
     
-        <title><?= $value['seoTitle']; ?></title>
-        <meta name="description" content="<?= $value['seoDescription'] ?>">
-        <meta name="keywords" content="<?= $value['seoKeyword'] ?>">
     
-        <meta property="og:title" content="<?= $value['seoTitle']; ?>" />
-        <meta property="og:description" content="<?= $value['seoDescription'] ?>" />
-        <link rel="canonical" href="http://localhost/portfolio/<?= $value['slug'] ?>" />
-    <?php } ?>
+        <title></title>
+        <meta name="description" content="">
+        <meta name="keywords" content="">
+    
+        <meta property="og:title" content="" />
+        <meta property="og:description" content="" />
+        <link rel="canonical" href="http://localhost/portfolio/" />
+   
     <meta property="og:image" content="favicon.png" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="" />
@@ -209,3 +203,88 @@ require 'database/db_conn.php';
         </div>
     </header>
     <!--//header-->
+
+<!-- about section -->
+<section class="w3l-about py-5">
+    <div class="container py-md-5 py-1">
+        <div class="row align-items-center">
+            <div class="col-lg-6 pr-lg-5  ">
+                <?php
+               
+                if (isset($_GET['photo'])) {
+                   
+                
+                if (isset($_POST['comment'])) {
+                    $photoId=$_GET['photo'];
+                    $name=$_POST['name'];
+                    $email=$_POST['email'];
+                    $message=$_POST['message'];
+                    $swal = 'swal';
+                    if (!$name || !$email || !$message) {
+                        echo '<script>' . $swal . '("Lütfen formu eksiksiz doldurun !", "", "warning");</script>';
+                    }else{
+                        $query = $db->prepare('INSERT INTO comment SET name = ?, email = ?, message = ?, photoId = ?');
+                        $save = $query->execute([$name, $email, $message, $photoId]);
+
+                        if ($save) {
+
+                            echo '<script>' . $swal . '("Yorumunuz Aldık", "Yorumunuz değerlendirildikten sonra yayımlanacaktır", "success");</script>';
+                            header('Refresh:3;');
+
+                        } else {
+                            echo '<script>' . $swal . '("Beklenmedik Bir Hata Oldu!", "Lütfen Tekrar Deneyin", "error");</script>';
+                        }
+                    }
+                }
+            }
+                ?>
+                <form action="" method="post" class="signin-form ">
+                   
+                        <label for="name"><strong>Ad-Soyad</strong></label>                 
+                        <input type="text" name="name" class="form-control" id="name">
+
+                        <label for="email" class="mt-2"><strong>E-mail</strong></label>                 
+                        <input type="email" name="email" class="form-control" id="email">
+
+                        <label for="message" class="mt-2"><strong>Mesajınız</strong></label>                 
+                        <textarea name="message" class="form-control" id="message" cols="10" rows="10"></textarea>
+                        
+                        <button type="submit" name="comment" class="btn btn-success float-right mt-3">Mesaj Bırak</button>
+                </form>
+            </div>
+            <div class="col-lg-6 mt-lg-0 mt-5">
+                <?php if (isset($_GET['photo'])) {
+                    $pid=$_GET['photo'];
+                    $get_photo=$db->query("SELECT * FROM photos WHERE id='$pid'",PDO::FETCH_ASSOC);
+                    foreach ($get_photo as $value) {?>
+                      
+                    
+                    
+                
+                      <div class=" item">
+                        
+                        <a href="../../public/uploads/<?=$value['photoName']?>" data-lightbox="example-set" data-title="<?=$value['photoName']?>"
+                            class="zoom d-block">
+                            <img class="img-fluid" src="../../public/uploads/<?=$value['photoName']?>" alt="Fotoğraf yok" style="width:100%">
+                            <span class="overlay__hover"></span>
+                            <!-- <span class="hover-content">
+                                <span class="title"><?=$value['name']?></span>
+                                <span class="content"><?=$value['categories']?></span>
+                               
+                            </span> -->
+                        </a>
+                    </div>
+
+                    <?php } } ?>
+               
+            </div>
+
+        </div>
+        <div class=" row mt-5 pt-lg-5 pt-sm-2 ">
+          
+        </div>
+    </div>
+</section>
+<!-- //about section -->
+
+<?php include('includes/footer.php'); ?>

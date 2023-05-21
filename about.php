@@ -1,11 +1,16 @@
 <!-- inner banner -->
-<section class="inner-banner py-5">
+<?php
+  $pageAbout = $db->query("SELECT * FROM pages WHERE slug='hakkimda'", PDO::FETCH_ASSOC);
+  $pageAboutBanner = $db->query("SELECT * FROM pages WHERE slug='hakkimda'", PDO::FETCH_ASSOC);
+ $aboutus = $db->query("SELECT * FROM aboutus  LIMIT 1", PDO::FETCH_ASSOC);
+?>
+<section class="inner-banner py-5" style="background: url('../../public/uploads/<?php  foreach ($pageAboutBanner as $aboutBanner){ echo $aboutBanner['banner'];} ?>') no-repeat center;background-size: cover;">
     <div class="w3l-breadcrumb py-lg-5">
         <div class="container pt-sm-5 pt-4 pb-sm-4">
-            <h4 class="inner-text-title font-weight-bold pt-5">About Us</h4>
+            <h4 class="inner-text-title font-weight-bold pt-5">Hakkımda</h4>
             <ul class="breadcrumbs-custom-path">
-                <li><a href="index.html">Home</a></li>
-                <li class="active"><span class="fa fa-chevron-right mx-2" aria-hidden="true"></span>About Us</li>
+                <li><a href="ana-sayfa">Ana Sayfa</a></li>
+                <li class="active"><span class="fa fa-chevron-right mx-2" aria-hidden="true"></span>Hakkımda</li>
             </ul>
         </div>
     </div>
@@ -16,14 +21,14 @@
 <section class="w3l-about py-5">
     <div class="container py-md-5 py-4">
         <div class="row align-items-center">
-            <?php
-            $about = $db->query("SELECT * FROM pages WHERE slug='hakkimda'", PDO::FETCH_ASSOC);
-            foreach ($about as $value) { ?>
+           
 
 
 
                 <div class="col-lg-6 pr-lg-5">
-                   
+                <?php
+          
+            foreach ($pageAbout as $value) { ?>
                     <!-- <h3 class="title-style mb-sm-3 mb-2">Birkaç Kelimede Hakkımda</h3> -->
                     <p> <?=$value['content']?></p>
                     <!-- <ul class="list-about-2 mt-sm-4 mt-3">
@@ -37,13 +42,18 @@
                             ea commodo
                             consequat</li>
                     </ul> -->
+                    <?php }
+            ?>
                     <a class="btn btn-style btn-style-primary-2 mt-lg-5 mt-4" href="hizmetler">Hizmetlerimiz</a>
                 </div>
                 <div class="col-lg-6 mt-lg-0 mt-5">
-                    <img src="front/assets/images/inner-banner.jpg" alt="" class="img-fluid" />
-                </div>
-            <?php }
+                <?php        
+            foreach ($aboutus as $about) { ?>
+                    <img src="../../public/uploads/<?=$about['rightImg']?>" alt="Fotoğraf bulunamadı" width="640" height="540" class="img-fluid" />
+                    <?php }
             ?>
+                </div>
+           
         </div>
         <div class="owl-carousel row mt-5 pt-lg-5 pt-sm-2 ">
         <?php
@@ -72,43 +82,43 @@
     <div class="container py-md-5 py-4">
         <div class="content-info-in row align-items-center">
             <?php 
-             $aboutus = $db->query("SELECT * FROM aboutus WHERE id ORDER BY id DESC LIMIT 1", PDO::FETCH_ASSOC);
-            foreach ($aboutus as $value) { ?>
-        <div class="content-right col-lg-6 mt-lg-0 mt-5">
-                <img src="front/assets/images/about2.jpg" alt="" class="img-fluid" />
+             $aboutuscontent = $db->query("SELECT * FROM aboutus WHERE id ORDER BY id DESC LIMIT 1", PDO::FETCH_ASSOC);
+            foreach ($aboutuscontent as $value) { ?>
+        <div class="content-right col-lg-6 mt-lg-0 mt-5 mb-5">
+                <img src="../../public/uploads/<?=$value['leftImg']?>" alt="fotoğraf yok" width="640" height="540" class="img-fluid" />
             </div>
-            <div class="content-left col-lg-6 pr-lg-5">
+            <div class="content-left col-lg-6 pl-lg-5">
                 <div class="row content4-right-grids mb-sm-5 mb-4 pb-3">
                     <div class="col-2 content4-right-icon">
-                        <div class="content4-icon icon-clr1">
-                            <i class="fas fa-mountain"></i>
+                        <div class="content4-icon icon-clr1 justify-content-center">
+                            <img src="../../public/uploads/<?=$value['content1Img']?>" alt="fotoğraf yok" class="img-fluid">
                         </div>
                     </div>
                     <div class="col-10 content4-right-info pl-lg-5">
-                        <h6><a href="#url">A high quality photography</a></h6>
-                        <p><?=$value['aboutContent1']?></p>
+                        <!-- <h6><a href="#url">A high quality photography</a></h6> -->
+                        <?=$value['aboutContent1']?>
                     </div>
                 </div>
                 <div class="row content4-right-grids mb-sm-5 mb-4 pb-3">
                     <div class="col-2 content4-right-icon">
-                        <div class="content4-icon icon-clr2">
-                            <i class="far fa-images"></i>
+                        <div class="content4-icon icon-clr2 justify-content-center">
+                       <img src="../../public/uploads/<?=$value['content2Img']?>" alt="fotoğraf yok" class="img-fluid">
                         </div>
                     </div>
                     <div class="col-10 content4-right-info pl-lg-5">
-                        <h6><a href="#url">With experience comes trust</a></h6>
-                        <p><?=$value['aboutContent2']?></p>
+                        <!-- <h6><a href="#url">With experience comes trust</a></h6> -->
+                        <?=$value['aboutContent2']?>
                     </div>
                 </div>
                 <div class="row content4-right-grids">
                     <div class="col-2 content4-right-icon">
-                        <div class="content4-icon icon-clr3">
-                            <i class="fas fa-video"></i>
+                        <div class="content4-icon icon-clr3 justify-content-center">
+                        <img src="../../public/uploads/<?=$value['content3Img']?>" alt="fotoğraf yok" class="img-fluid" >
                         </div>
                     </div>
                     <div class="col-10 content4-right-info pl-lg-5">
-                        <h6><a href="#url">Making world a better place</a></h6>
-                        <p><?=$value['aboutContent3']?></p>
+                        <!-- <h6><a href="#url">Making world a better place</a></h6> -->
+                        <?=$value['aboutContent3']?>
                     </div>
                 </div>
             </div>
@@ -155,16 +165,16 @@
 
 <!-- content with bg -->
 <?php 
- $aboutus = $db->query("SELECT * FROM aboutus", PDO::FETCH_ASSOC);
-foreach ($aboutus as $value) { ?>
-<section class="w3l-content-bg">
+ $aboutusSection = $db->query("SELECT * FROM aboutus WHERE id ORDER BY id DESC LIMIT 1", PDO::FETCH_ASSOC);
+foreach ($aboutusSection as $value) { ?>
+<section class="w3l-content-bg" style="background: url('../../public/uploads/<?php   echo $value['sectionImg'];?>') no-repeat center fixed;">
     <div class="container py-md-5 py-4">
         <div class="row py-5">
             <div class="col-md-7">
                 <div class="left-content-bg">
-                    <p class="text-tag">Brilliant Photography</p>
+                    <p class="text-tag"></p>
                     <h4 class="text-head-content"><?= $value['sectionTitle'] ?></h4>
-                    <a class="btn btn-style mt-4" href="services.html">Learn More</a>
+                    <a class="btn btn-style mt-4" href="ana-sayfa">Fotoğraflarımı İncele</a>
                 </div>
             </div>
         </div>

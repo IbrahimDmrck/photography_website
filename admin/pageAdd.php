@@ -128,8 +128,10 @@ if (isset($_SESSION['username'])) {
                             </div>
                             <div class="form-group row"><label class="col-lg-2 col-form-label">Kısa Açıklama</label>
 
-                                <div class="col-lg-6"><input type="text" name="shortDescription" placeholder="Kısa Açıklama"
-                                        class="form-control">
+                                <div class="col-lg-6">
+
+                                        <textarea class="summernote form-control" name="shortDescription" id="" cols="30"
+                                        rows="10"></textarea>
                                 </div>
                             </div>
                             <div class="form-group row"><label class="col-lg-2 col-form-label">İçerik</label>

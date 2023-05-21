@@ -36,6 +36,9 @@ require '../database/db_conn.php';
       <link href="back/css/plugins/jasny/jasny-bootstrap.min.css" rel="stylesheet">
 <!-- chosen-select -->
       <link href="back/css/plugins/chosen/bootstrap-chosen.css" rel="stylesheet">
+   <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://unpkg.com/multiple-select@1.5.2/dist/multiple-select.min.css">
+      
     <style>
         .ui-helper-hidden-accessible {
             display: none;
@@ -47,7 +50,9 @@ require '../database/db_conn.php';
         .ui-tooltip{
             display: none;
         }
-      
+
+    
+                    
     </style>
 
 

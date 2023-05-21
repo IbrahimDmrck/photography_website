@@ -6,15 +6,21 @@ require 'PHPMailer/src/Exception.php';
 require 'PHPMailer/src/PHPMailer.php';
 require 'PHPMailer/src/SMTP.php';
 ?>
-
+<?php
+  $pageService = $db->query("SELECT * FROM pages WHERE slug='hizmetler'", PDO::FETCH_ASSOC);
+  $pageServiceContent = $db->query("SELECT * FROM pages WHERE slug='hizmetler'", PDO::FETCH_ASSOC);
+  $pageContactBanner = $db->query("SELECT * FROM pages WHERE slug='iletisim'", PDO::FETCH_ASSOC);
+  $services = $db->query("SELECT * FROM services ", PDO::FETCH_ASSOC);
+  $talents = $db->query("SELECT * FROM talent ")->fetchAll();
+?>
 <!-- inner banner -->
-<section class="inner-banner py-5">
+<section class="inner-banner py-5" style="background: url('../../public/uploads/<?php  foreach ($pageContactBanner as $contactBanner){ echo $contactBanner['banner'];} ?>') no-repeat center;background-size: cover;">
         <div class="w3l-breadcrumb py-lg-5">
             <div class="container pt-sm-5 pt-4 pb-sm-4">
-                <h4 class="inner-text-title font-weight-bold pt-5">Contact Us</h4>
+                <h4 class="inner-text-title font-weight-bold pt-5">İletişim</h4>
                 <ul class="breadcrumbs-custom-path">
-                    <li><a href="index.html">Home</a></li>
-                    <li class="active"><span class="fa fa-chevron-right mx-2" aria-hidden="true"></span>Contact Us</li>
+                    <li><a href="ana-sayfa">Ana Sayfa</a></li>
+                    <li class="active"><span class="fa fa-chevron-right mx-2" aria-hidden="true"></span>İletişim</li>
                 </ul>
             </div>
         </div>
@@ -199,8 +205,6 @@ require 'PHPMailer/src/SMTP.php';
     </section>
     <!-- map -->
     <div class="map-iframe">
-        <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d317718.69319292053!2d-0.3817765050863085!3d51.528307984912544!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47d8a00baf21de75%3A0x52963a5addd52a99!2sLondon%2C+UK!5e0!3m2!1sen!2spl!4v1562654563739!5m2!1sen!2spl"
-            width="100%" height="400" frameborder="0" style="border: 0px;" allowfullscreen=""></iframe>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d385396.321051626!2d28.682533292640382!3d41.00537021771572!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14caa7040068086b%3A0xe1ccfe98bc01b0d0!2zxLBzdGFuYnVs!5e0!3m2!1str!2str!4v1684611142692!5m2!1str!2str" width="100%" height="400" style="border:0;" allowfullscreen="true" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
     <!-- //contact -->

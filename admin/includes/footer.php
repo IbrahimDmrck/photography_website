@@ -143,7 +143,7 @@
 <!-- Toastr -->
 <script src="back/js/plugins/toastr/toastr.min.js"></script>
 
-<!-- Select2 -->
+<!-- Select2 --> 
 <script src="back/js/plugins/select2/select2.full.min.js"></script>
 <!-- SUMMERNOTE -->
 <script src="back/js/plugins/summernote/summernote-bs4.js"></script>
@@ -156,6 +156,19 @@
 
    <!-- Chosen -->
    <script src="back/js/plugins/chosen/chosen.jquery.js"></script>
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://unpkg.com/multiple-select@1.5.2/dist/multiple-select.min.js"></script>
+<script>
+      $(function () {
+        $('select').multipleSelect({
+            width:'100%',
+            filter: true ,
+            animate:'slide',
+            displayDelimiter: ' | '
+        })
+      })
+    </script>
 
 <script>
  $('.custom-file-input').on('change', function() {
@@ -270,11 +283,13 @@
             $('.demo1').colorpicker();
             $('.footable').footable();
             $('.chosen-select').chosen({width: "100%"});
+           
 
         
 
     });
 </script>
+
 <script>
         $(document).ready(function () {
             $(".edit_btn").click(function (e) {

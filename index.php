@@ -19,27 +19,65 @@
     <!-- //banner section -->
 
     <!-- gallery section -->
-    <section class="w3l-gallery py-5" id="gallery">
-        <div class="container-fluid py-md-5 py-4">
-            <div class="title-heading-w3 text-center mx-auto mb-sm-5 mb-4" style="max-width:700px">
-                <h3 class="title-style">Amazing Photo Gallery</h3>
+    <section class="w3l-gallery py-2" id="gallery">
+        <div class="container-fluid py-md-2 py-2">
+            <div class="header title-heading-w3 text-center mx-auto mb-sm-2 mb-2" style="max-width:700px">
+                <!-- <h3 class="title-style">Amazing Photo Gallery</h3>
                 <p class="lead mt-2">Nostrud exercitation ullamco laboris nisi
-                    ut aliquip ex ea commodo consequat sunt in culpa qui official.</p>
+                    ut aliquip ex ea commodo consequat sunt in culpa qui official.</p> -->
+                   <?php  $categories = $db->query("SELECT * FROM categories", PDO::FETCH_ASSOC); 
+                   
+                 
+                   ?>
+                    <form action="" method="POST">
+                        <div class="row form-group">
+                    <label class="font-normal col-3" class="mt-3"><b>Kategori Seçin</b></label>
+
+                      <div  class="col-lg-6">
+                      <select name="categories[]"  multiple="multiple" data-placeholder="Lütfen en az bir kategori seçiniz">
+                            <?php if (isset($categories)) {
+                                foreach ($categories as $categoryValue) { ?>
+
+
+                                    <option value="<?= $categoryValue['name'] ?>">
+                                        <?= $categoryValue['name'] ?>
+                                    </option>
+
+                                <?php }
+                            } ?>
+                      </select>
+                      </div>
+                      
+                        <button name="filtre" class="btn btn-outline-primary col-lg-3" type="submit">Listele</button>
+                        </div>
+                       
+                    </form>
             </div>
-            <div class="row">
-                <div class="col-lg-4 col-sm-6">
+            <a href="" class="btn btn-lg btn-primary" <?php if(!isset($_POST['filtre'])){echo 'hidden';} ?> >Geri Dön</a>
+            <div class="photos" <?php if(isset($_POST['filtre'])){ echo "hidden"; } ?>>
+                                  
+                <div class="column">
+                <?php  $photos = $db->query("SELECT * FROM photos ")->fetchAll();
+
+                shuffle($photos);
+                $randomPhotos1=array_slice($photos,0,5);
+                $randomPhotos2=array_slice($photos,5,5);
+                $randomPhotos3=array_slice($photos,10,5);
+                $randomPhotos4=array_slice($photos,15,5);
+                foreach ($randomPhotos1 as  $value) {?>
                     <div class=" item">
-                        <a href="front/assets/images/g1.jpg" data-lightbox="example-set" data-title="Project 1"
+                        <a href="../../public/uploads/<?=$value['photoName']?>" data-lightbox="example-set" data-title="<?=$value['name']?>"
                             class="zoom d-block">
-                            <img class="card-img-bottom d-block" src="front/assets/images/g1.jpg" alt="Card image cap">
+                            <img class="" src="../../public/uploads/<?=$value['photoName']?>" alt="Fotoğraf yok" style="width:100%">
                             <span class="overlay__hover"></span>
                             <span class="hover-content">
-                                <span class="title">Portrait Photography</span>
-                                <span class="content">Quisque ut lectus, eros et, sed commodo risus.</span>
+                                <span class="title"><?=$value['name']?></span>
+                                <span class="content"><?=$value['categories']?></span>
+                              
                             </span>
                         </a>
                     </div>
-                    <div class="item mt-4">
+                    <!-- <div class="item mt-4">
                         <a href="front/assets/images/g2.jpg" data-lightbox="example-set" data-title="Project 2"
                             class="zoom d-block">
                             <img class="card-img-bottom d-block" src="front/assets/images/g2.jpg" alt="Card image cap">
@@ -49,10 +87,102 @@
                                 <span class="content">Quisque ut lectus, eros et, sed commodo risus.</span>
                             </span>
                         </a>
-                    </div>
+                    </div> -->
+                    <?php }?>
                 </div>
 
-                <div class="col-lg-4 col-sm-6 mt-sm-0 mt-4">
+                    
+                <div class="column">
+                 <?php     
+                foreach ($randomPhotos2 as  $value) {?>
+                    <div class=" item">
+                        <a href="../../public/uploads/<?=$value['photoName']?>" data-lightbox="example-set" data-title="<?=$value['name']?>"
+                            class="zoom d-block">
+                            <img class="" src="../../public/uploads/<?=$value['photoName']?>" alt="Fotoğraf yok" style="width:100%">
+                            <span class="overlay__hover"></span>
+                            <span class="hover-content">
+                                <span class="title"><?=$value['name']?></span>
+                                <span class="content"><?=$value['categories']?></span>
+                            </span>
+                        </a>
+                    </div>
+                    <!-- <div class="item mt-4">
+                        <a href="front/assets/images/g2.jpg" data-lightbox="example-set" data-title="Project 2"
+                            class="zoom d-block">
+                            <img class="card-img-bottom d-block" src="front/assets/images/g2.jpg" alt="Card image cap">
+                            <span class="overlay__hover"></span>
+                            <span class="hover-content">
+                                <span class="title">Wedding Photography</span>
+                                <span class="content">Quisque ut lectus, eros et, sed commodo risus.</span>
+                            </span>
+                        </a>
+                    </div> -->
+                    <?php }?>
+                </div>
+
+                    
+
+                <div class="column">
+                <?php  
+               
+                foreach ($randomPhotos3 as  $value) {?>
+                    <div class=" item">
+                        <a href="../../public/uploads/<?=$value['photoName']?>" data-lightbox="example-set" data-title="<?=$value['name']?>"
+                            class="zoom d-block">
+                            <img class="" src="../../public/uploads/<?=$value['photoName']?>" alt="Fotoğraf yok" style="width:100%">
+                            <span class="overlay__hover"></span>
+                            <span class="hover-content">
+                                <span class="title"><?=$value['name']?></span>
+                                <span class="content"><?=$value['categories']?></span>
+                            </span>
+                        </a>
+                    </div>
+                    <!-- <div class="item mt-4">
+                        <a href="front/assets/images/g2.jpg" data-lightbox="example-set" data-title="Project 2"
+                            class="zoom d-block">
+                            <img class="card-img-bottom d-block" src="front/assets/images/g2.jpg" alt="Card image cap">
+                            <span class="overlay__hover"></span>
+                            <span class="hover-content">
+                                <span class="title">Wedding Photography</span>
+                                <span class="content">Quisque ut lectus, eros et, sed commodo risus.</span>
+                            </span>
+                        </a>
+                    </div> -->
+                    <?php }?>
+                </div>
+
+                
+                
+                
+                <div class="column">
+                <?php  
+                    foreach ($randomPhotos4 as  $value) {?>
+                    <div class=" item">
+                        <a href="../../public/uploads/<?=$value['photoName']?>" data-lightbox="example-set" data-title="<?=$value['name']?>"
+                            class="zoom d-block">
+                            <img class="" src="../../public/uploads/<?=$value['photoName']?>" alt="Fotoğraf yok" style="width:100%">
+                            <span class="overlay__hover"></span>
+                            <span class="hover-content">
+                                <span class="title"><?=$value['name']?></span>
+                                <span class="content"><?=$value['categories']?></span>
+                            </span>
+                        </a>
+                    </div>
+                    <!-- <div class="item mt-4">
+                        <a href="front/assets/images/g2.jpg" data-lightbox="example-set" data-title="Project 2"
+                            class="zoom d-block">
+                            <img class="card-img-bottom d-block" src="front/assets/images/g2.jpg" alt="Card image cap">
+                            <span class="overlay__hover"></span>
+                            <span class="hover-content">
+                                <span class="title">Wedding Photography</span>
+                                <span class="content">Quisque ut lectus, eros et, sed commodo risus.</span>
+                            </span>
+                        </a>
+                    </div> -->
+                    <?php }?>
+                </div>
+
+                <!-- <div class="col-lg-4 col-sm-6 mt-sm-0 mt-4">
                     <div class="item">
                         <a href="front/assets/images/g3.jpg" data-lightbox="example-set" data-title="Project 3"
                             class="zoom d-block">
@@ -64,10 +194,10 @@
                             </span>
                         </a>
                     </div>
-                </div>
+                </div> -->
 
 
-                <div class="col-lg-4 mt-lg-0 mt-4">
+                <!-- <div class="col-lg-4 mt-lg-0 mt-4">
                     <div class="row">
                         <div class="col-lg-12 col-sm-6 item">
                             <a href="front/assets/images/g5.jpg" data-lightbox="example-set" data-title="Project 4"
@@ -92,7 +222,104 @@
                             </a>
                         </div>
                     </div>
+                </div> -->
+            </div>
+                       <?php
+                        if (isset($_POST['filtre'])) {
+                            $categories = $_POST['categories'];
+                            $ctg="";
+
+                            foreach ($categories as $value) {
+                                $ctg .= $value . ',';
+                            }
+                            if (!$categories) {
+                               echo "<script>alert('Lütfen en az bir kategori seçiniz')</script>";
+                            }else{
+                                   $filterPhoto = $db->query("SELECT * FROM photos WHERE categories LIKE '%$ctg%'")->fetchAll();
+                                   
+                            }
+                           
+                        }
+                        
+                      ?>
+                <!-- filtreleme sonuçları -->
+            <div class="photos" <?php if(!isset($_POST['filtre'])){ echo "hidden"; } ?>>
+                                  
+                <?php
+
+                foreach ($filterPhoto as  $value) {
+                   if (count($value)>0) {?>
+              
+                <div class="column">
+                    <div class=" item">
+                        <a href="../../public/uploads/<?=$value['photoName']?>" data-lightbox="example-set" data-title="<?=$value['name']?>"
+                            class="zoom d-block">
+                            <img class="" src="../../public/uploads/<?=$value['photoName']?>" alt="Fotoğraf yok" style="width:100%">
+                            <span class="overlay__hover"></span>
+                            <span class="hover-content">
+                                <span class="title"><?=$value['name']?></span>
+                                <span class="content"><?=$value['categories']?></span>
+                              
+                            </span>
+                        </a>
+                    </div>
+   
                 </div>
+                <?php  }else {
+                   echo " <div class='title-style'>Armanızla eşleşen kayıt bulunamadı</div>";
+                }}?>
+
+                    
+             
+
+                    
+
+               
+                
+                
+                
+             
+                <!-- <div class="col-lg-4 col-sm-6 mt-sm-0 mt-4">
+                    <div class="item">
+                        <a href="front/assets/images/g3.jpg" data-lightbox="example-set" data-title="Project 3"
+                            class="zoom d-block">
+                            <img class="card-img-bottom d-block" src="front/assets/images/g3.jpg" alt="Card image cap">
+                            <span class="overlay__hover"></span>
+                            <span class="hover-content">
+                                <span class="title">Fashion Photography</span>
+                                <span class="content">Quisque ut lectus, eros et, sed commodo risus.</span>
+                            </span>
+                        </a>
+                    </div>
+                </div> -->
+
+
+                <!-- <div class="col-lg-4 mt-lg-0 mt-4">
+                    <div class="row">
+                        <div class="col-lg-12 col-sm-6 item">
+                            <a href="front/assets/images/g5.jpg" data-lightbox="example-set" data-title="Project 4"
+                                class="zoom d-block">
+                                <img class="card-img-bottom d-block" src="front/assets/images/g5.jpg" alt="Card image cap">
+                                <span class="overlay__hover"></span>
+                                <span class="hover-content">
+                                    <span class="title">Model Photography</span>
+                                    <span class="content">Quisque ut lectus, eros et, sed commodo risus.</span>
+                                </span>
+                            </a>
+                        </div>
+                        <div class="col-lg-12 col-sm-6 item mt-lg-4 mt-sm-0 mt-4">
+                            <a href="front/assets/images/g4.jpg" data-lightbox="example-set" data-title="Project 5"
+                                class="zoom d-block">
+                                <img class="card-img-bottom d-block" src="front/assets/images/g4.jpg" alt="Card image cap">
+                                <span class="overlay__hover"></span>
+                                <span class="hover-content">
+                                    <span class="title">Photojournalism</span>
+                                    <span class="content">Quisque ut lectus, eros et, sed commodo risus.</span>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div> -->
             </div>
         </div>
     </section>

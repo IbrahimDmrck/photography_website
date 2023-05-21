@@ -288,8 +288,8 @@ if (isset($_SESSION['username'])) {
 
                                                     <label class="font-normal" class="mt-3"><b>Kategori Seçin</b></label>
 
-                                                    <select data-placeholder="Birden fazla kategori seçebilirsiniz..."
-                                                        name="categories[]" class="chosen-select" multiple tabindex="4">
+                                                    <select 
+                                                        name="categories[]"  multiple="multiple" data-placeholder="Lütfen en az bir kategori seçiniz" >
                                                         <?php if (isset($categories)) {
                                                             foreach ($categories as $categoryValue) { ?>
 
@@ -365,10 +365,10 @@ if (isset($_SESSION['username'])) {
                                                         echo '<script>' . $swal . '("Herhangi bir değişiklik yapmadınız !", "", "warning");</script>';
                                                     } elseif ($size > (1024 * 1024 * 3)) {
                                                         echo '<script>' . $swal . '("Fotoğraf boyutu çok fazla !", "", "warning");</script>';
-                                                    } elseif (isset($type)) {
-                                                        if ($type != 'image/jpeg' && $type != 'image/png' && $type != '.jpg') {
+                                                    } elseif ($type != 'image/jpeg' && $type != 'image/png' && $type != '.jpg') {
+                                                   
                                                             echo '<script>' . $swal . '("Dosya uzantısı jpeg,jpg veya png olabilir !", "", "warning");</script>';
-                                                        }
+                                                    
                                                     }else{
                                                         $check = $db->prepare('SELECT * FROM photos WHERE id = :id');
                                                         $check->execute([":id" => $id]);
@@ -399,10 +399,10 @@ if (isset($_SESSION['username'])) {
                                                     echo '<script>' . $swal . '("Herhangi bir fotoğraf yüklemediniz!", "", "warning");</script>';
                                                 } elseif (!$categories) {
                                                     echo '<script>' . $swal . '("Lütfen en az bir kategori seçiniz!", "", "warning");</script>';
-                                                }elseif (isset($type)) {
-                                                    if ($type != 'image/jpeg' && $type != 'image/png' && $type != '.jpg') {
+                                                }elseif ($type != 'image/jpeg' && $type != 'image/png' && $type != '.jpg') {
+                                                    
                                                         echo '<script>' . $swal . '("Dosya uzantısı jpeg,jpg veya png olabilir !", "", "warning");</script>';
-                                                    }
+                                               
                                                 } else {
 
                                                     foreach ($categories as $value) {
@@ -432,8 +432,7 @@ if (isset($_SESSION['username'])) {
 
                                                     <label class="font-normal" class="mt-3"><b>Kategori Seçin</b></label>
 
-                                                    <select data-placeholder="Birden fazla kategori seçebilirsiniz..."
-                                                        name="categories[]" id="categories" class="chosen-select" multiple tabindex="4" required="true">
+                                                    <select name="categories[]"  multiple="multiple" data-placeholder="Lütfen en az bir kategori seçiniz">
                                                         <?php if (isset($categories)) {
                                                             foreach ($categories as $categoryValue) { ?>
 

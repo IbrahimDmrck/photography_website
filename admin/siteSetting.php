@@ -65,12 +65,12 @@ if (isset($_POST['iletisim'])) {
     $Adres=$_POST['Adres'];
     $Telefon=$_POST['Telefon'];
     $Email=$_POST['Email'];
-
+    
 
 
 
         $query = $db->prepare('UPDATE settings SET Adres = ?, Telefon = ?, Email = ? WHERE id=?');
-        $save = $query->execute([$Adres, $Telefon, $Email,1]);
+        $save = $query->execute([$Adres, $Telefon, $Email, 1]);
 
         if ($save) {
 
@@ -187,6 +187,8 @@ foreach ($settings as $value) {?>
                                 <input type="text" name="Email" id="email" value="<?=$value['Email']?>" class="form-control">
                             </div>
                        </div>
+
+                    
 
 
                        <div class="row form-group justify-content-center"> 

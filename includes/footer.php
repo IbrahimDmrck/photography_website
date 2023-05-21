@@ -106,7 +106,22 @@
 <!-- //counter for stats -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+  <!-- Chosen -->
+  <script src="admin/back/js/plugins/chosen/chosen.jquery.js"></script>
+
 <!-- testimonial script -->
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://unpkg.com/multiple-select@1.5.2/dist/multiple-select.min.js"></script>
+<script>
+      $(function () {
+        $('select').multipleSelect({
+            width:'100%',
+            filter: true ,
+            animate:'slide',
+            displayDelimiter: ' | '
+        })
+      })
+    </script>
 <script>
     $(document).ready(function () {
 
@@ -243,6 +258,8 @@
     }
    
   });
+
+  $('.chosen-select').chosen({width: "100%"});
 });
 </script>
 

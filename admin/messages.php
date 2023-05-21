@@ -52,18 +52,18 @@ include('includes/header.php'); ?>
                                     
                                     <td >
                                         <?php
-                                        if (isset($_POST['sennMessage'])) {
+                                        if (isset($_POST['sennMessage'.$value['Id'].''])) {
                                            $seen=$_POST['seen'];
-
+                                           $id=$value['Id'];
                                            if(!$seen){
                                             
                                            }else{
-                                            $query = $db->prepare("UPDATE messages SET seen = ? WHERE sender LIKE '%".$value['sender']."%' ");
+                                            $query = $db->prepare("UPDATE messages SET seen = ? WHERE Id='$id' ");
                                             $save = $query->execute([$seen]);
             
                                             if ($save) {
             
-                                                header('Refresh:2;messages.php');
+                                                header('Refresh:0;');
             
                                             } else {
                                                 echo '<script>"Beklenmedik Bir Hata Oldu!</script>';
@@ -73,7 +73,7 @@ include('includes/header.php'); ?>
                                         ?>
                                         <form action="" method="post">
                                             <input type="number" name="seen" value="1" hidden>
-                                        <button type="submit" name="sennMessage" class="btn <?=$value['seen']==0 ? 'btn-danger':'btn-info' ?> btn-circle "><i class="fa fa-<?=$value['seen']==0 ? 'times':'check' ?> text-white"></i>
+                                        <button type="submit" name="sennMessage<?=$value['Id']?>" class="btn <?=$value['seen']==0 ? 'btn-danger':'btn-info' ?> btn-circle "><i class="fa fa-<?=$value['seen']==0 ? 'times':'check' ?> text-white"></i>
                                     </button>
                                     </form>
                                 </td>

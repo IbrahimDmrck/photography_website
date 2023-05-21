@@ -89,7 +89,7 @@ require '../database/db_conn.php';
                             </div>
                         <?php } ?>
                     </li>
-                    <li class="active">
+                    <li >
                         <a href="index.php"><i class="fa fa-th-large"></i> <span class="nav-label">Ana Sayfa</span> </a>
                     </li>
                     <li>

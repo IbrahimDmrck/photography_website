@@ -263,7 +263,7 @@ require 'database/db_conn.php';
                 
                       <div class=" item">
                         
-                        <a href="../../public/uploads/<?=$value['photoName']?>" data-lightbox="example-set" data-title="<?=$value['photoName']?>"
+                        <a href="../../public/uploads/<?=$value['photoName']?>" data-lightbox="example-set" data-title="<?=$value['name']?>"
                             class="zoom d-block">
                             <img class="img-fluid" src="../../public/uploads/<?=$value['photoName']?>" alt="Fotoğraf yok" style="width:100%">
                             <span class="overlay__hover"></span>
@@ -280,9 +280,22 @@ require 'database/db_conn.php';
             </div>
 
         </div>
-        <div class=" row mt-5 pt-lg-5 pt-sm-2 ">
+        <div class=" row mt-3 pt-lg-3 pb-lg-3 pt-sm-2 ">
+          <?php if (isset($_GET['photo'])) {
+           $photoid =$_GET['photo'];
+            $comments=$db->query("SELECT * FROM comment WHERE photoId='$photoid' and status=1",PDO::FETCH_ASSOC);
+            foreach ($comments as $commentValue) {?>
+              
           
+            <div class="col-lg-12 mt-3 pt-lg-3 pb-lg-3 pt-sm-2 border border-success rounded">
+                <h3 class="title mb-2 mt-2"><?=$commentValue['name']?></h3>
+                <div><?=$commentValue['message']?> <span style="font-weight:bolder;font-size: 1rem;" class="badge badge-lg bg-dark text-white float-right mb-2"><?=$commentValue['create_date']?></span></div>
+            </div>
+            <?php }
+          } ?>
         </div>
+
+        
     </div>
 </section>
 <!-- //about section -->

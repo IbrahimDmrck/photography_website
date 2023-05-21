@@ -97,7 +97,7 @@
                  <?php     
                 foreach ($randomPhotos2 as  $value) {?>
                     <div class=" item">
-                        <a href="../../public/uploads/<?=$value['photoName']?>" data-lightbox="example-set" data-title="<a href='http://localhost/portfolio/yorum-yap'  class='text-white  w-100  btn btn-success'>Yorum Yap</a>"
+                        <a href="../../public/uploads/<?=$value['photoName']?>" data-lightbox="example-set" data-title="<a href='comment.php?photo=<?=$value['id']?>'  class='text-white  w-100  btn btn-success'>Yorum Yap</a>"
                             class="zoom d-block">
                             <img class="" src="../../public/uploads/<?=$value['photoName']?>" alt="Fotoğraf yok" style="width:100%">
                             <span class="overlay__hover"></span>
@@ -128,7 +128,7 @@
                
                 foreach ($randomPhotos3 as  $value) {?>
                     <div class=" item">
-                        <a href="../../public/uploads/<?=$value['photoName']?>" data-lightbox="example-set" data-title="<a href='http://localhost/portfolio/yorum-yap'  class='text-white  w-100  btn btn-success'>Yorum Yap</a>"
+                        <a href="../../public/uploads/<?=$value['photoName']?>" data-lightbox="example-set" data-title="<a href='comment.php?photo=<?=$value['id']?>'  class='text-white  w-100  btn btn-success'>Yorum Yap</a>"
                             class="zoom d-block">
                             <img class="" src="../../public/uploads/<?=$value['photoName']?>" alt="Fotoğraf yok" style="width:100%">
                             <span class="overlay__hover"></span>
@@ -159,7 +159,7 @@
                 <?php  
                     foreach ($randomPhotos4 as  $value) {?>
                     <div class=" item">
-                        <a href="../../public/uploads/<?=$value['photoName']?>" data-lightbox="example-set" data-title="<a href='http://localhost/portfolio/yorum-yap'  class='text-white  w-100  btn btn-success'>Yorum Yap</a>"
+                        <a href="../../public/uploads/<?=$value['photoName']?>" data-lightbox="example-set" data-title="<a href='comment.php?photo=<?=$value['id']?>'  class='text-white  w-100  btn btn-success'>Yorum Yap</a>"
                             class="zoom d-block">
                             <img class="" src="../../public/uploads/<?=$value['photoName']?>" alt="Fotoğraf yok" style="width:100%">
                             <span class="overlay__hover"></span>
@@ -253,7 +253,7 @@
               
                 <div class="column">
                     <div class=" item">
-                        <a href="../../public/uploads/<?=$value['photoName']?>" data-lightbox="example-set" data-title="<a href='http://localhost/portfolio/yorum-yap' class='text-white fw-bol btn btn-outline-primary'>Yorum Yap</a>"
+                        <a href="../../public/uploads/<?=$value['photoName']?>" data-lightbox="example-set" data-title="<a href='comment.php?photo=<?=$value['id']?>' class='text-white fw-bol btn btn-outline-primary'>Yorum Yap</a>"
                             class="zoom d-block">
                             <img class="" src="../../public/uploads/<?=$value['photoName']?>" alt="Fotoğraf yok" style="width:100%">
                             <span class="overlay__hover"></span>

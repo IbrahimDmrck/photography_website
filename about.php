@@ -187,138 +187,51 @@ foreach ($aboutusSection as $value) { ?>
 <section id="testimonial-area" class="pt-5">
     <div class="container pt-md-5 pt-4">
         <div class="title-heading-w3 text-center mx-auto mb-sm-5 mb-4" style="max-width:700px">
-            <h3 class="title-style">Testimonials</h3>
-            <p class="lead mt-2">Nostrud exercitation ullamco laboris nisi
-                ut aliquip ex ea commodo consequat sunt in culpa qui official.</p>
+            <h3 class="title-style">Yorumlar</h3>
+            <p class="lead mt-2"></p>
         </div>
         <div class="testi-wrap">
-            <div class="client-single active position-1" data-position="position-1">
-                <div class="client-img">
-                    <img src="front/assets/images/testi4.jpg" alt="" />
-                </div>
-                <div class="client-info">
-                    <h3>Theo Hall</h3>
-                    <p>Subtitle goes here</p>
-                </div>
-                <div class="client-comment">
-                    <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                        laboris nisi ut aliquip ex ea commodo consequat. </h3>
-                    <img src="front/assets/images/quote.png" alt="" />
-                </div>
-            </div>
+            
 
-            <div class="client-single inactive position-2" data-position="position-2">
-                <div class="client-img">
-                    <img src="front/assets/images/testi2.jpg" alt="" />
-                </div>
-                <div class="client-info">
-                    <h3>Olive Yew</h3>
-                    <p>Subtitle goes here</p>
-                </div>
-                <div class="client-comment">
-                    <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                        laboris nisi ut aliquip ex ea commodo consequat. </h3>
-                    <img src="front/assets/images/quote.png" alt="" />
-                </div>
-            </div>
+            <?php    $comments = $db->query("SELECT * FROM comment WHERE status='1' ORDER BY RAND() Limit 7")->fetchAll();
+                
+                $randomComments=array_slice($comments,0,7);
+                $randomComments1=array_slice($comments,1,7);
+                   foreach ($randomComments as  $comment) { ?> 
+               <div class="client-single active position-<?=$comment['id']?>" data-position="position-<?=$comment['id']?>">
+                   <div class="client-img">
+                       <img src="front/assets/images/user.jpg" alt="" />
+                   </div>
+                   <div class="client-info">
+                       <h3><?=$comment['name']?></h3>
+                       <p><?=$comment['email']?></p>
+                   </div>
+                   <div class="client-comment">
+                       <h3><?=$comment['message']?>. </h3>
+                       <img src="front/assets/images/quote.png" alt="" />
+                   </div>
+               </div>
+              
+               <?php  break; } ?>
 
-            <div class="client-single inactive position-3" data-position="position-3">
-                <div class="client-img">
-                    <img src="front/assets/images/testi1.jpg" alt="" />
-                </div>
-                <div class="client-info">
-                    <h3>Maya Didas</h3>
-                    <p>Subtitle goes here</p>
-                </div>
-                <div class="client-comment">
-                    <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                        laboris nisi ut aliquip ex ea commodo consequat. </h3>
-                    <img src="front/assets/images/quote.png" alt="" />
-                </div>
-            </div>
+             <?php  foreach ($randomComments1 as  $comment) { ?> 
+               <div class="client-single inactive position-<?=$comment['id']?>" data-position="position-<?=$comment['id']?>">
+                   <div class="client-img">
+                       <img src="front/assets/images/user.jpg" alt="" />
+                   </div>
+                   <div class="client-info">
+                       <h3><?=$comment['name']?></h3>
+                       <p><?=$comment['email']?></p>
+                   </div>
+                   <div class="client-comment">
+                       <h3><?=$comment['message']?>. </h3>
+                       <img src="front/assets/images/quote.png" alt="" />
+                   </div>
+               </div>
+              
+               <?php } ?>
 
-            <div class="client-single inactive position-4" data-position="position-4">
-                <div class="client-img">
-                    <img src="front/assets/images/testi3.jpg" alt="" />
-                </div>
-                <div class="client-info">
-                    <h3>Brock Lee</h3>
-                    <p>Subtitle goes here</p>
-                </div>
-                <div class="client-comment">
-                    <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                        laboris nisi ut aliquip ex ea commodo consequat. </h3>
-                    <img src="front/assets/images/quote.png" alt="" />
-                </div>
-            </div>
-
-            <div class="client-single inactive position-5" data-position="position-5">
-                <div class="client-img">
-                    <img src="front/assets/images/testi5.jpg" alt="" />
-                </div>
-                <div class="client-info">
-                    <h3>Shona Leer</h3>
-                    <p>Subtitle goes here</p>
-                </div>
-                <div class="client-comment">
-                    <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                        laboris nisi ut aliquip ex ea commodo consequat. </h3>
-                    <img src="front/assets/images/quote.png" alt="" />
-                </div>
-            </div>
-
-            <div class="client-single inactive position-6" data-position="position-6">
-                <div class="client-img">
-                    <img src="front/assets/images/testi6.jpg" alt="" />
-                </div>
-                <div class="client-info">
-                    <h3>Dennis Lson</h3>
-                    <p>Subtitle goes here</p>
-                </div>
-                <div class="client-comment">
-                    <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                        laboris nisi ut aliquip ex ea commodo consequat. </h3>
-                    <img src="front/assets/images/quote.png" alt="" />
-                </div>
-            </div>
-
-            <div class="client-single inactive position-7" data-position="position-7">
-                <div class="client-img">
-                    <img src="front/assets/images/testi7.jpg" alt="" />
-                </div>
-                <div class="client-info">
-                    <h3>Jenna John</h3>
-                    <p>Subtitle goes here</p>
-                </div>
-                <div class="client-comment">
-                    <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                        laboris nisi ut aliquip ex ea commodo consequat. </h3>
-                    <img src="front/assets/images/quote.png" alt="" />
-                </div>
-            </div>
-            <div class="client-single inactive position-8" data-position="position-8">
-                <div class="client-img">
-                    <img src="front/assets/images/testi7.jpg" alt="" />
-                </div>
-                <div class="client-info">
-                    <h3>Jenna John</h3>
-                    <p>Subtitle goes here</p>
-                </div>
-                <div class="client-comment">
-                    <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                        laboris nisi ut aliquip ex ea commodo consequat. </h3>
-                    <img src="front/assets/images/quote.png" alt="" />
-                </div>
-            </div>
-         
+          
             
            
        

@@ -65,12 +65,35 @@ if (isset($_POST['iletisim'])) {
     $Adres=$_POST['Adres'];
     $Telefon=$_POST['Telefon'];
     $Email=$_POST['Email'];
+    $location=$_POST['location'];
+
+
+
+        $query = $db->prepare('UPDATE settings SET Adres = ?, Telefon = ?, Email = ?, location=? WHERE id=?');
+        $save = $query->execute([$Adres, $Telefon, $Email,$location, 1]);
+
+        if ($save) {
+
+            echo '<script>' . $swal . '("Bilgiler başarıyla kaydedildi", "", "success");</script>';
+            header('Refresh:3;url=siteSetting.php');
+
+        } else {
+            echo '<script>' . $swal . '("Beklenmedik Bir Hata Oldu!", "Lütfen Tekrar Deneyin", "error");</script>';
+        }
+    
+}
+
+if (isset($_POST['statistics'])) {
+    $swal = 'swal';
+    $total_comment=$_POST['total_comment'];
+    $total_category=$_POST['total_category'];
+    $total_photo=$_POST['total_photo'];
     
 
 
 
-        $query = $db->prepare('UPDATE settings SET Adres = ?, Telefon = ?, Email = ? WHERE id=?');
-        $save = $query->execute([$Adres, $Telefon, $Email, 1]);
+        $query = $db->prepare('UPDATE settings SET total_comment = ?, total_category = ?, total_photo = ? WHERE id=?');
+        $save = $query->execute([$total_comment, $total_category, $total_photo, 1]);
 
         if ($save) {
 
@@ -188,12 +211,80 @@ foreach ($settings as $value) {?>
                             </div>
                        </div>
 
+                       <div class="row form-group"> <label class="col-2 col-form-label" for="location">Konum Bilgisi (Google Haritalar):</label>
+                            <div class="col-8">
+                            
+                                <textarea name="location" id="location" cols="30" rows="10" class="form-control summernote"><?=$value['location']?></textarea>
+                            </div>
+                       </div>
+
                     
 
 
                        <div class="row form-group justify-content-center"> 
                             
                                <button type="submit" name="iletisim" class="btn btn-lg btn-secondary w-25">Ekle</button>
+                           
+                       </div>
+                       
+                     </form>
+                     <?php } ?>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-12">
+                    <div class="ibox ">
+                        <div class="ibox-title">
+                            <h5>İstatistik Bilgileri</h5>
+                            <div class="ibox-tools">
+                                <a class="collapse-link" href="">
+                                    <i class="fa fa-chevron-up"></i>
+                                </a>
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                    <i class="fa fa-wrench"></i>
+                                </a>
+                                <ul class="dropdown-menu dropdown-user">
+                                    <li><a href="#" class="dropdown-item">Config option 1</a>
+                                    </li>
+                                    <li><a href="#" class="dropdown-item">Config option 2</a>
+                                    </li>
+                                </ul>
+                                <a class="close-link" href="">
+                                    <i class="fa fa-times"></i>
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <div class="ibox-content ">   
+                            <?php 
+                            $settings=$db->query("SELECT * FROM settings WHERE id=1",PDO::FETCH_ASSOC);
+                            foreach ($settings as $value) {?>          
+                        <form action="" method="post">
+                       <div class="row form-group"> <label class="col-2 col-form-label" for="total_comment">Toplam Yorum Sayısı:</label>
+                            <div class="col-8">
+                                <input type="number" name="total_comment" id="total_comment" min="0" value="<?=$value['total_comment']?>" class="form-control">
+                            </div>
+                       </div>
+
+                       <div class="row form-group"> <label class="col-2 col-form-label" for="total_category">Toplam Kategori Sayısı:</label>
+                            <div class="col-8">
+                                <input type="number" name="total_category" min="0" id="total_category" value="<?=$value['total_category']?>"  class="form-control">
+                            </div>
+                       </div>
+
+                       <div class="row form-group"> <label class="col-2 col-form-label" for="total_photo">Toplam Fotoğraf Sayısı:</label>
+                            <div class="col-8">
+                                <input type="number" name="total_photo" id="total_photo" min="0" value="<?=$value['total_photo']?>" class="form-control">
+                            </div>
+                       </div>
+
+                    
+
+
+                       <div class="row form-group justify-content-center"> 
+                            
+                               <button type="submit" name="statistics" class="btn btn-lg btn-secondary w-25">Ekle</button>
                            
                        </div>
                        

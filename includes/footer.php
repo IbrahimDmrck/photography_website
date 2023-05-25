@@ -111,6 +111,9 @@
 <script src="front/assets/js/jquery-3.3.1.min.js"></script>
 <!-- //common jquery plugin -->
 
+<!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+
 <!-- theme switch js (light and dark)-->
 <script src="front/assets/js/theme-change.js"></script>
 <!-- //theme switch js (light and dark)-->
@@ -130,6 +133,25 @@
 <!-- testimonial script -->
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://unpkg.com/multiple-select@1.5.2/dist/multiple-select.min.js"></script>
+ <!-- Initialize Swiper -->
+ <script>
+      var swiper = new Swiper(".mySwiper", {
+        cssMode: true,
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+      autoplay: {
+        delay: 2500,
+        disableOnInteraction: false,
+      },
+      pagination: {
+        el: ".swiper-pagination",
+      },
+      mousewheel: true,
+      keyboard: true,
+    });
+  </script>
 <script>
       $(function () {
         $('select').multipleSelect({
@@ -276,6 +298,18 @@
     }
    
   });
+
+  $('.slide').owlCarousel({
+    center: true,
+    items:2,
+    loop:true,
+    margin:10,
+    responsive:{
+        600:{
+            items:4
+        }
+    }
+})
 
   $('.chosen-select').chosen({width: "100%"});
 });

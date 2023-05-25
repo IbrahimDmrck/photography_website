@@ -57,9 +57,9 @@
             <div class="photos" <?php if(isset($_POST['filtre'])){ echo "hidden"; } ?>>
                                   
                 <div class="column">
-                <?php  $photos = $db->query("SELECT * FROM photos ")->fetchAll();
+                <?php  $photos = $db->query("SELECT * FROM photos ORDER BY view_count DESC")->fetchAll();
 
-                shuffle($photos);
+               // shuffle($photos);
                 $randomPhotos1=array_slice($photos,0,5);
                 $randomPhotos2=array_slice($photos,5,5);
                 $randomPhotos3=array_slice($photos,10,5);
@@ -159,7 +159,7 @@
                             if (!$categories) {
                                echo "<script>alert('Lütfen en az bir kategori seçiniz')</script>";
                             }else{
-                                   $filterPhoto = $db->query("SELECT * FROM photos WHERE categories LIKE '%$ctg%'")->fetchAll();
+                                   $filterPhoto = $db->query("SELECT * FROM photos WHERE categories LIKE '%$ctg%' ORDER BY view_count DESC")->fetchAll();
                                    
                             }
                            
@@ -289,14 +289,14 @@
     <!-- //progress & faq section -->
 
     <!-- testimonial section -->
-    <section id="testimonial-area" class="pt-5">
+    <section id="testimonial-area" class="pt-5 pl-2 pr-2">
         <div class="container pt-md-5 pt-4">
             <div class="title-heading-w3 text-center mx-auto mb-sm-5 mb-4" style="max-width:700px">
                 <h3 class="title-style">Yorumlarınız</h3>
                 <p class="lead mt-2"></p>
             </div>
             <div class="testi-wrap">
-                <?php    $comments = $db->query("SELECT * FROM comment WHERE status='1' ORDER BY RAND() Limit 7")->fetchAll();
+                <?php    $comments = $db->query("SELECT * FROM comment WHERE status='1' ORDER BY id ASC Limit 7")->fetchAll();
                 
                  $randomComments=array_slice($comments,0,7);
                  $randomComments1=array_slice($comments,1,7);

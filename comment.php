@@ -267,7 +267,7 @@ require 'database/db_conn.php';
                         
                         <a href="../../public/uploads/<?=$value['photoName']?>" data-lightbox="example-set" data-title="<?=$value['name']?>" 
                             class="zoom d-block">
-                            <img class="img-fluid mb-3" src="../../public/uploads/<?=$value['photoName']?>" alt="Fotoğraf yok" style="width:100%">
+                            <img class="mb-3" src="../../public/uploads/<?=$value['photoName']?>" alt="Fotoğraf yok" style="width:100%">
                             <span class="overlay__hover"></span>
                             <!-- <span class="hover-content">
                                 <span class="title"><?=$value['name']?></span>
@@ -276,8 +276,11 @@ require 'database/db_conn.php';
                             </span> -->
                         </a>
                     </div>
+                    <?=$value['name']?>
                     <span class="m-3 my-3" ><i class="fas fa-eye pl-3 pr-3"></i><?=$value['view_count']?></span>
-
+                   
+                    <button type="submit" name="like" class="btn btn-outline-primary m-3 my-3" ><i class="fas fa-heart pr-3"></i>Beğen</button>
+                    
                     <?php } } ?>
                
             </div>

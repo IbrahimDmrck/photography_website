@@ -212,7 +212,9 @@ require 'database/db_conn.php';
                 <?php
                
                 if (isset($_GET['photo'])) {
-                   
+                    $photoId=$_GET['photo'];
+                    $query = $db->prepare('UPDATE photos SET view_count =view_count+1 WHERE id=?');
+                    $save = $query->execute([$photoId]);
                 
                 if (isset($_POST['comment'])) {
                     $photoId=$_GET['photo'];
@@ -263,9 +265,9 @@ require 'database/db_conn.php';
                 
                       <div class=" item">
                         
-                        <a href="../../public/uploads/<?=$value['photoName']?>" data-lightbox="example-set" data-title="<?=$value['name']?>"
+                        <a href="../../public/uploads/<?=$value['photoName']?>" data-lightbox="example-set" data-title="<?=$value['name']?>" 
                             class="zoom d-block">
-                            <img class="img-fluid" src="../../public/uploads/<?=$value['photoName']?>" alt="Fotoğraf yok" style="width:100%">
+                            <img class="img-fluid mb-3" src="../../public/uploads/<?=$value['photoName']?>" alt="Fotoğraf yok" style="width:100%">
                             <span class="overlay__hover"></span>
                             <!-- <span class="hover-content">
                                 <span class="title"><?=$value['name']?></span>
@@ -274,6 +276,7 @@ require 'database/db_conn.php';
                             </span> -->
                         </a>
                     </div>
+                    <span class="m-3 my-3" ><i class="fas fa-eye pl-3 pr-3"></i><?=$value['view_count']?></span>
 
                     <?php } } ?>
                

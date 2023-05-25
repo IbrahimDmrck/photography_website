@@ -73,7 +73,7 @@ if (isset($_SESSION['username'])) {
                             <div class="form-group row"><label class="col-lg-2 col-form-label">Menü Konumu</label>
 
                                 <div class="col-lg-6">
-                                    <select name="position" class="select2_demo_3 form-control">
+                                    <select name="position" >
                                         <option></option>
                                         <option value="Header">Header</option>
                                         <option value="Footer">Footer</option>

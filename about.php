@@ -55,9 +55,9 @@
                 </div>
            
         </div>
-        <div class="owl-carousel row mt-5 pt-lg-5 pt-sm-2 ">
+        <!-- <div class="owl-carousel row mt-5 pt-lg-5 pt-sm-2 ">
         <?php
-            $talent = $db->query("SELECT * FROM talent ORDER BY id DESC ", PDO::FETCH_ASSOC);
+            $talent = $db->query("SELECT * FROM services ORDER BY id DESC ", PDO::FETCH_ASSOC);
             foreach ($talent as $value) { ?>
             <div class="col-lg-4 col-md-6 ">
                 <div class="about-single p-md-3 d-flex justify-content-between">
@@ -72,7 +72,24 @@
             </div>
            
             <?php } ?>
-        </div>
+        </div> -->
+        <div class="row mt-5 pt-lg-5 pt-sm-2">
+        <?php
+            $services = $db->query("SELECT * FROM talent  ORDER BY RAND() LIMIT 3", PDO::FETCH_ASSOC);
+            foreach ($services as $value) { ?>
+                <div class="col-lg-4 col-md-6">
+                    <div class="about-single p-md-3 d-flex justify-content-between">
+                        <div class="about-icon w-25 mr-2">
+                            <i class="fas fa-star w-25"></i>
+                        </div>
+                        <div class="about-content">
+                            <h5 class="mb-3"><?=$value['talentName']?></h5>
+                            <?=$value['talentContent']?>
+                        </div>
+                    </div>
+                </div>
+                <?php } ?>
+            </div>
     </div>
 </section>
 <!-- //about section -->
@@ -129,7 +146,7 @@
 <!-- //features section -->
 
 <!-- team section -->
-<div class="team-area py-5" id="team">
+<!-- <div class="team-area py-5" id="team">
     <div class="container py-lg-5 py-md-4 py-2">
         <div class="title-heading-w3 text-center mx-auto mb-sm-5 mb-4" style="max-width:700px">
             <h3 class="title-style">Amazing Photographers</h3>
@@ -160,7 +177,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 <!-- //team section -->
 
 <!-- content with bg -->
@@ -193,7 +210,7 @@ foreach ($aboutusSection as $value) { ?>
         <div class="testi-wrap">
             
 
-            <?php    $comments = $db->query("SELECT * FROM comment WHERE status='1' ORDER BY RAND() Limit 7")->fetchAll();
+            <?php    $comments = $db->query("SELECT * FROM comment WHERE status='1' ORDER BY id ASC Limit 7")->fetchAll();
                 
                 $randomComments=array_slice($comments,0,7);
                 $randomComments1=array_slice($comments,1,7);

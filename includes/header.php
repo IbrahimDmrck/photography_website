@@ -58,21 +58,7 @@ require 'database/db_conn.php';
 
     <style>
         /*swiper start */
-        html,
-    body {
-      position: relative;
-      height: 100%;
-    }
-
-    body {
-      background: #eee;
-      font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-      font-size: 14px;
-      color: #000;
-      margin: 0;
-      padding: 0;
-    }
-
+    
     .swiper {
       width: 100%;
       height: 100%;
@@ -174,7 +160,15 @@ require 'database/db_conn.php';
     float: none !important;
 }
  
+@media screen and (max-width: 992px) {
+  .about-single .about-icon  {
+    display: none;
+  }
 
+  .about-content p{
+ word-wrap: break-word;
+  }
+}
         
        
     </style>

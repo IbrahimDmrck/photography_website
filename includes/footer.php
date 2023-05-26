@@ -139,7 +139,7 @@
       spaceBetween: 30,
       effect: "fade",
       autoplay: {
-        delay: 2500,
+        delay: 3000,
         disableOnInteraction: false,
       },
       navigation: {
@@ -237,67 +237,88 @@
 <!-- //disable body scroll which navbar is in active -->
 <script>
     $(document).ready(function(){
-  $(".owl-carousel").owlCarousel({
+        $('.owl-carousel').owlCarousel({
     center: true,
     items:3,
     loop:true,
-    margin:0,
-    autoplay:true,
-    autoplayTimeout:5000,
-    autoplayHoverPause:true, responsive:{
-        2560:{
-            center: false,
-            margin:10,
-            items:3,
-            autoplay:true,
-            autoplayTimeout:5000,
-            autoplayHoverPause:true,
-            loop:true
+    margin:3,
+    responsive:{
+        600:{
+            items:3
         },
-        1920:{
-            center: false,
-            items:3,
-            loop:true,
+        400:{
+            items:1
+        },
+        300:{
+            items:1,
             margin:0,
-            autoplay:true,
-            autoplayTimeout:5000,
-            autoplayHoverPause:true,
-        },
-        768:{
-            center: false,
-            margin:50,
-            loop:true,
-            autoplay:true,
-            autoplayTimeout:5000,
-            autoplayHoverPause:true,
-            items:2
-        },
-        390:{
-            loop:true,
-            autoplay:true,
-            autoplayTimeout:5000,
-            autoplayHoverPause:true,
-            items:1
-        },
-        375:{
-            margin:40,
-            loop:true,
-            autoplay:true,
-            autoplayTimeout:5000,
-            autoplayHoverPause:true,
-            items:1
-        }, 
-        320:{
-            margin:100,
-            loop:true,
-            autoplay:true,
-            autoplayTimeout:5000,
-            autoplayHoverPause:true,
-            items:1
+            center: true,
         }
+
     }
+});
+
+//   $(".owl-carousel").owlCarousel({
+//     center: true,
+//     items:3,
+//     loop:true,
+//     margin:0,
+//     autoplay:true,
+//     autoplayTimeout:5000,
+//     autoplayHoverPause:true, responsive:{
+//         2560:{
+//             center: false,
+//             margin:10,
+//             items:3,
+//             autoplay:true,
+//             autoplayTimeout:5000,
+//             autoplayHoverPause:true,
+//             loop:true
+//         },
+//         1920:{
+//             center: false,
+//             items:3,
+//             loop:true,
+//             margin:0,
+//             autoplay:true,
+//             autoplayTimeout:5000,
+//             autoplayHoverPause:true,
+//         },
+//         768:{
+//             center: false,
+//             margin:50,
+//             loop:true,
+//             autoplay:true,
+//             autoplayTimeout:5000,
+//             autoplayHoverPause:true,
+//             items:2
+//         },
+//         390:{
+//             loop:true,
+//             autoplay:true,
+//             autoplayTimeout:5000,
+//             autoplayHoverPause:true,
+//             items:1
+//         },
+//         375:{
+//             margin:40,
+//             loop:true,
+//             autoplay:true,
+//             autoplayTimeout:5000,
+//             autoplayHoverPause:true,
+//             items:1
+//         }, 
+//         320:{
+//             margin:100,
+//             loop:true,
+//             autoplay:true,
+//             autoplayTimeout:5000,
+//             autoplayHoverPause:true,
+//             items:1
+//         }
+//     }
    
-  });
+//   });
 
   $('.slide').owlCarousel({
     center: true,

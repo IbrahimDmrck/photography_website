@@ -8,7 +8,7 @@
                 <h4>A high quality photography</h4>
                 <p class="mt-4">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
                     commodo.</p>
-                <a href="about.html" class="btn btn-style mt-5">Read More</a>
+                <a href="about.html" class="btn btn-style mt-5">Read More <i class="fas fa-down"></i></a>
             </div>
         </div>
         <div class="right-slide">
@@ -65,7 +65,7 @@
                       </select>
                       </div>
                       
-                        <button name="filtre" class="btn btn-outline-primary col-lg-3" type="submit">Listele</button>
+                        <button name="filtre" class="btn btn-outline-primary col-lg-3" type="submit"><i class="fas fa-search  pr-1 "></i>Listele</button>
                         </div>
                        
                     </form>

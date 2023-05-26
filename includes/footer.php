@@ -135,21 +135,21 @@
 <script src="https://unpkg.com/multiple-select@1.5.2/dist/multiple-select.min.js"></script>
  <!-- Initialize Swiper -->
  <script>
-      var swiper = new Swiper(".mySwiper", {
-        cssMode: true,
-      navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
-      },
+    var swiper = new Swiper(".mySwiper", {
+      spaceBetween: 30,
+      effect: "fade",
       autoplay: {
         delay: 2500,
         disableOnInteraction: false,
       },
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
       pagination: {
         el: ".swiper-pagination",
+        clickable: true,
       },
-      mousewheel: true,
-      keyboard: true,
     });
   </script>
 <script>

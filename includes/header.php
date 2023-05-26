@@ -79,19 +79,14 @@ require 'database/db_conn.php';
     }
 
     .swiper-slide {
-      text-align: center;
-      font-size: 18px;
-      background: #fff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      background-position: center;
+      background-size: cover;
     }
 
     .swiper-slide img {
       display: block;
       width: 100%;
       height: 100%;
-      object-fit: cover;
     }
     /*swiper end */
         

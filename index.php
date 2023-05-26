@@ -12,7 +12,24 @@
             </div>
         </div>
         <div class="right-slide">
-        <div class="bg-image1"></div>
+        <div class=" swiper mySwiper swiper-fade swiper-initialized swiper-horizontal swiper-watch-progress swiper-backface-hidden">
+    <div class="swiper-wrapper" id="swiper-wrapper-a50fc51f996a5fda" aria-live="polite" style="transition-duration: 0ms;">
+    <?php  $photos = $db->query("SELECT * FROM photos ORDER BY view_count DESC")->fetchAll();
+
+
+ foreach ($photos as  $value) {?>
+      <div class="swiper-slide" style="width: 1366px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;" role="group" aria-label="1 / 4">
+        <img src="../../public/uploads/<?=$value['photoName']?>" class="img-fluid rounded-0">
+      </div>
+  <?php } ?>
+      
+     
+    </div>
+    <div class="swiper-button-next swiper-button-disabled" tabindex="-1" role="button" aria-label="Next slide" aria-controls="swiper-wrapper-a50fc51f996a5fda" aria-disabled="true"></div>
+    <div class="swiper-button-prev" tabindex="0" role="button" aria-label="Previous slide" aria-controls="swiper-wrapper-a50fc51f996a5fda" aria-disabled="false"></div>
+    <div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-horizontal"><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 1"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 2"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 3"></span><span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button" aria-label="Go to slide 4" aria-current="true"></span></div>
+  <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
+</div>
       
         </div>
     </div>
@@ -31,9 +48,9 @@
                    ?>
                     <form action="" method="POST">
                         <div class="row form-group">
-                    <label class="font-normal col-3" class="mt-3"><b>Kategori Seçin</b></label>
+                    <label class="font-normal col-3"><b>Kategori Seçin</b></label>
 
-                      <div  class="col-lg-6">
+                      <div  class="col-lg-6 mb-3">
                       <select name="categories[]"  multiple="multiple" data-placeholder="Lütfen en az bir kategori seçiniz">
                             <?php if (isset($categories)) {
                                 foreach ($categories as $categoryValue) { ?>

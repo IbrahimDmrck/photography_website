@@ -14,12 +14,12 @@
         <div class="right-slide">
         <div class=" swiper mySwiper swiper-fade swiper-initialized swiper-horizontal swiper-watch-progress swiper-backface-hidden">
     <div class="swiper-wrapper" id="swiper-wrapper-a50fc51f996a5fda" aria-live="polite" style="transition-duration: 0ms;">
-    <?php  $photos = $db->query("SELECT * FROM photos ORDER BY view_count DESC")->fetchAll();
+    <?php  $sliders = $db->query("SELECT * FROM sliders ")->fetchAll();
 
 
- foreach ($photos as  $value) {?>
+ foreach ($sliders as  $value) {?>
       <div class="swiper-slide" style="width: 1366px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;" role="group" aria-label="1 / 4">
-        <img src="../../public/uploads/<?=$value['photoName']?>" class="img-fluid rounded-0">
+        <img src="../../public/uploads/<?=$value['slide']?>" class="img-fluid rounded-0">
       </div>
   <?php } ?>
       

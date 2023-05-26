@@ -373,6 +373,33 @@
                         });
                     });
 
+                    $(".edit_photo_btn").click(function (e) {
+
+                    e.preventDefault();
+                    var slide_id = $(this).closest("tr").find(".slide_id").text();
+
+                        $.ajax({
+                            type: "POST",
+                            url: "ajax_post.php",
+                            data: {
+                                'checking_edit_slider_photo_btn': true,
+                                'slide_id': slide_id,
+                            },
+                        
+                            success: function (response) {
+                            
+                                $.each(response, function (key, value) {
+                                    $('#name').val(value['name']);
+                                    $('#id').val(value['id']);
+                                    $('#photoName').val(value['photoName']);
+                                    
+                                });
+                            
+                                $('#photoUpdateModalCenter').modal('show');
+                            }
+                        });
+                    });
+
             });
 
 </script>

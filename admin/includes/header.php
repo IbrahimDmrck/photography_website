@@ -108,6 +108,9 @@ require '../database/db_conn.php';
                         <a href="gallery.php"><i class="fa fa-photo"></i> <span class="nav-label">Galeri</span> </a>
                     </li>
                     <li>
+                        <a href="slider.php"><i class="fa fa-photo"></i> <span class="nav-label">Slider</span> </a>
+                    </li>
+                    <li>
                         <a href="siteSetting.php"><i class="fa fa-gear"></i> <span class="nav-label">Site
                                 Ayarları</span></a>
                     </li>

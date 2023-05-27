@@ -36,10 +36,28 @@ include('includes/header.php'); ?>
                                     <th data-hide="all">Mesaj</th>
                                     <th>Fotoğraf</th>
                                     <th>Onaylandı </th>
+                                    <th>Sil </th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                     <?php
+                                     if (isset($_GET['id'])) {
+                                        $id=$_GET['id'];
+                                        $swal = 'swal';
+                                        $deleteComment=$db->query("DELETE FROM comment WhERE id=$id",PDO::FETCH_ASSOC);
+                                        $delete= $deleteComment->execute();
+
+                                        if ($delete) {
+       
+                                            echo '<script>' . $swal . '("Yorum Silindi", "", "success");</script>';
+                                            header('Refresh:2;index.php');
+                                      
+                                          } else {
+                                            echo '<script>' . $swal . '("Beklenmedik Bir Hata Oldu", "Lütfen Tekrar Deneyin", "error");</script>';
+                                          }
+                                    }
+
+
                                     $messages=$db->query("SELECT * FROM comment ORDER BY id DESC",PDO::FETCH_ASSOC);
                                     foreach ($messages as $value) {
                                         $messages=$db->query("SELECT * FROM photos WHERE id=$value[photoId] ORDER BY id DESC")->fetch();
@@ -83,6 +101,7 @@ include('includes/header.php'); ?>
                                     </button>
                                     </form>
                                 </td>
+                                <td><a href="?id=<?= $value['id']?>" name="delete" class="btn btn-danger text-white"   title="sil"><i class="fa fa-times"></i></a></td>
                                 </tr>
                                 <?php } ?>
                                  

@@ -34,7 +34,7 @@ include('includes/header.php'); ?>
                                     <th>Email</th>
                                     
                                     <th data-hide="all">Mesaj</th>
-                                  
+                                    <th>Fotoğraf</th>
                                     <th>Onaylandı </th>
                                 </tr>
                                 </thead>
@@ -42,7 +42,7 @@ include('includes/header.php'); ?>
                                     <?php
                                     $messages=$db->query("SELECT * FROM comment ORDER BY id DESC",PDO::FETCH_ASSOC);
                                     foreach ($messages as $value) {
-                                       
+                                        $messages=$db->query("SELECT * FROM photos WHERE id=$value[photoId] ORDER BY id DESC")->fetch();
                                         ?>
                                      
                                     
@@ -53,7 +53,9 @@ include('includes/header.php'); ?>
                                     <td><div class="bg-dark text-white p-1 font-bold"><?=$value['message']?> 
                                     <span style="font-weight:bolder;font-size: 1rem;" class="badge badge-lg bg-success text-white float-right mb-2"><?=$value['create_date']?></span>
                                 </div></td>
-                                    
+                                    <td>
+                                        <a href="../comment.php?photo=<?=$messages['id']?>" target="_blank"><img src="../../public/uploads/<?=$messages['photoName']?>" width="50" height="50" alt=""></a>
+                                    </td>
                                     <td >
                                         <?php
                                         if (isset($_POST['sennMessage'.$value['id'].''])) {

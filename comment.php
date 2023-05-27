@@ -130,9 +130,14 @@ require 'database/db_conn.php';
     margin: 1rem auto 0px auto !important; 
     float: none !important;
 }
- 
 
-        
+
+@media screen and (max-width: 992px) {
+ 
+    .comment_title{
+        margin-top: 1rem;
+    }
+}
        
     </style>
 </head>
@@ -240,6 +245,7 @@ require 'database/db_conn.php';
                 }
             }
                 ?>
+                <h3 class="pb-3 text-center comment_title">Bir Yorum Bırak</h3>
                 <form action="" method="post" class="signin-form ">
                    
                         <label for="name"><strong>Ad-Soyad</strong></label>                 
@@ -248,15 +254,16 @@ require 'database/db_conn.php';
                         <label for="email" class="mt-2"><strong>E-mail</strong></label>                 
                         <input type="email" name="email" class="form-control" id="email">
 
-                        <label for="message" class="mt-2"><strong>Mesajınız</strong></label>                 
-                        <textarea name="message" class="form-control" id="message" cols="10" rows="10"></textarea>
+                        <label for="message" class="mt-2"><strong>Yorumunuz</strong></label>                 
+                        <textarea name="message" class="form-control" id="message" cols="10" rows="5"></textarea>
                         
-                        <button type="submit" name="comment" class="btn btn-success float-right mt-3">Mesaj Bırak</button>
+                        <button type="submit" name="comment" class="btn btn-success float-right mt-3">Yorum Yap</button>
                 </form>
             </div>
             <div class="col-lg-6 mt-lg-0 mt-5">
                 <?php if (isset($_GET['photo'])) {
                     $pid=$_GET['photo'];
+                    $comments=$db->query("SELECT * FROM comment WHERE photoId='$pid' and status=1 ORDER BY id DESC")->fetchAll();
                     $get_photo=$db->query("SELECT * FROM photos WHERE id='$pid'",PDO::FETCH_ASSOC);
                     foreach ($get_photo as $value) {?>
                       
@@ -276,25 +283,31 @@ require 'database/db_conn.php';
                             </span> -->
                         </a>
                     </div>
-                    <?=$value['name']?>
-                    <span class="m-3 my-3" ><i class="fas fa-eye pl-3 pr-3"></i><?=$value['view_count']?></span>
                    
-                    <button type="submit" name="like" class="btn btn-outline-primary m-3 my-3" ><i class="fas fa-heart pr-3"></i>Beğen</button>
+                    <span class="m-3 my-3" ><i class="fas fa-eye pl-3 pr-3"></i><?=$value['view_count']?></span>
+
+                    <span class="m-3 my-3" ><i class="fas fa-comment  pr-3"></i><?php echo count($comments) ?></span>
+
+                    <span class="m-3 my-3" ><i class="fas fa-heart  pr-3"></i><?php echo count($comments) ?></span>
+                   
+                    <button type="submit" name="like" class="btn btn-outline-primary " ><i class="fas fa-heart pr-2"></i>Beğen</button>
                     
                     <?php } } ?>
                
             </div>
 
         </div>
-        <div class=" row mt-3 pt-lg-3 pb-lg-3 pt-sm-2 ">
+        <div class=" row mt-3 pt-lg-3 pb-lg-5  pt-sm-2 ">
+            <h3 class="pl-3">Yorumlar</h3>
+            <hr style="border: 1px solid red;" class="w-100">
           <?php if (isset($_GET['photo'])) {
-           $photoid =$_GET['photo'];
-            $comments=$db->query("SELECT * FROM comment WHERE photoId='$photoid' and status=1",PDO::FETCH_ASSOC);
+          // $photoid =$_GET['photo'];
+           
             foreach ($comments as $commentValue) {?>
               
           
-            <div class="col-lg-12 mt-3 pt-lg-3 pb-lg-3 pt-sm-2 border border-success rounded">
-                <h3 class="title mb-2 mt-2"><?=$commentValue['name']?></h3>
+            <div class="col-lg-12 mt-3 pt-lg-3 pb-lg-3 pt-sm-2  border border-success rounded">
+                <h3 class="title mb-2 mt-2"><?=$commentValue['name'] ?></h3>
                 <div><?=$commentValue['message']?> <span style="font-weight:bolder;font-size: 1rem;" class="badge badge-lg bg-dark text-white float-right mb-2"><?=$commentValue['create_date']?></span></div>
             </div>
             <?php }

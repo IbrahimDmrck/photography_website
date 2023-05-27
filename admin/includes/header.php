@@ -71,59 +71,53 @@ require '../database/db_conn.php';
                         $admin = $db->query("SELECT * FROM admin WHERE email  LIKE '%$admin_name%' ", PDO::FETCH_ASSOC);
                         ?>
                         <?php foreach ($admin as $value) { ?>
-                            <div class="dropdown profile-element">
-                                <img alt="image" class="rounded-circle" src="img/profile_small.jpg" />
-                                <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <div class=" profile-element">
+                                <!-- <img alt="image" class="rounded-circle" src="img/profile_small.jpg" /> -->
+                                <a   href="#">
                                     <span class="block m-t-xs font-bold">
                                         <?= $value['name'] . " " . $value['surName'] ?>
                                     </span>
-                                    <span class="text-muted text-xs block">Admin <b class="caret"></b></span>
+                                    <span class="text-muted text-xs block">Admin </span>
                                 </a>
-                                <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                                    <li><a class="dropdown-item" href="profile.html">Profile</a></li>
-                                    <li><a class="dropdown-item" href="contacts.html">Contacts</a></li>
-                                    <li><a class="dropdown-item" href="mailbox.html">Mailbox</a></li>
-                                    <li class="dropdown-divider"></li>
-                                    <li><a class="dropdown-item" href="login.php">Logout</a></li>
-                                </ul>
+                              
                             </div>
                         <?php } ?>
                     </li>
-                    <li >
-                        <a href="index.php"><i class="fa fa-th-large"></i> <span class="nav-label">Ana Sayfa</span> </a>
+                    <li title="Yorumlar">
+                        <a href="index.php"><i class="fa fa-comment" title="Yorumlar"></i> <span class="nav-label">Yorumlar</span> </a>
                     </li>
-                    <li>
-                        <a href="aboutUs.php"><i class="fa fa-user"></i> <span class="nav-label">Hakkımda</span></a>
+                    <li  title="Hakkımda">
+                        <a href="aboutUs.php"><i class="fa fa-user" title="Hakkımda"></i> <span class="nav-label">Hakkımda</span></a>
                     </li>
-                    <li>
-                        <a href="ourService.php"><i class="fa fa-bar-chart-o"></i> <span
+                    <li title="Hizmetler">
+                        <a href="ourService.php" title="Hizmetler"><i class="fa fa-bar-chart-o"></i> <span
                                 class="nav-label">Hizmetler</span></a>
 
                     </li>
-                    <li>
-                        <a href="messages.php"><i class="fa fa-envelope"></i> <span class="nav-label">İletişim
+                    <li title="Mesajlar">
+                        <a href="messages.php" title="Mesajlar"><i class="fa fa-envelope"></i> <span class="nav-label">İletişim
                             </span></a>
                     </li>
-                    <li>
-                        <a href="gallery.php"><i class="fa fa-photo"></i> <span class="nav-label">Galeri</span> </a>
+                    <li title="Galeri">
+                        <a href="gallery.php" title="Galeri"><i class="fa fa-photo"></i> <span class="nav-label">Galeri</span> </a>
                     </li>
-                    <li>
-                        <a href="slider.php"><i class="fa fa-photo"></i> <span class="nav-label">Slider</span> </a>
+                    <li title="Slider">
+                        <a href="slider.php" title="Slider"><i class="fa fa-photo"></i> <span class="nav-label">Slider</span> </a>
                     </li>
-                    <li>
-                        <a href="siteSetting.php"><i class="fa fa-gear"></i> <span class="nav-label">Site
+                    <li title="Site Ayarları">
+                        <a href="siteSetting.php" title="Site Ayarları"><i class="fa fa-gear"></i> <span class="nav-label">Site
                                 Ayarları</span></a>
                     </li>
-                    <li>
-                        <a href="menus.php"><i class="fa fa-list"></i> <span class="nav-label">Menüler</span></a>
+                    <li title="Menüler">
+                        <a href="menus.php" title="Menüler"><i class="fa fa-list"></i> <span class="nav-label">Menüler</span></a>
 
                     </li>
-                    <li>
-                        <a href="pages.php"><i class="fa fa-file"></i> <span class="nav-label">Sayfalar</span></a>
+                    <li title="Sayfalar">
+                        <a href="pages.php" title="Sayfalar"><i class="fa fa-file"></i> <span class="nav-label">Sayfalar</span></a>
 
                     </li>
-                    <li>
-                        <a href="../ana-sayfa" target="_blank"><i class="fa fa-sign-out"></i> <span
+                    <li title="Siteye Git">
+                        <a href="../ana-sayfa" target="_blank" title="Siteye Git"><i class="fa fa-sign-out"></i> <span
                                 class="nav-label">Siteye Git</span></a>
 
                     </li>
@@ -139,65 +133,50 @@ require '../database/db_conn.php';
                     <div class="navbar-header">
                         <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i
                                 class="fa fa-bars"></i> </a>
-                        <form role="search" class="navbar-form-custom" action="search_results.html">
+                        <!-- <form role="search" class="navbar-form-custom" action="search_results.html">
                             <div class="form-group">
                                 <input type="text" placeholder="Search for something..." class="form-control"
                                     name="top-search" id="top-search">
                             </div>
-                        </form>
+                        </form> -->
                     </div>
                     <ul class="nav navbar-top-links navbar-right">
-
+                    <?php
+                                    $messages=$db->query("SELECT * FROM messages WHERE seen=0 ORDER BY Id DESC")->fetchAll(); 
+                                    $comments=$db->query("SELECT * FROM comment  WHERE status=0 ORDER BY id DESC")->fetchAll();
+                    ?>
                         <li class="dropdown">
                             <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                                <i class="fa fa-envelope"></i> <span class="label label-warning">16</span>
+                                <i class="fa fa-envelope"></i> <?php if(count($messages)!=0) {?><span class="label label-warning"><?php echo count($messages) ?></span><?php } ?>
                             </a>
                             <ul class="dropdown-menu dropdown-messages dropdown-menu-right">
+
+                            <?php if (isset($messages)) {
+                               foreach ($messages as $value) {?>
+                               
+                              
                                 <li>
                                     <div class="dropdown-messages-box">
-                                        <a class="dropdown-item float-left" href="profile.html">
+                                        <!-- <a class="dropdown-item float-left" href="profile.html">
                                             <img alt="image" class="rounded-circle" src="img/a7.jpg">
-                                        </a>
-                                        <div class="media-body">
-                                            <small class="float-right">46h ago</small>
-                                            <strong>Mike Loreipsum</strong> started following <strong>Monica
-                                                Smith</strong>. <br>
-                                            <small class="text-muted">3 days ago at 7:58 pm - 10.06.2014</small>
+                                        </a> -->
+                                        <div class="media-body border">
+                                            <small class="float-right"><?= substr($value['create_date'],11,5 )?></small>
+                                           Ad-Soyad : <strong><?= $value['name'] ?></strong><br>
+                                           Email : <strong><?= $value['sender'] ?></strong><br>
+                                           Konu : <strong><?= $value['subject'] ?></strong>
+                                            <small class="float-right"><?= substr($value['create_date'],0,10) ?></small>
                                         </div>
                                     </div>
                                 </li>
                                 <li class="dropdown-divider"></li>
-                                <li>
-                                    <div class="dropdown-messages-box">
-                                        <a class="dropdown-item float-left" href="profile.html">
-                                            <img alt="image" class="rounded-circle" src="img/a4.jpg">
-                                        </a>
-                                        <div class="media-body ">
-                                            <small class="float-right text-navy">5h ago</small>
-                                            <strong>Chris Johnatan Overtunk</strong> started following <strong>Monica
-                                                Smith</strong>. <br>
-                                            <small class="text-muted">Yesterday 1:21 pm - 11.06.2014</small>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="dropdown-divider"></li>
-                                <li>
-                                    <div class="dropdown-messages-box">
-                                        <a class="dropdown-item float-left" href="profile.html">
-                                            <img alt="image" class="rounded-circle" src="img/profile.jpg">
-                                        </a>
-                                        <div class="media-body ">
-                                            <small class="float-right">23h ago</small>
-                                            <strong>Monica Smith</strong> love <strong>Kim Smith</strong>. <br>
-                                            <small class="text-muted">2 days ago at 2:30 am - 11.06.2014</small>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="dropdown-divider"></li>
+                                <?php }
+                            } ?>
+                          
                                 <li>
                                     <div class="text-center link-block">
-                                        <a href="mailbox.html" class="dropdown-item">
-                                            <i class="fa fa-envelope"></i> <strong>Read All Messages</strong>
+                                        <a href="messages.php" class="dropdown-item">
+                                            <i class="fa fa-envelope"></i> <strong>Tüm Mesajlar</strong>
                                         </a>
                                     </div>
                                 </li>
@@ -205,40 +184,26 @@ require '../database/db_conn.php';
                         </li>
                         <li class="dropdown">
                             <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                                <i class="fa fa-bell"></i> <span class="label label-primary">8</span>
+                                <i class="fa fa-comment"></i> <?php if(count($comments)!=0) {?><span class="label label-primary"><?php echo count($comments) ?></span><?php } ?>
                             </a>
                             <ul class="dropdown-menu dropdown-alerts">
+                            <?php if (isset($comments)) {
+                               foreach ($comments as $comment) {?>
                                 <li>
-                                    <a href="mailbox.html" class="dropdown-item">
+                                    <a href="../comment.php?photo=<?=$comment['photoId']?>" target="_blank" class="dropdown-item">
                                         <div>
-                                            <i class="fa fa-envelope fa-fw"></i> You have 16 messages
-                                            <span class="float-right text-muted small">4 minutes ago</span>
+                                            <i class="fa fa-comment"></i> <?=$comment['name']?>
+                                            <span class="float-right text-muted small"><?=$comment['create_date']?></span>
                                         </div>
                                     </a>
                                 </li>
                                 <li class="dropdown-divider"></li>
-                                <li>
-                                    <a href="profile.html" class="dropdown-item">
-                                        <div>
-                                            <i class="fa fa-twitter fa-fw"></i> 3 New Followers
-                                            <span class="float-right text-muted small">12 minutes ago</span>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="dropdown-divider"></li>
-                                <li>
-                                    <a href="grid_options.html" class="dropdown-item">
-                                        <div>
-                                            <i class="fa fa-upload fa-fw"></i> Server Rebooted
-                                            <span class="float-right text-muted small">4 minutes ago</span>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="dropdown-divider"></li>
+                                <?php }
+                            } ?>
                                 <li>
                                     <div class="text-center link-block">
-                                        <a href="notifications.html" class="dropdown-item">
-                                            <strong>See All Alerts</strong>
+                                        <a href="index.php" class="dropdown-item">
+                                            <strong>Tüm Yorumler</strong>
                                             <i class="fa fa-angle-right"></i>
                                         </a>
                                     </div>
@@ -249,7 +214,7 @@ require '../database/db_conn.php';
 
                         <li>
                             <a href="login.php">
-                                <i class="fa fa-sign-out"></i> Log out
+                                <i class="fa fa-sign-out"></i> Çıkış Yap
                             </a>
                         </li>
 

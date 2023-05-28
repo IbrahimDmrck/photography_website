@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
 session_start();
 require '../database/db_conn.php';
 require 'ajax_post.php';

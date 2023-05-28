@@ -3,7 +3,9 @@ Author: W3layouts
 Author URL: http://w3layouts.com
 -->
 <?php
+error_reporting(0);
 ob_start();
+session_start();
 require 'database/db_conn.php';
 
 ?>
@@ -180,13 +182,22 @@ require 'database/db_conn.php';
                 </div>
                 <!-- search button -->
                 <div class="search-right ml-lg-3">
-                    <div class="search-container">
-                        <form action="/search" method="get">
-                            <input class="search expandright" id="searchright" type="search" name="q"
-                                placeholder="Search">
-                            <label class="button searchbutton" for="searchright"><i class="fas fa-search"></i></label>
-                        </form>
-                    </div>
+                            <?php
+                            if (isset($_POST['logout'])) {
+                              session_destroy();
+                              header('Refresh:0;');
+                            }
+                            ?>
+                          <?php if(!isset($_SESSION['name'])){?>
+                            
+                             <button type="button" name="login" class="btn btn-outline-success" data-toggle="modal" data-target="#exampleModalLong">Giriş Yap</button>
+                           
+                          <?php } ?>
+                          <?php if(isset($_SESSION['name'])){?>
+                            <form action="" method="post">
+                            <button type="submit" name="logout" class="btn btn-outline-primary" >Çıkış Yap</button>
+                            </form>
+                            <?php } ?>
                 </div>
                 <!-- //search button -->
                 <!-- toggle switch for light and dark theme -->
@@ -208,6 +219,137 @@ require 'database/db_conn.php';
         </div>
     </header>
     <!--//header-->
+<?php
+if (isset($_POST['user_register'])) {
+  $name = $_POST['name'];
+  $email = $_POST['email'];
+ $password = $_POST['password'];
+ $swal = 'swal';
+
+ if (!$name) {
+
+  echo '<script>' . $swal . '("Adınızı girin !", "", "error");</script>';
+
+} elseif (!preg_match("/^[a-zA-ZŞşÇçİÜüĞğÖöı ']*$/", $name)) {
+
+  echo '<script>' . $swal . '(" Ad sadece harflerden oluşabilir !", "", "error");</script>';
+
+}elseif (!$email) {
+  echo '<script>' . $swal . '("E-posta adresinizi girin !", "", "error");</script>';
+}elseif (!preg_match('/^\\S+@\\S+\\.\\S+$/', $email)) {
+  echo '<script>' . $swal . '("E-posta adresinizi doğru girin !", "", "error");</script>';
+}elseif (!$password || strlen($password) < 8) {
+
+  echo '<script>' . $swal . '("Lütfen şifrenizi girin en az 8 karakter olmalı !", "", "error");</script>';
+
+}else {
+
+  $query = $db->prepare('INSERT INTO users SET name = ?, email = ? ,password = ?');
+  $save = $query->execute([$name,$email,md5($password)]);
+
+  if ($save) {
+     
+    echo '<script>' . $swal . '("Kayıt İşlemi Başarılı !", "Aramıza Hoşgelidiniz", "success");</script>';
+    header('Refresh:2;');
+
+  } else {
+    echo '<script>' . $swal . '("Lütfen bilgilerinizi kontrol edip tekrar deneyin !", "", "error");</script>';
+  }
+}
+
+}
+
+
+if (isset($_POST['user_login'])) {
+ $email = $_POST['email'];
+ $password = $_POST['password'];
+ $swal = 'swal';
+ if (!$email) {
+     echo '<script>' . $swal . '("E-posta adresinizi girin !", "", "error");</script>';
+   }elseif (!preg_match('/^\\S+@\\S+\\.\\S+$/', $email)) {
+     echo '<script>' . $swal . '("E-posta adresinizi doğru girin !", "", "error");</script>';
+   }elseif (!$password || strlen($password) < 8) {
+ 
+     echo '<script>' . $swal . '("Şifrenizi eksik girdiniz en az 8 karakter olmalı !", "", "error");</script>';
+ 
+   }else {
+     $query = $db->prepare('SELECT * FROM users WHERE email = ? and password = ?');
+    $query->execute([$email,md5($password)]);
+
+    $admin_exist = $query->rowCount();
+
+     if ($admin_exist == 1) {
+     $_SESSION['name'] = $email;
+      
+     echo '<script>' . $swal . '("Giriş İşlemi Başarılı !", "", "success");</script>';
+     header('Refresh:2;');
+
+     } else {
+     echo '<script>' . $swal . '("Lütfen bilgilerinizi kontrol edip tekrar deneyin !", "", "error");</script>';
+     }
+   }
+
+}
+
+?>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-dark" id="exampleModalLongTitle">Giriş Yap</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       
+        <form action="" method="POST">
+       <label for="email">E-mail :</label>
+       <input type="text" name="email" id="email" class="form-control mb-1">
+       <label for="sifre">Şifre :</label>
+       <input type="password" name="password" id="sifre" class="form-control">
+       <button type="submit" name="user_login" class="btn btn-success mt-2">Giriş Yap</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button> -->
+        <small>Bir hesabın yoksa </small><button type="button" data-toggle="modal" data-target="#exampleModalLong2" class="btn btn-primary">Kayıt Ol</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="exampleModalLong2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLong2Title" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-dark" id="exampleModalLong2Title">Kayıt Ol</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       
+        <form action="" method="POST">
+        <label for="name">Ad-Soyad :</label>
+       <input type="text" name="name" id="name" class="form-control mb-1">
+       <label for="email">E-mail :</label>
+       <input type="text" name="email" id="email" class="form-control mb-1">
+       <label for="sifre">Şifre :</label>
+       <input type="password" name="password" id="sifre" class="form-control">
+       <button type="submit" name="user_register" class="btn btn-success mt-2">Kayıt Ol</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button> -->
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- about section -->
 <section class="w3l-about py-5">
@@ -217,7 +359,7 @@ require 'database/db_conn.php';
                 <?php
                
 ob_start();
-session_start();
+
                 if (isset($_GET['photo'])) {
                     $photoId=$_GET['photo'];
                     $query = $db->prepare('UPDATE photos SET view_count =view_count+1 WHERE id=?');
@@ -290,10 +432,21 @@ session_start();
                 <?php if (isset($_GET['photo'])) {
                     $pid=$_GET['photo'];
                     $email="";
+                    $class="";
                     if(isset($_SESSION['name'])) {
                         $email=$_SESSION['name'];
                     }
                     $like = $db->query("SELECT  * FROM likes WHERE photoId='$pid' and status=1 and email='$email'")->fetch();
+                    if (isset($like['email'])) {
+                        if ($like['email']==$_SESSION['name']) {
+                            $class="btn btn-primary";
+                        }else{
+                            $class="btn btn-outline-primary";
+                        }
+                    }else{
+                        $class="btn btn-outline-primary";
+                    }
+                    $like_photo = $db->query("SELECT  * FROM likes WHERE photoId='$pid' and status=1")->fetchAll();
                     $comments=$db->query("SELECT * FROM comment WHERE photoId='$pid' and status=1 ORDER BY id DESC")->fetchAll();
                     $get_photo=$db->query("SELECT * FROM photos WHERE id='$pid'",PDO::FETCH_ASSOC);
                     foreach ($get_photo as $value) {?>
@@ -319,12 +472,12 @@ session_start();
 
                     <span class="m-3 my-3" ><i class="fas fa-comment  pr-3"></i><?php echo count($comments) ?></span>
 
-                    <span class="m-3 my-3" ><i class="fas fa-heart  pr-3"></i><?php echo count($comments) ?></span>
+                    <span class="m-3 my-3" ><i class="fas fa-heart  pr-3"></i><?php echo count($like_photo) ?></span>
                    <form action="" method="post" style="display: inline;">
                     <input type="text" name="status" hidden id="status" value="1">
                    <input type="text" name="photoId" hidden value="<?= $pid ?>">
                     <input type="text" name="email" hidden value="<?php if(isset($_SESSION['name'])) echo $_SESSION['name'] ?>">
-                    <button type="submit" name="like" class="<?= $like['email']==$_SESSION['name'] ? 'btn btn-primary':'btn btn-outline-primary '?>"  ><i class="fas fa-heart pr-2"></i>Beğen</button>
+                    <button type="submit" name="like" class="<?=$class?>"  ><i class="fas fa-heart pr-2"></i>Beğen</button>
                     </form>
                   
                     <?php } } ?>

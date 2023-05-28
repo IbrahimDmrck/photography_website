@@ -1,5 +1,6 @@
 <!-- inner banner -->
 <?php
+error_reporting(0);
   $pageAbout = $db->query("SELECT * FROM pages WHERE slug='hakkimda'", PDO::FETCH_ASSOC);
   $pageAboutBanner = $db->query("SELECT * FROM pages WHERE slug='hakkimda'", PDO::FETCH_ASSOC);
  $aboutus = $db->query("SELECT * FROM aboutus  LIMIT 1", PDO::FETCH_ASSOC);

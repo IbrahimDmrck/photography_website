@@ -3,6 +3,7 @@ Author: W3layouts
 Author URL: http://w3layouts.com
 -->
 <?php
+error_reporting(0);
 ob_start();
 session_start();
 require 'database/db_conn.php';
@@ -181,7 +182,7 @@ require 'database/db_conn.php';
         <div class="container">
             <nav class="navbar navbar-expand-lg stroke">
                 <h1>
-                    <a class="navbar-brand" href="index.html">
+                    <a class="navbar-brand" href="ana-sayfa">
                         Phot<i class="fas fa-camera"></i>genic
                     </a>
                 </h1>
@@ -291,9 +292,6 @@ if (isset($_POST['user_register'])) {
 }
 
 
-// unset($_SESSION["name"]);
-
-
 if (isset($_POST['user_login'])) {
  $email = $_POST['email'];
  $password = $_POST['password'];
@@ -315,7 +313,7 @@ if (isset($_POST['user_login'])) {
      if ($admin_exist == 1) {
      $_SESSION['name'] = $email;
       
-     echo '<script>' . $swal . '("Giriş İşlemi Başarılı !", "Admin Paneline Yönlediriliyorsunuz...", "success");</script>';
+     echo '<script>' . $swal . '("Giriş İşlemi Başarılı !", "", "success");</script>';
      header('Refresh:2;');
 
      } else {

@@ -14,7 +14,9 @@
         <div class="right-slide">
         <div class=" swiper mySwiper swiper-fade swiper-initialized swiper-horizontal swiper-watch-progress swiper-backface-hidden">
     <div class="swiper-wrapper" id="swiper-wrapper-a50fc51f996a5fda" aria-live="polite" style="transition-duration: 0ms;">
-    <?php  $sliders = $db->query("SELECT * FROM sliders ")->fetchAll();
+    <?php
+    error_reporting(0);  
+    $sliders = $db->query("SELECT * FROM sliders ")->fetchAll();
 
 
  foreach ($sliders as  $value) {?>
@@ -75,13 +77,18 @@
                                   
                 <div class="column">
                 <?php  $photos = $db->query("SELECT * FROM photos ORDER BY view_count DESC")->fetchAll();
-
-               // shuffle($photos);
+                
+                     
+               // shuffle($photos); 
                 $randomPhotos1=array_slice($photos,0,5);
                 $randomPhotos2=array_slice($photos,5,5);
                 $randomPhotos3=array_slice($photos,10,5);
                 $randomPhotos4=array_slice($photos,15,5);
-                foreach ($randomPhotos1 as  $value) {?>
+                foreach ($randomPhotos1 as  $value) {
+                    $id=$value['id'];
+                    $like_photo = $db->query("SELECT  * FROM likes WHERE photoId=$id and status=1")->fetchAll();
+                    $comments=$db->query("SELECT * FROM comment WHERE photoId=$id and status=1 ORDER BY id DESC")->fetchAll();
+                    ?>
                     <div class=" item">
                         
                         <a href="../../public/uploads/<?=$value['photoName']?>" data-lightbox="example-set" data-title="<a href='comment.php?photo=<?=$value['id']?>'  class='text-white  w-100  btn btn-success'>Yorum Yap</a>"
@@ -91,7 +98,9 @@
                             <span class="hover-content">
                                 <span class="title"><?=$value['name']?></span>
                                 <span class="content"><?=$value['categories']?></span>
-                                <span class="content"><i class="fas fa-eye pl-3 pr-3 pt-2"></i><?=$value['view_count']?></span>
+                                <span class="content" style="display: inline;"><i class="fas fa-eye pl-1 pr-3 pt-2"></i><?=$value['view_count']?></span>
+                                <span class="content" style="display: inline;"><i class="fas fa-comment pl-3 pr-3 pt-2"></i><?php echo count($comments) ?></span>
+                                <span class="content" style="display: inline;"><i class="fas fa-heart pl-3 pr-3 pt-2"></i><?php echo count($like_photo) ?></span>
                             </span>
                         </a>
                     </div>
@@ -102,7 +111,11 @@
                     
                 <div class="column">
                  <?php     
-                foreach ($randomPhotos2 as  $value) {?>
+                foreach ($randomPhotos2 as  $value) {
+                    $id=$value['id'];
+                    $like_photo = $db->query("SELECT  * FROM likes WHERE photoId=$id and status=1")->fetchAll();
+                    $comments=$db->query("SELECT * FROM comment WHERE photoId=$id and status=1 ORDER BY id DESC")->fetchAll();
+                    ?>
                     <div class=" item">
                         <a href="../../public/uploads/<?=$value['photoName']?>" data-lightbox="example-set" data-title="<a href='comment.php?photo=<?=$value['id']?>'  class='text-white  w-100  btn btn-success'>Yorum Yap</a>"
                             class="zoom d-block">
@@ -111,7 +124,9 @@
                             <span class="hover-content">
                                 <span class="title"><?=$value['name']?></span>
                                 <span class="content"><?=$value['categories']?></span>
-                                <span class="content"><i class="fas fa-eye pl-3 pr-3 pt-2"></i><?=$value['view_count']?></span>
+                                <span class="content" style="display: inline;"><i class="fas fa-eye pl-1 pr-3 pt-2"></i><?=$value['view_count']?></span>
+                                <span class="content" style="display: inline;"><i class="fas fa-comment pl-3 pr-3 pt-2"></i><?php echo count($comments) ?></span>
+                                <span class="content" style="display: inline;"><i class="fas fa-heart pl-3 pr-3 pt-2"></i><?php echo count($like_photo) ?></span>
                             </span>
                         </a>
                     </div>
@@ -124,7 +139,11 @@
                 <div class="column">
                 <?php  
                
-                foreach ($randomPhotos3 as  $value) {?>
+                foreach ($randomPhotos3 as  $value) {
+                    $id=$value['id'];
+                    $like_photo = $db->query("SELECT  * FROM likes WHERE photoId=$id and status=1")->fetchAll();
+                    $comments=$db->query("SELECT * FROM comment WHERE photoId=$id and status=1 ORDER BY id DESC")->fetchAll();
+                    ?>
                     <div class=" item">
                         <a href="../../public/uploads/<?=$value['photoName']?>" data-lightbox="example-set" data-title="<a href='comment.php?photo=<?=$value['id']?>'  class='text-white  w-100  btn btn-success'>Yorum Yap</a>"
                             class="zoom d-block">
@@ -133,7 +152,9 @@
                             <span class="hover-content">
                                 <span class="title"><?=$value['name']?></span>
                                 <span class="content"><?=$value['categories']?></span>
-                                <span class="content"><i class="fas fa-eye pl-3 pr-3 pt-2"></i><?=$value['view_count']?></span>
+                                <span class="content" style="display: inline;"><i class="fas fa-eye pl-1 pr-3 pt-2"></i><?=$value['view_count']?></span>
+                                <span class="content" style="display: inline;"><i class="fas fa-comment pl-3 pr-3 pt-2"></i><?php echo count($comments) ?></span>
+                                <span class="content" style="display: inline;"><i class="fas fa-heart pl-3 pr-3 pt-2"></i><?php echo count($like_photo) ?></span>
                             </span>
                         </a>
                     </div>
@@ -146,7 +167,11 @@
                 
                 <div class="column">
                 <?php  
-                    foreach ($randomPhotos4 as  $value) {?>
+                    foreach ($randomPhotos4 as  $value) {
+                        $id=$value['id'];
+                        $like_photo = $db->query("SELECT  * FROM likes WHERE photoId=$id and status=1")->fetchAll();
+                        $comments=$db->query("SELECT * FROM comment WHERE photoId=$id and status=1 ORDER BY id DESC")->fetchAll();
+                        ?>
                     <div class=" item">
                         <a href="../../public/uploads/<?=$value['photoName']?>" data-lightbox="example-set" data-title="<a href='comment.php?photo=<?=$value['id']?>'  class='text-white  w-100  btn btn-success'>Yorum Yap</a>"
                             class="zoom d-block">
@@ -155,7 +180,9 @@
                             <span class="hover-content">
                                 <span class="title"><?=$value['name']?></span>
                                 <span class="content"><?=$value['categories']?></span>
-                                <span class="content"><i class="fas fa-eye pl-3 pr-3 pt-2"></i><?=$value['view_count']?></span>
+                                <span class="content" style="display: inline;"><i class="fas fa-eye pl-1 pr-3 pt-2"></i><?=$value['view_count']?></span>
+                                <span class="content" style="display: inline;"><i class="fas fa-comment pl-3 pr-3 pt-2"></i><?php echo count($comments) ?></span>
+                                <span class="content" style="display: inline;"><i class="fas fa-heart pl-3 pr-3 pt-2"></i><?php echo count($like_photo) ?></span>
                             </span>
                         </a>
                     </div>
@@ -189,6 +216,9 @@
                 <?php
 
                 foreach ($filterPhoto as  $value) {
+                    $id=$value['id'];
+                    $like_photo = $db->query("SELECT  * FROM likes WHERE photoId=$id and status=1")->fetchAll();
+                    $comments=$db->query("SELECT * FROM comment WHERE photoId=$id and status=1 ORDER BY id DESC")->fetchAll();
                    if (count($value)>0) {?>
               
                 <div class="column">
@@ -200,8 +230,9 @@
                             <span class="hover-content">
                                 <span class="title"><?=$value['name']?></span>
                                 <!-- <span class="content"><?=$value['categories']?></span> -->
-                                <span class="content"><i class="fas fa-eye pl-3 pr-3 pt-2"></i><?=$value['view_count']?></span>
-                              
+                                <span class="content" style="display: inline;"><i class="fas fa-eye pl-1 pr-3 pt-2"></i><?=$value['view_count']?></span>
+                                <span class="content" style="display: inline;"><i class="fas fa-comment pl-3 pr-3 pt-2"></i><?php echo count($comments) ?></span>
+                                <span class="content" style="display: inline;"><i class="fas fa-heart pl-3 pr-3 pt-2"></i><?php echo count($like_photo) ?></span>
                             </span>
                         </a>
                     </div>

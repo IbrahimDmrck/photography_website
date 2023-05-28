@@ -1,5 +1,7 @@
 
-    <?php include('includes/header.php'); ?>
+    <?php
+    error_reporting(0);
+    include('includes/header.php'); ?>
 
     <?php
     if (isset($_GET['page'])) {

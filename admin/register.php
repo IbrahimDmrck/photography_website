@@ -22,6 +22,7 @@
         <div>
             <div>          
 <?php
+error_reporting(0);
 require '../database/db_conn.php';
 
 if (isset($_POST['register'])) {

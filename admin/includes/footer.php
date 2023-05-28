@@ -1,13 +1,13 @@
 <div class="footer">
-    <div class="float-right">
+    <!-- <div class="float-right">
         10GB of <strong>250GB</strong> Free.
-    </div>
+    </div> -->
     <div>
-        <strong>Copyright</strong> Example Company &copy; 2014-2018
+        <strong>Copyright</strong> İbrahim Demircik &copy; <?php echo date('Y') ?>
     </div>
 </div>
 </div>
-<div class="small-chat-box fadeInRight animated">
+<!-- <div class="small-chat-box fadeInRight animated">
 
     <div class="heading" draggable="true">
         <small class="chat-date float-right">
@@ -84,15 +84,15 @@
         </div>
     </div>
 
-</div>
-<div id="small-chat">
+</div> -->
+<!-- <div id="small-chat">
 
     <span class="badge badge-warning float-right">5</span>
     <a class="open-small-chat" href="">
         <i class="fa fa-comments"></i>
 
     </a>
-</div>
+</div> -->
 
 </div>
 
@@ -175,29 +175,7 @@
    let fileName = $(this).val().split('\\').pop();
    $(this).next('.custom-file-label').addClass("selected").html(fileName);
 }); 
-    <?php
-    $admin_name = $_SESSION['username'];
-    $admin = $db->query("SELECT * FROM admin WHERE email  LIKE '%$admin_name%' ", PDO::FETCH_ASSOC);
-
-
-    foreach ($admin as $value) {
-        echo "$(document).ready(function() {
-           
-            setTimeout(function(){
-                toastr.options = {
-                    closeButton: true,
-                    progressBar: true,
-                    showMethod: 'slideDown',
-                    timeOut: 5000
-                };
-                toastr.success('Yönetim Paneli', 'Hoş Geldin " . $value['name'] . ' ' . $value['surName'] . "');
-
-            }, 1300);
-           
-        });";
-    }
-
-    ?>
+ 
     $(document).ready(function () {
         $('.dataTables-example').DataTable({
             pageLength: 25,

@@ -17,21 +17,21 @@ require 'database/db_conn.php';
     
     
     
-        <title></title>
-        <meta name="description" content="">
-        <meta name="keywords" content="">
+        <title>Yorum Yap | YasinYilmaz.Net</title>
+        <meta name="description" content="Yasin Yılmaz Photography-Design , Grafik Tasarımcı, Yasin Yılmaz Web Sitesi , Fotoğrafçılık">
+        <meta name="keywords" content="yasin-yilmaz,fotografci,tasarimci,photography-design,grafik-tasarimci,yasin-yilmaz-web-sitesi">
     
-        <meta property="og:title" content="" />
-        <meta property="og:description" content="" />
-        <link rel="canonical" href="http://localhost/portfolio/" />
+        <meta property="og:title" content="Yorum Yap | YasinYilmaz.Net" />
+        <meta property="og:description" content="Yasin Yılmaz Photography-Design , Grafik Tasarımcı, Yasin Yılmaz Web Sitesi , Fotoğrafçılık" />
+        <link rel="canonical" href="https://www.yasinyilmaz.net/comment.php" />
    
     <meta property="og:image" content="favicon.png" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="" />
+        <meta property="og:url" content="https://www.yasinyilmaz.net/comment.php" />
  
     
     <meta name="robots" content="index,follow"/><meta name="googlebot" content="index,follow"/>
-    <meta name="author" content="Yasin Yilmaz">
+    <meta name="author" content="yasinyilmaz.net">
     <!-- google-fonts -->
     <link href="//fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;600;700;800;900&display=swap" rel="stylesheet">
     <link href="//fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -216,6 +216,8 @@ require 'database/db_conn.php';
             <div class="col-lg-6 pr-lg-5  ">
                 <?php
                
+ob_start();
+session_start();
                 if (isset($_GET['photo'])) {
                     $photoId=$_GET['photo'];
                     $query = $db->prepare('UPDATE photos SET view_count =view_count+1 WHERE id=?');
@@ -261,8 +263,37 @@ require 'database/db_conn.php';
                 </form>
             </div>
             <div class="col-lg-6 mt-lg-0 mt-5">
+                <?php
+                 $swal = 'swal';
+                 if (isset($_POST['like'])) {
+                      $status=$_POST['status'];
+                      $photoId=$_POST['photoId'];
+                      $email=$_POST['email'];
+                     
+                      if (!$status || !$photoId || !$email) {
+                        echo '<script>' . $swal . '("Lütfen önce giriş yapın!", "", "warning");</script>';
+                    }else{
+                        $query = $db->prepare('INSERT INTO likes SET photoId = ?, email = ?, status = ?');
+                        $save = $query->execute([$photoId, $email, $status]);
+
+                        if ($save) {
+
+                            echo '<script>' . $swal . '("Bu fotoğrafı beğendiniz", "success");</script>';
+                            header('Refresh:3;');
+
+                        } else {
+                            echo '<script>' . $swal . '("Beklenmedik Bir Hata Oldu!", "Lütfen Tekrar Deneyin", "error");</script>';
+                        }
+                    }
+                 }
+                ?>
                 <?php if (isset($_GET['photo'])) {
                     $pid=$_GET['photo'];
+                    $email="";
+                    if(isset($_SESSION['name'])) {
+                        $email=$_SESSION['name'];
+                    }
+                    $like = $db->query("SELECT  * FROM likes WHERE photoId='$pid' and status=1 and email='$email'")->fetch();
                     $comments=$db->query("SELECT * FROM comment WHERE photoId='$pid' and status=1 ORDER BY id DESC")->fetchAll();
                     $get_photo=$db->query("SELECT * FROM photos WHERE id='$pid'",PDO::FETCH_ASSOC);
                     foreach ($get_photo as $value) {?>
@@ -289,9 +320,13 @@ require 'database/db_conn.php';
                     <span class="m-3 my-3" ><i class="fas fa-comment  pr-3"></i><?php echo count($comments) ?></span>
 
                     <span class="m-3 my-3" ><i class="fas fa-heart  pr-3"></i><?php echo count($comments) ?></span>
-                   
-                    <button type="submit" name="like" class="btn btn-outline-primary " ><i class="fas fa-heart pr-2"></i>Beğen</button>
-                    
+                   <form action="" method="post" style="display: inline;">
+                    <input type="text" name="status" hidden id="status" value="1">
+                   <input type="text" name="photoId" hidden value="<?= $pid ?>">
+                    <input type="text" name="email" hidden value="<?php if(isset($_SESSION['name'])) echo $_SESSION['name'] ?>">
+                    <button type="submit" name="like" class="<?= $like['email']==$_SESSION['name'] ? 'btn btn-primary':'btn btn-outline-primary '?>"  ><i class="fas fa-heart pr-2"></i>Beğen</button>
+                    </form>
+                  
                     <?php } } ?>
                
             </div>

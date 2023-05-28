@@ -138,9 +138,9 @@ function generateRandomPassword($length = 8) {
             </head>
             <body>
             <div class="card text-bg-info mb-3">
-            <div class="card-header"><h3>Şifre Yenileme İsteği Aldık</h3></div>
+            <div class="card-header"><h2>Şifre Yenileme İsteği Aldık</h2></div>
             <div class="card-body">
-                <h5 class="card-title">Yeni Şifreniz Aşağıdaki Gibidir</h5>
+                <h3 class="card-title">Yeni Şifreniz Aşağıdaki Gibidir</h3>
                 <p class="card-text">'.$randomPassword.'</p>
             </div>
             </div>

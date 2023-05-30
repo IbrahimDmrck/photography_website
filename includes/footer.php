@@ -85,6 +85,7 @@
 <button onclick="topFunction()" id="movetop" title="Go to top">
     <span class="fas fa-level-up-alt" aria-hidden="true"></span>
 </button>
+
 <script>
     // When the user scrolls down 20px from the top of the document, show the button
     window.onscroll = function () {
@@ -334,6 +335,35 @@
 
   $('.chosen-select').chosen({width: "100%"});
 });
+</script>
+
+<script>
+// Tema değiştirme düğmesini seçin
+const themeToggle = document.getElementById("change_theme");
+
+// Siyah logo ve beyaz logo elementlerini seçin
+const blackLogo = document.getElementById("darklogo");
+const whiteLogo = document.getElementById("lightlogo");
+
+// Tema değiştirme düğmesine tıklama olayını dinleyin
+themeToggle.addEventListener("click", function() {
+  // Temayı değiştirin
+  // Burada temanın nasıl değiştiğini belirlemek için gerekli kodunuz olacak
+  var html=document.getElementsByTagName("html");
+var firstValue=$(html).attr("data-theme");
+  // Tema rengine göre logoları gösterin veya gizleyin
+  if (firstValue=="dark") {
+    blackLogo.style.display = "block";
+    whiteLogo.style.display = "none";
+  }  else {
+    blackLogo.style.display = "none";
+    whiteLogo.style.display = "block";
+  }
+});
+
+
+
+
 </script>
 
 <!--bootstrap-->

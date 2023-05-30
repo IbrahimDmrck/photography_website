@@ -181,15 +181,17 @@ require 'database/db_conn.php';
     <header id="site-header" class="fixed-top">
         <div class="container">
             <nav class="navbar navbar-expand-lg stroke">
-                <h1>
+                <!-- <h1>
                     <a class="navbar-brand" href="ana-sayfa">
                         Phot<i class="fas fa-camera"></i>genic
                     </a>
-                </h1>
-                <!-- if logo is image enable this   
-    <a class="navbar-brand" href="#index.html">
-        <img src="image-path" alt="Your logo" title="Your logo" style="height:35px;" />
-    </a> -->
+                </h1> -->
+                <!-- if logo is image enable this   -->
+    <a  class="navbar-brand" href="#index.html">
+     <img  id="darklogo" src="../../public/uploads/yasinyilmaz_logo.png" alt="Your logo" title="Your logo" style="height:35px;" />
+     <img id="lightlogo" src="../../public/uploads/yasinyilmazbeyaz_logo.png" alt="Your logo" title="Your logo" style="height:35px;" />
+    </a> 
+   
                 <button class="navbar-toggler  collapsed bg-gradient" type="button" data-toggle="collapse"
                     data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false"
                     aria-label="Toggle navigation">
@@ -238,7 +240,7 @@ require 'database/db_conn.php';
                         <div class="theme-switch-wrapper">
                             <label class="theme-switch" for="checkbox">
                                 <input type="checkbox" id="checkbox">
-                                <div class="mode-container">
+                                <div id="change_theme" class="mode-container">
                                     <i class="gg-sun"></i>
                                     <i class="gg-moon"></i>
                                 </div>

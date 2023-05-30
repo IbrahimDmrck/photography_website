@@ -345,11 +345,14 @@
             </div>
             <div class="testi-wrap">
                 <?php    $comments = $db->query("SELECT * FROM comment WHERE status='1' ORDER BY id ASC Limit 7")->fetchAll();
-                
+                $order_no=1;
+                $order_no1=1;
+                $order_no2=2;
+                $order_no3=2;
                  $randomComments=array_slice($comments,0,7);
                  $randomComments1=array_slice($comments,1,7);
                     foreach ($randomComments as  $comment) { ?> 
-                <div class="client-single active position-<?=$comment['id']?>" data-position="position-<?=$comment['id']?>">
+                <div class="client-single active position-<?=$order_no++?>" data-position="position-<?=$order_no1++?>">
                     <div class="client-img">
                         <img src="front/assets/images/user.jpg" alt="" />
                     </div>
@@ -366,7 +369,7 @@
                 <?php  break; } ?>
 
               <?php  foreach ($randomComments1 as  $comment) { ?> 
-                <div class="client-single inactive position-<?=$comment['id']?>" data-position="position-<?=$comment['id']?>">
+                <div class="client-single inactive position-<?= $order_no2++?>" data-position="position-<?=$order_no3++?>">
                     <div class="client-img">
                         <img src="front/assets/images/user.jpg" alt="" />
                     </div>

@@ -6,7 +6,12 @@ if (currentTheme) {
   
     if (currentTheme === 'dark') {
         toggleSwitch.checked = true;
+      
+       
     }
+
+
+   
 }
 
 function switchTheme(e) {

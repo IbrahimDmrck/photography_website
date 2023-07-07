@@ -126,7 +126,7 @@ function generateRandomPassword($length = 8) {
             $mail->Port=587;
             $mail->Host="smtp.gmail.com";
             $mail->Username="ibrahimdmrck@gmail.com";
-            $mail->Password="vpqsrdpkyvyidtgi";
+            $mail->Password="*****";//google hesabınızda bir şifre oluşturmalısınız detaylarını internetten araştırarak öğrenin
             $mail->addAddress("ibrahimdmrck@gmail.com");//alıcı adres
             $mail->isHTML(true);
             $mail->Subject="Sifre Yenileme Islemi";

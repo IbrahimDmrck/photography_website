@@ -136,7 +136,7 @@ require 'PHPMailer/src/SMTP.php';
                                     $mail->Port=587;
                                     $mail->Host="smtp.gmail.com";
                                     $mail->Username="ibrahimdmrck@gmail.com";
-                                    $mail->Password="vpqsrdpkyvyidtgi";
+                                    $mail->Password="******";//google hesabınızdan şifre oluşturmalısnız ,detayları internetten araştırın
                                     $mail->addAddress("ibrahimdmrck@gmail.com");//alıcı adres
                                     $mail->isHTML(true);
                                     $mail->Subject=$subject;
